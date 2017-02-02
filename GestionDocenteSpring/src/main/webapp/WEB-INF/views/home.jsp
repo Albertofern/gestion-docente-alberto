@@ -8,7 +8,7 @@
 <h1>
 	Hello world!  
 </h1>
+<a href="alumnos">Ir a alumnos</a>
 
-<P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
