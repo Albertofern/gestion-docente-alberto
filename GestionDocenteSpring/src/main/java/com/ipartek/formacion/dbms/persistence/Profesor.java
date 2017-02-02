@@ -1,33 +1,33 @@
-package com.ipartek.formacion.dbms.persistence;
+	package com.ipartek.formacion.dbms.persistence;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 
- * @author Urko Villanueva
- *
- */
-public class Alumno implements Comparable<Alumno>, Serializable {
+public class Profesor implements Comparable<Profesor> {
 
-	private static final long serialVersionUID = -6698866485450376235L;
+	
 	public static final int CODIGO_NULO = -1;
-		private int codigo;
-		private boolean activo;
-		private int nHermanos;
-		private String dni;
-		private String nombre;
-		private String apellidos;
-		private Date fNacimiento;
-		private String email;
-		private String direccion;
+	private int nSS;
+	private int codigo;
+	private String dni;
+	private String nombre;
+	private String apellidos;
+	private Date fNacimiento;
+	private String email;
+	private String direccion;
 
-	public Alumno() {
-		super();// constructor de la clase padre
+	public Profesor() {
+		super();
 		this.codigo = CODIGO_NULO;
-		this.activo = true;
-		this.nHermanos = 0;
+		this.nSS = 0;
+	}
 
+
+	public int getnSS() {
+		return nSS;
+	}
+
+	public void setnSS(int nSS) {
+		this.nSS = nSS;
 	}
 
 	public int getCodigo() {
@@ -37,36 +37,20 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	
 
-	@Override
-	public String toString() {
-		return this.getCodigo() + " " + this.getApellidos() + ", " + this.getNombre() + " " + this.getDni();
-	}
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
-	public int getnHermanos() {
-		return nHermanos;
-	}
-
-	public void setnHermanos(int nHermanos) {
-		this.nHermanos = nHermanos;
-	}
-
-	/**
-	 * Se usa en el caso de ordenamiento de List o Array
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param o
-	 * @return
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public int compareTo(Alumno o) {
+	public String toString() {
+		
+		return this.codigo + " " + this.getNombre() + ", " + " " + this.getEmail();
+	}
+	@Override
+	public int compareTo(Profesor o) {
 		return this.apellidos.compareToIgnoreCase(o.getApellidos());
 	}
 
@@ -76,22 +60,22 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public String getDni() {
 		return dni;
 	}
-	
+
 	/**
 	 * @param dni
 	 *            the dni to set
 	 */
 	public void setDni(String dni) {
-			this.dni = dni;
+		this.dni = dni;
 	}
-	
+
 	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	/**
 	 * @param nombre
 	 *            the nombre to set
@@ -99,7 +83,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	/**
 	 * @return the apellidos
 	 */
@@ -121,7 +105,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public Date getfNacimiento() {
 		return fNacimiento;
 	}
-	
+
 	/**
 	 * @param fNacimiento
 	 *            the fNacimiento to set
@@ -129,7 +113,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public void setfNacimiento(Date fNacimiento) {
 		this.fNacimiento = fNacimiento;
 	}
-	
+
 	/**
 	 * @return the email
 	 */
@@ -144,7 +128,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	/**
 	 * @return the direccion
 	 */
@@ -159,21 +143,6 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
-	/**
-	 * Para evaluar si los objetos son iguales
-	 */
-
-	@Override
-	public boolean equals(Object obj) {
-		boolean iguales = false;
-		if (obj instanceof Alumno) {
-			Alumno alum = (Alumno) obj;
-			if (this.codigo == alum.getCodigo()) {
-				iguales = true;
-			}
-		}
-		return iguales;
-	}
-
+	
+	
 }

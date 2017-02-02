@@ -9,9 +9,6 @@ import java.util.List;
 
 public class Curso implements Serializable, Comparable<Curso>{ 
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static final int CODIGO_NULO = -1;
 	private int codigo;
