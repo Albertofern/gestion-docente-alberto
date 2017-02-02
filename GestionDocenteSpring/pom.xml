@@ -17,7 +17,6 @@
 		<mysql.version>5.1.40</mysql.version>
 	</properties>
 	<dependencies>
-	
 		<!-- MySQL JDBC Driver -->
 			<dependency>
 			    <groupId>mysql</groupId>
@@ -37,6 +36,13 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
+		            <!-- JDBC --> <!-- Paquete de Spring para acceso a BBDD -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
