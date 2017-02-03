@@ -1,9 +1,13 @@
 package com.ipartek.formacion.dbms.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +22,7 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	@Autowired 
 	private DataSource dataSource;  // Todas las clases DAO implementaran este metodo
 	private JdbcTemplate template;
+	private Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
 	
 	@Autowired
 	@Override
@@ -37,9 +42,14 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	public List<Alumno> getAll() {
 		final String SQL = "SELECT * FROM alumno";
 		List<Alumno> alumnos = null;
-		// estructura de usar la conexión. Por cada registro un objeto de tipo alumno
-		alumnos = (List<Alumno>) template.queryForObject(SQL, new AlumnoMapper()); // esto hace una query!!
 		
+		try{ // Prueba si te devuelve registros (tuplas) del sql
+		// estructura de usar la conexión. Por cada registro un objeto de tipo alumno
+		alumnos = (List<Alumno>) template.query(SQL, new AlumnoMapper()); // esto hace una query!!
+		}catch (EmptyResultDataAccessException e){
+			logger.trace(e.getMessage());
+			alumnos = new ArrayList<Alumno>();
+		}
 		
 		return alumnos;
 	}

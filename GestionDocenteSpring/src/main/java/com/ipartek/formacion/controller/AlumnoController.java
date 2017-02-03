@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ipartek.formacion.dbms.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 @Controller
@@ -27,7 +28,7 @@ public class AlumnoController {
 	public ModelAndView getAll() {
 		mav =new ModelAndView("alumnos/alumnos");
 		//cargar la lista de alumnos
-		List alumnos = null;
+		List<Alumno> alumnos = aS.getAll(); // He creado el CRUD en la CAPA Service
 		//engancharla al modelandview
 		mav.addObject("listadoAlumnos", alumnos); // esto es request (se recoge de la request)
 		logger.trace("Pasa por getAll()");
