@@ -159,7 +159,5 @@ public class Curso implements Serializable, Comparable<Curso>{
 			}
 		}
 		return iguales;
-	}
-
-	
+	}	
 }
