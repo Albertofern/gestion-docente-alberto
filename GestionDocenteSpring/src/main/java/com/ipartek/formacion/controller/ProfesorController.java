@@ -27,7 +27,7 @@ public class ProfesorController {
 	
 	@RequestMapping(method =RequestMethod.GET)
 	public ModelAndView getAll() {
-		mav =new ModelAndView("profesores/profesores");
+		mav =new ModelAndView("profesores/profesores"); // esto le engancha el .jsp AUTO (puede ser .xxx)
 		//cargar la lista de profesores
 		List<Profesor> profesores = pS.getAll(); // He creado el CRUD en la CAPA Service
 		//engancharla al modelandview
