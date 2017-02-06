@@ -14,8 +14,7 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 public class AlumnoServiceImp implements AlumnoService{
 
 	@Autowired // Con esto instancio la clase. 
-			   // El objeto (BEN del root-context) que esta en el .xml
-	private AlumnoDAO alumnoDao;
+	private AlumnoDAO alumnoDao; // El objeto (BEN del root-context) que esta en el .xml
 
 	@Override
 	public Alumno create(Alumno alumno) {

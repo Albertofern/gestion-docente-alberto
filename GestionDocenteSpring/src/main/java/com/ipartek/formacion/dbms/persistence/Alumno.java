@@ -3,11 +3,7 @@ package com.ipartek.formacion.dbms.persistence;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 
- * @author Urko Villanueva
- *
- */
+
 public class Alumno implements Comparable<Alumno>, Serializable {
 
 	private static final long serialVersionUID = -6698866485450376235L;

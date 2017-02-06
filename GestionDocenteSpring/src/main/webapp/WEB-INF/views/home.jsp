@@ -9,6 +9,6 @@
 	Hello world!  
 </h1>
 <a href="alumnos">Ir a alumnos</a>
-
+<a href="profesores">Ir a profesores</a>
 </body>
 </html>

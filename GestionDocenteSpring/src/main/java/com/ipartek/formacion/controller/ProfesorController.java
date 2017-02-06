@@ -1,6 +1,5 @@
 package com.ipartek.formacion.controller;
 
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,27 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ipartek.formacion.dbms.persistence.Alumno;
-import com.ipartek.formacion.service.interfaces.AlumnoService;
+import com.ipartek.formacion.dbms.persistence.Profesor;
+import com.ipartek.formacion.service.interfaces.ProfesorService;
+
 
 @Controller
-@RequestMapping(value="/alumnos")
-public class AlumnoController {
+@RequestMapping(value="/profesores")
+public class ProfesorController {
 	
-	@Inject // es lo mismo que @autowired
-	private AlumnoService aS;
-	private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class);
+	
+	@Inject
+	private ProfesorService pS;
+	private static final Logger logger = LoggerFactory.getLogger(ProfesorController.class);
 	ModelAndView mav = null;
 	
 	@RequestMapping(method =RequestMethod.GET)
 	public ModelAndView getAll() {
-		mav =new ModelAndView("alumnos/alumnos");
-		//cargar la lista de alumnos
-		List<Alumno> alumnos = aS.getAll(); // He creado el CRUD en la CAPA Service
+		mav =new ModelAndView("profesores/profesores");
+		//cargar la lista de profesores
+		List<Profesor> profesores = pS.getAll(); // He creado el CRUD en la CAPA Service
 		//engancharla al modelandview
-		mav.addObject("listadoAlumnos", alumnos); // esto es request (se recoge de la request)
+		mav.addObject("listadoProfesores", profesores); // esto es request (se recoge de la request)
 		logger.trace("Pasa por getAll()");
 		return mav;
 	}
+			
+	
 
 }

@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta  content= charset=UTF-8">
-<title>Gestion Docente - Listado Alumnos</title>
+<title>Gestion Docente - Listado Profesores</title>
 </head>
 <body>
 
 <header>
-	<h1>Gestion Docente - Listado Alumnos</h1>
+	<h1>Gestion Docente - Listado Profesores</h1>
 </header>
 <main>
 	<table>
@@ -24,18 +24,18 @@
 		<tbody>
 		
 	<c:choose>
-		<c:when test="${not empty listadoAlumnos}"><!-- Cuando la lista tiene datos  -->
-			<c:forEach var="alumno" items="${listadoAlumnos}">
+		<c:when test="${not empty listadoProfesores}"><!-- Cuando la lista tiene datos  -->
+			<c:forEach var="profesor" items="${listadoProfesores}">
 			<tr>	
-				<td>${alumno.nombre}</td> 
-				<td>${alumno.apellidos}</td> 
-				<td><a href="">Editar</a></td>
+				<td>${profesor.nombre}</td> 
+				<td>${profesor.apellidos}</td> 
+				<td><a href="">Editar</a></td> 
 			</tr>	
 			</c:forEach>
 		</c:when>
 		<c:otherwise><!-- Cuando la lista NO tiene datos -->
 			<tr>
-				No se han encontrado alumnos en la Base de Datos
+				No se han encontrado profesores en la Base de Datos
 			</tr>
 		</c:otherwise>
 	</c:choose>

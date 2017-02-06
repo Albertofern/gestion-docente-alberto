@@ -1,10 +1,12 @@
 	package com.ipartek.formacion.dbms.persistence;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Profesor implements Comparable<Profesor> {
+public class Profesor implements Comparable<Profesor>,Serializable {
 
-	
+
+	private static final long serialVersionUID = -8239371384272787185L;
 	public static final int CODIGO_NULO = -1;
 	private int nSS;
 	private int codigo;
@@ -17,7 +19,7 @@ public class Profesor implements Comparable<Profesor> {
 
 	public Profesor() {
 		super();
-		this.codigo = CODIGO_NULO;
+		this.codigo = Profesor.CODIGO_NULO;
 		this.nSS = 0;
 	}
 
@@ -47,7 +49,7 @@ public class Profesor implements Comparable<Profesor> {
 	@Override
 	public String toString() {
 		
-		return this.codigo + " " + this.getNombre() + ", " + " " + this.getEmail();
+		return this.getCodigo() + " " + this.getNombre() + ", " + " " + this.getApellidos();
 	}
 	@Override
 	public int compareTo(Profesor o) {
@@ -144,5 +146,20 @@ public class Profesor implements Comparable<Profesor> {
 		this.direccion = direccion;
 	}
 	
+	/**
+	 * Para evaluar si los objetos son iguales
+	 */
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean iguales = false;
+		if (obj instanceof Profesor) {
+			Profesor prof = (Profesor) obj;
+			if (this.codigo == prof.getCodigo()) {
+				iguales = true;
+			}
+		}
+		return iguales;
+	}
 	
 }
