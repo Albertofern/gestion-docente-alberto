@@ -10,20 +10,22 @@
 	<artifactId>gestion-docente-spring</artifactId>
 	<name>GestionDocenteSpring</name>
 	<packaging>war</packaging>
-	<properties>
-		<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<mysql.version>5.1.40</mysql.version>
-	</properties>
-	<dependencies>
-		<!-- MySQL JDBC Driver -->
-			<dependency>
+		<properties>
+			<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
+			<org.aspectj-version>1.6.10</org.aspectj-version>
+			<org.slf4j-version>1.6.6</org.slf4j-version>
+			<mysql.version>5.1.40</mysql.version>
+			<javax.validation.version>1.0.0.GA</javax.validation.version>
+			<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
+		</properties> 
+		<dependencies>
+				<!-- MySQL JDBC Driver -->
+		<dependency>
 			    <groupId>mysql</groupId>
 			    <artifactId>mysql-connector-java</artifactId>
 			    <version>${mysql.version}</version>
-			</dependency>
-		<!-- Spring -->
+		</dependency>
+				<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -37,24 +39,35 @@
 			</exclusions>
 		</dependency>
 		            <!-- JDBC --> <!-- Paquete de Spring para acceso a BBDD -->
-        <dependency>
+    	<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${org.springframework-version}</version>
-        </dependency>
-        
+    	</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!-- AspectJ -->
+					<!-- Java JSR303 validarion -->
+		<dependency>
+			    <groupId>javax.validation</groupId>
+			    <artifactId>validation-api</artifactId>
+			    <version>${javax.validation.version}</version>
+		</dependency>
+					<!-- Hibernate validator -->
+		<dependency>
+			    <groupId>org.hibernate</groupId>
+			    <artifactId>hibernate-validator</artifactId>
+			    <version>${hibernate.validator.version}</version>
+		</dependency>
+					<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
-		<!-- Logging -->
+					<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -96,13 +109,13 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- @Inject -->
+				<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		<!-- Servlet -->
+				<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -120,7 +133,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- Test -->
+				<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
