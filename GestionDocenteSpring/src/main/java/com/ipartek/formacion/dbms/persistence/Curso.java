@@ -148,16 +148,28 @@ public class Curso implements Serializable, Comparable<Curso>{
 		return this.nombreCurso+ ", " + this.duracion;
 	}
 	
-	
+	/*
+  	 * (non-Javadoc)
+  	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+ 	 */
 	@Override
-	public boolean equals(Object obj) {
-		boolean iguales = false;
-		if (obj instanceof Curso) {
-			Curso cur = (Curso) obj;
-			if (this.codigo == cur.getCodigo()) {
-				iguales = true;
-			}
-		}
-		return iguales;
-	}	
+  	public boolean equals(Object obj) {
+
+  		boolean iguales = false;
+		if (obj != null && obj instanceof Curso) {
+  			Curso curso = (Curso) obj;
+			if (this == curso || curso.getCodigo() == this.codigo) {
+  				iguales = true;
+  			}
+  		}
+ 		return iguales;
+	}
 }

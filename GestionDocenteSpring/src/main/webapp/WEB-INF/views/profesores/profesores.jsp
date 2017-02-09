@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta  content= charset=UTF-8">
+<meta charset=UTF-8">
 <title>Gestion Docente - Listado Profesores</title>
 </head>
 <body>
@@ -13,6 +13,7 @@
 	<h1>Gestion Docente - Listado Profesores</h1>
 </header>
 <main>
+	<a href="profesores/addProfesor">Crear</a>
 	<table>
 		<thead>
 			<tr>
@@ -29,7 +30,10 @@
 			<tr>	
 				<td>${profesor.nombre}</td> 
 				<td>${profesor.apellidos}</td> 
-				<td><a href="">Editar</a></td> 
+				<td>
+					<a href="profesores/${profesor.codigo}">Editar</a>
+					<a href="profesores/deleteProfesor/${profesor.codigo}">Borrar</a>
+				</td> 
 			</tr>	
 			</c:forEach>
 		</c:when>

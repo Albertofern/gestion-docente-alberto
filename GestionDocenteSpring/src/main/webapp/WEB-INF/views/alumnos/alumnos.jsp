@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta  content= charset=UTF-8">
+<meta charset="UTF-8">
 <title>Gestion Docente - Listado Alumnos</title>
 </head>
 <body>
@@ -13,8 +13,7 @@
 	<h1>Gestion Docente - Listado Alumnos</h1>
 </header>
 <main>
-	<a href="alumnos/addAlumnos">Crear Alumno</a>
-	<a href="alumnos/deleteAlumnos">Borrar Alumno</a>
+	<a href="alumnos/addAlumno">Crear</a>
 	<table>
 		<thead>
 			<tr>

@@ -6,6 +6,9 @@ import java.util.Date;
 
 public class Alumno implements Comparable<Alumno>, Serializable {
 
+
+
+
 	private static final long serialVersionUID = -6698866485450376235L;
 	public static final int CODIGO_NULO = -1;
 		private int codigo;
@@ -17,19 +20,39 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 		private Date fNacimiento;
 		private String email;
 		private String direccion;
+		private String telefono;
+		private String poblacion;
+		private int codigopostal;
+		
 
 	public Alumno() {
 		super();// constructor de la clase padre
 		this.codigo = CODIGO_NULO;
+		this.nombre = "";
+		this.apellidos = "";
+		this.dni = "";
+		this.fNacimiento = null;
+		this.email = "";
+		this.direccion = "";
+		this.poblacion = "";
+		this.telefono = "";
+		this.codigopostal = 48;
 		this.activo = true;
 		this.nHermanos = 0;
 
 	}
 
+	/**
+	 * @return the codigo
+	 */
 	public int getCodigo() {
 		return codigo;
 	}
 
+	/**
+	 * @param codigo
+	 *            the codigo to set
+	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -39,22 +62,81 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 		return this.getCodigo() + " " + this.getApellidos() + ", " + this.getNombre() + " " + this.getDni();
 	}
 
+	/**
+	 * @return the activo
+	 */
 	public boolean isActivo() {
 		return activo;
 	}
 
+	/**
+	 * @param activo
+	 *            the activo to set
+	 */
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
 
+	/**
+	 * @return the nHermanos
+	 */
 	public int getnHermanos() {
 		return nHermanos;
 	}
 
+	/**
+	 * @param nHermanos
+	 *            the nHermanos to set
+	 */
 	public void setnHermanos(int nHermanos) {
 		this.nHermanos = nHermanos;
 	}
 
+	/**
+	 * @return the telefono
+	 */
+	public String getTelefono() {
+		return telefono;
+	}
+
+	/**
+	 * @param telefono
+	 *            the telefono to set
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	/**
+	 * @return the poblacion
+	 */
+	public String getPoblacion() {
+		return poblacion;
+	}
+
+	/**
+	 * @param poblacion
+	 *            the poblacion to set
+	 */
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	
+	}
+	/**
+	 * @return the codigopostal
+	 */
+	public int getCodigopostal() {
+		return codigopostal;
+	}
+
+	/**
+	 * @param codigopostal
+	 *            the codigopostal to set
+	 */
+	public void setCodigopostal(int codigopostal) {
+		this.codigopostal = codigopostal;
+	}
+	
 	/**
 	 * Se usa en el caso de ordenamiento de List o Array
 	 * 
@@ -156,20 +238,29 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 		this.direccion = direccion;
 	}
 
-	/**
-	 * Para evaluar si los objetos son iguales
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-
 	@Override
 	public boolean equals(Object obj) {
 		boolean iguales = false;
-		if (obj instanceof Alumno) {
+		if (obj != null && obj instanceof Alumno) {
 			Alumno alum = (Alumno) obj;
-			if (this.codigo == alum.getCodigo()) {
+			if (this == alum || (alum.getCodigo() == this.codigo && this.dni.equalsIgnoreCase(alum.getDni()))) {
 				iguales = true;
 			}
 		}
 		return iguales;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+			int result = 1;
+			result = prime * result + codigo;
+			return result;
+		}
 }
