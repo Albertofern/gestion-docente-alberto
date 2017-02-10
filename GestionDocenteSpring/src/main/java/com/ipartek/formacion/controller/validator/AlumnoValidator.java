@@ -21,11 +21,11 @@ public class AlumnoValidator implements Validator {
 	
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "505" ,"Tiene que introducir un nombre");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "505" ,"Tiene que introducir un apellido");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "505" ,"Tiene que introducir un email");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "505" ,"Tiene que introducir un dni");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "505" ,"Tiene que introducir un telefono");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "nombreRequerido" ,"Tiene que introducir un nombre");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellidos", "apellidosRequerido" ,"Tiene que introducir un apellido");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "emailRequerido" ,"Tiene que introducir un email");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "dniRequerido" ,"Tiene que introducir un dni");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "telefonoRequerido" ,"Tiene que introducir un telefono");
 		// Para cubirnos de los datos que insertamos a la BBDD
 		// Se le añadira el validation a todos los campos de la BBDD para que no metan campos en blanco "WhiteSpace"
 		// Se le añadira el validation a todos los campos de la BBDD que le pusimos "not null"

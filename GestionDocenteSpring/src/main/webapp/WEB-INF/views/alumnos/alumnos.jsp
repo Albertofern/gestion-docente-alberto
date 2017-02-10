@@ -22,8 +22,8 @@
 				<th></th>
 			</tr>	
 		</thead>
-		<tbody>
 		
+	<tbody>	
 	<c:choose>
 		<c:when test="${not empty listadoAlumnos}"><!-- Cuando la lista tiene datos  -->
 			<c:forEach var="alumno" items="${listadoAlumnos}">

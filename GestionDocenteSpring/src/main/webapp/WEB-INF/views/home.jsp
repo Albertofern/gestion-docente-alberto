@@ -12,6 +12,7 @@
 		<ul>
 			<a href="alumnos">Ir a alumnos</a>
 			<a href="profesores">Ir a profesores</a>
+			<a href="clientes">Ir a clientes</a>
 		</ul>
 	</nav>
 </body>

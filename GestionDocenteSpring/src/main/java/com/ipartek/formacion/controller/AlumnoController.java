@@ -71,7 +71,7 @@ public class AlumnoController {
 		
 		if (bindingResult.hasErrors()){
 			logger.info("alumno tiene errores");
-			destino = "/alumnos/alumno";
+			destino = "alumnos/alumno";
 		} else {
 			destino = "redirect:/alumnos"; // Que hace esto? Hace una redireccion a "public ModelAndView getAll()"  LO RECICLA el codigo de getAll()
 			if(alumno.getCodigo() > alumno.CODIGO_NULO){

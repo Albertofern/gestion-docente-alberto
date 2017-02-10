@@ -2,7 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -11,9 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +31,9 @@ public class ProfesorController {
 	ModelAndView mav = null;
 	
 	
-	// --------------------  Para el validador de SPRING  --------------------------
 	
-	@Resource(name="profesorValidator")   // ==@Autowired@Qualifier("profesorValidator")
-	private Validator validator = null;
+	// --------  En esta ocasion no usaremos el validador de Spring  ---------------
+	// -----------------  Usaremos el Standard de JAVA  ----------------------------
 	
 	
 	// --------------------------- METODOS CRUD ------------------------------------
@@ -62,7 +57,7 @@ public class ProfesorController {
 		
 		if (bindingResult.hasErrors()){
 			logger.info("profesor tiene errores");
-			destino = "/profesores/profesor";
+			destino = "profesores/profesor";
 		} else {
 			destino = "redirect:/profesores"; // Que hace esto? Hace una redireccion a "public ModelAndView getAll()"  LO RECICLA el codigo de getAll()
 			if(profesor.getCodigo() > profesor.CODIGO_NULO){

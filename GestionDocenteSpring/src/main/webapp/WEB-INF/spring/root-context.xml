@@ -23,4 +23,15 @@
      <bean id="profesorDaoImp" class="com.ipartek.formacion.dbms.dao.ProfesorDAOImp">
     	<property name="dataSource" ref="mysqlDataSource"/>
     </bean>
+         <bean id="clienteDaoImp" class="com.ipartek.formacion.dbms.dao.ClienteDAOImp">
+    	<property name="dataSource" ref="mysqlDataSource"/>
+    </bean>
+    <bean id="messageSource"
+      class="org.springframework.context.support.ResourceBundleMessageSource">
+       <property name="basenames">
+           <list>
+               <value>ValidationMessages</value>
+           </list>
+        </property>
+    </bean>
 </beans>

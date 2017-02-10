@@ -40,15 +40,17 @@ public class AlumnoDAOImp implements AlumnoDAO{
 
 	@Override
 	public List<Alumno> getAll() {
-		final String SQL = "SELECT * FROM alumno";
+		//final String SQL = "SELECT * FROM alumno";
+		final String SQL = "CALL alumnogetAll();";
 		List<Alumno> alumnos = null;
 		
 		try{ // Prueba si te devuelve registros (tuplas) del sql
 		// estructura de usar la conexión. Por cada registro un objeto de tipo alumno
 		alumnos = (List<Alumno>) template.query(SQL, new AlumnoMapper()); // esto hace una query!!
+		logger.info(String.valueOf(alumnos.size()));
 		}catch (EmptyResultDataAccessException e){
-			logger.trace(e.getMessage());
-			alumnos = new ArrayList<Alumno>();
+			logger.info("sin datos:" + e.getMessage() + " " + SQL);
+			//alumnos = new ArrayList<Alumno>();
 		}
 		
 		return alumnos;

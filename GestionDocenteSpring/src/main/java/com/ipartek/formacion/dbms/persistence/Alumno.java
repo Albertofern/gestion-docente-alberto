@@ -11,6 +11,8 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 
 	private static final long serialVersionUID = -6698866485450376235L;
 	public static final int CODIGO_NULO = -1;
+	
+	
 		private int codigo;
 		private boolean activo;
 		private int nHermanos;
@@ -262,5 +264,5 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 			int result = 1;
 			result = prime * result + codigo;
 			return result;
-		}
+	}
 }

@@ -16,31 +16,54 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 
 	private static final long serialVersionUID = -8239371384272787185L;
 	public static final int CODIGO_NULO = -1;
-	
-	@NotNull(message="")
-	@NotBlank(message="")
+
 	private int codigo;
+	
+	@NotNull(message = "nSS incorrecta")
+	@NotBlank
 	private int nSS;
+	
 	@Pattern(regexp = "[0-9]{8}[a-z-A-Z]", message = "DNI introducido incorrecto")
 	private String dni;
-	@Size(min=3, max=50)
+	
+	@Size(min=3, max=50, message = "Nombre incorrecto")
 	private String nombre;
-	@Size(min=7, max=150)
+	
+	@Size(min=7, max=150, message = "apellidos incorrecto")
 	private String apellidos;
+	
+	@NotNull(message = "fecha incorrecta")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Past //Tiene que ser mas antigua que HOY
+	@Past(message = "Past.fNacimiento") //Tiene que ser mas antigua que HOY
 	private Date fNacimiento;
-	@Email 
+	
+	@NotNull(message = "NotEmpty.email")
+ 	@NotBlank(message = "NotBlank.email")
+ 	@Email(message = "Email.email")
 	private String email;
+	
 	private String direccion;
-	//@Phone
+	
+	@NotNull(message = "NotEmpty.telefono")
+ 	@NotBlank(message = "NotBlank.telefono")
+ 	//@Phone(message = "Phone.telefono")
 	private String telefono;
+	private int codigoPostal;
 	
 
 	public Profesor() {
 		super();
 		this.codigo = Profesor.CODIGO_NULO;
 		this.nSS = 0;
+		this.dni = "";
+		this.nombre = "";
+		this.apellidos = "";
+		this.fNacimiento = new Date();
+		this.email = "";
+		this.direccion = "";
+		this.telefono = "94";
+		this.codigoPostal = 48;
+		
 	}
 
 	
@@ -206,6 +229,18 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 			}
 	 }
 	return iguales;
+	}
+
+
+
+	public int getCodigoPostal() {
+		return codigoPostal;
+	}
+
+
+
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
 	}
 	
 }
