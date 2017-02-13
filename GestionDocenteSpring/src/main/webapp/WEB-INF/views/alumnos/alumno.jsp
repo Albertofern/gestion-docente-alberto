@@ -8,24 +8,10 @@
 	<c:if test="${alumno.codigo > 0}" >
 		<spring:message var="men"  code="form.editar" text="nombre" />
 	</c:if> 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Gestion Docente - ${men} <spring:message code="alumno.alumno" text="alumno" /></title>
-</head>
-<body>
-<header>
-	<h1>Gestion Docente - ${men} Alumno</h1>
- 	<nav>
- 		<ul>
- 			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
- 			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
- 			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
- 		</ul>
- 	</nav>
- </header>
- <main>
+<spring:message var="seccion" code="alumnos.titulo" text="alumno" />
+<c:set scope="request" var="seccion" value="${men} ${seccion}"/>
+<jsp:include page="../includes/header.jsp" />
+<main>
 	<!-- @ModelAttribute("alumno") de AlumnoController -->
 	<form:form action="save" method="post" modelAttribute="alumno">
 		<c:if test="${!empty alumno}">
@@ -55,7 +41,7 @@
 		</div>
 		<div>
 			<form:label path="telefono">Telefono:</form:label>
-			<form:input path="telefono"/>
+			<form:input path="telefono" pattern="[0-9]{9}"/>
 			<form:errors path="telefono" />
 		</div>
 		<div>
@@ -75,7 +61,7 @@
 		</div>
 		<div>
 			<form:label path="codigopostal">Codigo Postal:</form:label>
-			<form:input path="codigopostal" pattern="[0-9]{5}"/>
+			<form:input path="codigopostal" />
 			<form:errors path="codigopostal" />
 		</div>
 		<div>

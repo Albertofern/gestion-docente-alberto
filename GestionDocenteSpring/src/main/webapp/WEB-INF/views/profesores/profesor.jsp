@@ -3,23 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Gestion Docente - Profesor</title>
-</head>
-<body>
-<header>
-	<h1>Gestion Docente - ${men} Profesor</h1>
-	<nav>
-		<ul>
-			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
- 			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
-			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
- 		</ul>
-	</nav>	
-</header>
+<spring:message var="men" code="form.crear" text="nombre" />
+<c:if test="${cliente.codigo > 0}" >
+	<spring:message var="men"  code="form.editar" text="nombre" />
+</c:if>   
+<spring:message var="seccion" code="profesores.titulo" text="Profesor" />
+<c:set scope="request" var="seccion" value="${men} ${seccion}"/>
+<jsp:include page="../includes/header.jsp" />
 <main>
 	<form:form action="save" method="post" modelAttribute="profesor">
 		<c:if test="${!empty profesor}">

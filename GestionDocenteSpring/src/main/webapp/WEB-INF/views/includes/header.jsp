@@ -20,12 +20,12 @@
 		</ul>
 	</nav>
 	<a href="?locale=es">				
-		<spring:message code="idioma.castellano" />
+		<spring:message code="idioma.castellano" text="castellano" />
 	</a>
 	<a href="?locale=en">
-		<spring:message code="idioma.ingles" />
+		<spring:message code="idioma.ingles" text="ingles"/>
 	</a>
 	<a href="?locale=eu">
-		<spring:message code="idioma.euskera" />
+		<spring:message code="idioma.euskera" text="euskera" />
 	</a>
 </header>

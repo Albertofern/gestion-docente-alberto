@@ -4,27 +4,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 				<!-- BOTON Crear//Editar formulario -->
-<c:set var="men" value="Crear" />
+<spring:message var="men" code="form.crear" text="nombre" />
 <c:if test="${cliente.codigo > 0}" >
-<c:set var="men" value="Editar" />
-</c:if>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Gestion Docente - ${men} Cliente</title>
-</head>
-<body>
-<header>
- 	<h1>Gestion Docente - ${men} Cliente</h1>
-	<nav>
-		<ul>
- 			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
-			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
- 			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
- 		</ul>
- 	</nav>	
-</header>
+	<spring:message var="men"  code="form.editar" text="nombre" />
+</c:if>   
+<spring:message var="seccion" code="cliente.titulo" text="cliente" />
+<c:set scope="request" var="seccion" value="${men} ${seccion}"/>
+<jsp:include page="../includes/header.jsp" />
 <main>
 	<form:form action="save" method="post" modelAttribute="cliente">
 		<c:if test="${!empty cliente}">

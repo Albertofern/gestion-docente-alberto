@@ -3,25 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
  <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Gestion Docente - Listado Clientes</title>
-</head>
-<body>
-<header>
-	<h1>Gestion Docente - ${men} Cliente</h1>
- 	<nav>
- 		<ul>
- 			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
- 			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
- 			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
- 		</ul>
- 	</nav>	
- </header>
+<spring:message var="seccion" code="clientes.titulo"/>
+<c:set scope="request" var="seccion" value="${seccion}"/>
+<jsp:include page="../includes/header.jsp" />
  <main>
-	<a href="clientes/addCliente">Crear</a>
+	<a href="<c:url value='/clientes/addCliente'/>">Crear Cliente</a>
 	<table>
 		<thead>
 			<tr>
@@ -40,8 +26,8 @@
 				<td>${cliente.identificador}</td> 
 				<td>${cliente.telefono}</td>
 				<td>
-					<a href="cliente/${cliente.codigo}">Editar</a>
-					<a href="cliente/deleteCliente/${cliente.codigo}">Borrar</a>
+					<a href="<c:url value='/clientes/${cliente.codigo}'/>">Editar</a>
+					<a href="<c:url value='/clientes/deleteCliente/${cliente.codigo}'/>">Borrar</a>
 				</td>
 				
 			</tr>	

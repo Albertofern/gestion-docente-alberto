@@ -2,27 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset=UTF-8">
-<title>Gestion Docente - Listado Profesores</title>
-</head>
-<body>
-
-<header>
-	<h1>Gestion Docente - Listado Profesores</h1>
-	<nav>
-		<ul>
-			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
-			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
-			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
-		</ul>
-	</nav>
-</header>
+<spring:message var="seccion" code="profesores.titulo" />
+<c:set scope="request" var="seccion" value="${seccion}"/>
+<jsp:include page="../includes/header.jsp" />
 <main>
-	<a href="profesores/addProfesor">Crear</a>
+	<a href="<c:url value='/profesores/addProfesor'/>">Crear Profesor</a>
 	<table>
 		<thead>
 			<tr>
@@ -40,8 +24,9 @@
 				<td>${profesor.nombre}</td> 
 				<td>${profesor.apellidos}</td> 
 				<td>
-					<a href="profesores/${profesor.codigo}">Editar</a>
-					<a href="profesores/deleteProfesor/${profesor.codigo}">Borrar</a>
+						<a href="<c:url value='/profesores/${profesor.codigo}'/>">Editar</a>
+						<a href="<c:url value='/profesores/deleteProfesor/${profesor.codigo}'/>">Borrar</a>
+
 				</td> 
 			</tr>	
 			</c:forEach>
