@@ -33,7 +33,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 		this.nombre = "";
 		this.apellidos = "";
 		this.dni = "";
-		this.fNacimiento = null;
+		this.fNacimiento = new Date();
 		this.email = "";
 		this.direccion = "";
 		this.poblacion = "";

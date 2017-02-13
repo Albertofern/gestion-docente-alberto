@@ -1,6 +1,5 @@
 package com.ipartek.formacion.dbms.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
@@ -46,7 +45,7 @@ public class AlumnoDAOImp implements AlumnoDAO{
 		
 		try{ // Prueba si te devuelve registros (tuplas) del sql
 		// estructura de usar la conexión. Por cada registro un objeto de tipo alumno
-		alumnos = (List<Alumno>) template.query(SQL, new AlumnoMapper()); // esto hace una query!!
+		alumnos = template.query(SQL, new AlumnoMapper()); // esto hace una query!!
 		logger.info(String.valueOf(alumnos.size()));
 		}catch (EmptyResultDataAccessException e){
 			logger.info("sin datos:" + e.getMessage() + " " + SQL);

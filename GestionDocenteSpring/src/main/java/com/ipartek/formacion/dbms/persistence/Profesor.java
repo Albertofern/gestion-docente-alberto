@@ -12,41 +12,40 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ipartek.formacion.dbms.persistence.validator.Phone;
+
 public class Profesor implements Comparable<Profesor>,Serializable {
 
 	private static final long serialVersionUID = -8239371384272787185L;
 	public static final int CODIGO_NULO = -1;
 
 	private int codigo;
+	private long nSS;
 	
-	@NotNull(message = "nSS incorrecta")
-	@NotBlank
-	private int nSS;
-	
-	@Pattern(regexp = "[0-9]{8}[a-z-A-Z]", message = "DNI introducido incorrecto")
+	@Pattern(regexp = "[0-9]{8}[a-z-A-Z]", message="Pattern.dni")
 	private String dni;
 	
-	@Size(min=3, max=50, message = "Nombre incorrecto")
+	@Size(min=3, max=50, message="Size.nombre")
 	private String nombre;
 	
-	@Size(min=7, max=150, message = "apellidos incorrecto")
+	@Size(min=7, max=150, message="Size.apellidos")
 	private String apellidos;
 	
-	@NotNull(message = "fecha incorrecta")
+	//@NotNull(message="Past.fNacimiento")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Past(message = "Past.fNacimiento") //Tiene que ser mas antigua que HOY
 	private Date fNacimiento;
 	
-	@NotNull(message = "NotEmpty.email")
- 	@NotBlank(message = "NotBlank.email")
- 	@Email(message = "Email.email")
+	@NotNull(message="NotEmpty.email")
+ 	@NotBlank(message="NotBlank.email")
+ 	@Email(message="Email.email")
 	private String email;
 	
 	private String direccion;
 	
-	@NotNull(message = "NotEmpty.telefono")
- 	@NotBlank(message = "NotBlank.telefono")
- 	//@Phone(message = "Phone.telefono")
+	@NotNull(message="NotEmpty.telefono")
+ 	@NotBlank(message="NotBlank.telefono")
+ 	@Phone(message = "Phone.telefono")
 	private String telefono;
 	private int codigoPostal;
 	
@@ -181,11 +180,11 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 		this.telefono = telefono;
 	}
 	
-	public int getnSS() {
+	public long getnSS() {
 		return nSS;
 	}
 
-	public void setnSS(int nSS) {
+	public void setnSS(long nSS) {
 		this.nSS = nSS;
 	}
 

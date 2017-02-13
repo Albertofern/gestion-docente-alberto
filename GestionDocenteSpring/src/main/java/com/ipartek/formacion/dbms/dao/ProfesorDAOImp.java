@@ -42,7 +42,7 @@ public class ProfesorDAOImp implements ProfesorDAO{
 
 	@Override
 	public List<Profesor> getAll() {
-		final String SQL = "SELECT * FROM profesor";
+		final String SQL = "SELECT codigo as codigo,nss,dni,fNacimiento,nombre as nombre, apellidos as apellidos FROM profesor";
 		List<Profesor> profesores = null;
 		
 		try { // Prueba si te devuelve registros (tuplas) del sql

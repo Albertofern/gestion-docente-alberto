@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+ <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +10,17 @@
 <title>Gestion Docente - Listado Clientes</title>
 </head>
 <body>
-	<header>
-	<h1>Gestion Docente - Listado Clientes</h1>
-</header>
-<main>
+<header>
+	<h1>Gestion Docente - ${men} Cliente</h1>
+ 	<nav>
+ 		<ul>
+ 			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
+ 			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
+ 			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
+ 		</ul>
+ 	</nav>	
+ </header>
+ <main>
 	<a href="clientes/addCliente">Crear</a>
 	<table>
 		<thead>
@@ -27,9 +36,10 @@
 			<c:forEach var="cliente" items="${listadoClientes}">
 			<tr>	
 				<td>${cliente.nombre}</td> 
+				<td>${cliente.email}</td>
 				<td>${cliente.identificador}</td> 
 				<td>${cliente.telefono}</td>
-				
+				<td>
 					<a href="cliente/${cliente.codigo}">Editar</a>
 					<a href="cliente/deleteCliente/${cliente.codigo}">Borrar</a>
 				</td>

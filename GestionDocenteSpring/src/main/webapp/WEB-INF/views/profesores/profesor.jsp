@@ -10,8 +10,18 @@
 <title>Gestion Docente - Profesor</title>
 </head>
 <body>
-	<!-- @ModelAttribute("profesor") de ProfesorController -->
-	<form:form action="save" method="post" commandName="profesor">
+<header>
+	<h1>Gestion Docente - ${men} Profesor</h1>
+	<nav>
+		<ul>
+			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
+ 			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
+			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
+ 		</ul>
+	</nav>	
+</header>
+<main>
+	<form:form action="save" method="post" modelAttribute="profesor">
 		<c:if test="${!empty profesor}">
 			<form:hidden path="codigo"/>
 		</c:if>
@@ -47,7 +57,7 @@
 		</div>
 		<div>
 			<form:label path="fNacimiento">F. Nacimiento:</form:label>
-			<form:input path="fNacimiento" placeholder="dd/MM/yyyy" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
+			<form:input path="fNacimiento" placeholder="dd/mm/yyyy" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
 			<form:errors path="fNacimiento" />
 		</div>
 		<div>
@@ -61,5 +71,8 @@
 		</c:if>
 		<input type="submit" value="${mens}">
 	</form:form>
+</main>
+<footer>
+</footer>
 </body>
 </html>
