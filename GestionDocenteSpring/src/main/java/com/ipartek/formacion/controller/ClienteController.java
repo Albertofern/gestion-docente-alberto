@@ -90,7 +90,7 @@ public class ClienteController {
 			destino = "/clientes/cliente";
 		} else {
 			destino = "redirect:/alumnos"; 
-			if(cliente.getCodigo() > cliente.CODIGO_NULO){
+			if(cliente.getCodigo() > Cliente.CODIGO_NULO){
 				logger.info(cliente.toString());
 				cS.update(cliente);
 			} else {

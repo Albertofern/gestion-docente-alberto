@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-02-2017 a las 13:37:45
+-- Tiempo de generación: 14-02-2017 a las 13:28:15
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -19,21 +19,22 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gestiondocente`
 --
-DROP DATABASE `gestiondocente`;
-CREATE DATABASE IF NOT EXISTS `gestiondocente` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `gestiondocente`;
 
 DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `alumnodelete`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnodelete` (IN `codigo` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnoCreate` (IN `papellidos` VARCHAR(250), IN `pcodigopostal` INT(5), IN `pdireccion` VARCHAR(250), IN `pdni` VARCHAR(9), IN `pemail` VARCHAR(150), IN `pfNacimiento` DATE, IN `pnHermanos` INT(2), IN `pnombre` VARCHAR(50), IN `ppoblacion` VARCHAR(150), IN `ptelefono` INT(9), OUT `pcodigo` INT)  NO SQL
+BEGIN 
+INSERT INTO alumno(nombre,apellidos,dni,email,direccion,codigopostal,poblacion,fNacimiento,telefono,nHermanos) VALUES(LOWER(pnombre),LOWER(papellidos),LOWER(pdni),LOWER(pemail),LOWER(pdireccion),pcodigopostal,LOWER(ppoblacion),pfNacimiento,ptelefono,pnHermanos);
+SET pcodigo = LAST_INSERT_ID();
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnoDelete` (IN `pcodigo` INT)  NO SQL
 BEGIN
    DELETE FROM alumno WHERE codigo = pcodigo;
 END$$
 
-DROP PROCEDURE IF EXISTS `alumnogetAll`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnogetAll` ()  NO SQL
 BEGIN
 	SELECT a.codigo,a.nombre,a.apellidos,a.fNacimiento,a.direccion,
@@ -42,7 +43,6 @@ BEGIN
     FROM alumno as a;
 END$$
 
-DROP PROCEDURE IF EXISTS `alumnogetById`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnogetById` (IN `pcodigo` INT)  NO SQL
 BEGIN
 	SELECT a.codigo,a.nombre,a.apellidos,a.fNacimiento,a.direccion,
@@ -50,6 +50,21 @@ BEGIN
     a.activo
     FROM alumno as a
     WHERE codigo = pcodigo;  
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnoUpdate` (IN `papellidos` VARCHAR(250), IN `pcodigo` INT, IN `pcodigopostal` INT(5), IN `pdireccion` VARCHAR(250), IN `pdni` VARCHAR(9), IN `pemail` VARCHAR(150), IN `pfNacimiento` DATE, IN `pnHermanos` INT(2), IN `pnombre` VARCHAR(50), IN `ppoblacion` VARCHAR(150), IN `ptelefono` INT(9))  NO SQL
+BEGIN
+UPDATE alumno 
+SET nombre = LOWER(pnombre),apellidos = LOWER(papellidos), dni = LOWER(pdni),email = LOWER(pemail),direccion=LOWER(pdireccion),codigopostal=pcodigopostal,poblacion=LOWER(ppoblacion),fNacimiento=pfNacimiento,telefono=ptelefono,nHermanos=pnHermanos
+WHERE codigo = pcodigo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `profesorgetAll` ()  NO SQL
+BEGIN
+	SELECT p.codigo,p.nombre,p.apellidos,p.fNacimiento,p.direccion,
+    p.poblacion,p.codigopostal,p.telefono,p.email,p.dni,p.nHermanos,
+    p.activo,p.nss,p.dni
+    FROM profesor as p;
 END$$
 
 DELIMITER ;
@@ -60,7 +75,6 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `alumno`
 --
 
-DROP TABLE IF EXISTS `alumno`;
 CREATE TABLE `alumno` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -81,7 +95,7 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`codigo`, `nombre`, `apellidos`, `fNacimiento`, `direccion`, `poblacion`, `codigopostal`, `telefono`, `email`, `dni`, `nHermanos`, `activo`) VALUES
-(1, 'Sergio', 'Aparicio Vargas', '2017-02-01', NULL, NULL, NULL, 944, 'aaaa@aaaa.com', '44974398z', NULL, 1);
+(2, 'alberto', 'fernandez', '2019-04-04', '', '', 48, 688810557, 'alberto@gmail.com', '45751515f', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -89,7 +103,6 @@ INSERT INTO `alumno` (`codigo`, `nombre`, `apellidos`, `fNacimiento`, `direccion
 -- Estructura de tabla para la tabla `cliente`
 --
 
-DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
   `codigo` int(11) NOT NULL,
   `nombre` text COLLATE utf8_bin NOT NULL,
@@ -114,7 +127,6 @@ INSERT INTO `cliente` (`codigo`, `nombre`, `email`, `telefono`, `direccion`, `po
 -- Estructura de tabla para la tabla `profesor`
 --
 
-DROP TABLE IF EXISTS `profesor`;
 CREATE TABLE `profesor` (
   `codigo` int(11) NOT NULL,
   `NSS` bigint(12) NOT NULL,
@@ -166,7 +178,7 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --

@@ -29,7 +29,7 @@ public class AlumnoValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "formAlumno.telefonoRequerido" ,"Tiene que introducir un telefono");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"fNacimiento", "formAlumno.fNacimiento" , "Tiene que introducir la fecha de nacimiento");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"direccion", "formAlumno.poblacion", "Tiene que introducir una poblacion");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors,"direccion", "formAlumno.poblacion", "Tiene que introducir una poblacion");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"codigopostal", "formAlumno.codigopostal", "Tiene que introducir una poblacion");
 		
 		// Para cubirnos de los datos que insertamos a la BBDD

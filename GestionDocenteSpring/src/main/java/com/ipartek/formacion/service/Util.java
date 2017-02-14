@@ -33,7 +33,7 @@ public final class Util {
 		boolean valido = false;
 		final Pattern pattern = Pattern.compile(REGEX);
 		final Matcher matcher = pattern.matcher(parameter);
-		if (matcher.matches() && comprobarLetraDni(parameter)) {
+		if (matcher.matches()) {
 			valido = true;
 		}
 		return valido;

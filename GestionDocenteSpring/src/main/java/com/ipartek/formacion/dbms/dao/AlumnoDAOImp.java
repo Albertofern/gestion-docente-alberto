@@ -1,6 +1,8 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -8,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dbms.dao.interfaces.AlumnoDAO;
@@ -20,7 +25,10 @@ public class AlumnoDAOImp implements AlumnoDAO{
 
 	@Autowired 
 	private DataSource dataSource;  // Todas las clases DAO implementaran este metodo
-	private JdbcTemplate template;
+	private JdbcTemplate jdbctemplate;
+	
+	private SimpleJdbcCall jdbcCall;
+	
 	private Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
 	
 	@Autowired
@@ -28,13 +36,43 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource; //  esto es un setter!! Que se usara para la injección de dependencias.
 									  //  (la conexion del OBJETO (Ben del root-contex: mysqlDataSource en el xml.))
-		this.template = new JdbcTemplate(dataSource); // para crear la QUERY en el getAll()
+		this.jdbctemplate = new JdbcTemplate(dataSource); // para crear la QUERY en el getAll()
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
 	}
 
 	@Override
 	public Alumno create(Alumno alumno) {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL = "alumnoCreate";
+		
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		
+		jdbcCall.withProcedureName(SQL);
+		
+		
+		//crear un mapa con los parametros de procedimientos almacenados
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("pnombre", alumno.getNombre())
+				.addValue("papellidos", alumno.getApellidos())
+				.addValue("pdni", alumno.getDni())
+				.addValue("pcodigopostal", alumno.getCodigopostal())
+				.addValue("pdireccion", alumno.getDireccion())
+				.addValue("pemail", alumno.getEmail())
+				.addValue("pfNacimiento", alumno.getfNacimiento())
+				.addValue("ppoblacion", alumno.getPoblacion())
+				.addValue("pnHermanos", alumno.getnHermanos())
+				.addValue("ptelefono", alumno.getTelefono());
+		// Como se ejecuta la consulta?
+		//jdbcCall.execute(in);
+		
+		//logger
+		logger.info(alumno.toString());
+		
+		//Como se recoge los datos?
+		Map<String, Object> out = jdbcCall.execute(in);
+		// En out se han recogido los parametros out de la consulta a BBDD.
+		
+		alumno.setCodigo((Integer) out.get("pcodigo"));		
+		return alumno;
 	}
 
 	@Override
@@ -45,31 +83,68 @@ public class AlumnoDAOImp implements AlumnoDAO{
 		
 		try{ // Prueba si te devuelve registros (tuplas) del sql
 		// estructura de usar la conexión. Por cada registro un objeto de tipo alumno
-		alumnos = template.query(SQL, new AlumnoMapper()); // esto hace una query!!
+		alumnos = jdbctemplate.query(SQL, new AlumnoMapper()); // esto hace una query!!
 		logger.info(String.valueOf(alumnos.size()));
 		}catch (EmptyResultDataAccessException e){
 			logger.info("sin datos:" + e.getMessage() + " " + SQL);
 			//alumnos = new ArrayList<Alumno>();
 		}
-		
 		return alumnos;
 	}
 
 	@Override
 	public Alumno getById(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Alumno alumno = null;
+		final String SQL = "CALL alumnogetById(?)";
+		try{
+			alumno = jdbctemplate.queryForObject(SQL, new AlumnoMapper(),new Object[] { codigo });
+			logger.info(alumno.toString());
+		} catch (EmptyResultDataAccessException e){
+			alumno = new Alumno();
+			logger.info("No se ha encontrado Alumno para codigo: " + codigo + " " + e.getMessage());
+		}
+		
+		return alumno;
 	}
 
 	@Override
 	public Alumno update(Alumno alumno) {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL = "alumnoUpdate";
+		
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		jdbcCall.withProcedureName(SQL);
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("pnombre", alumno.getNombre())
+				.addValue("papellidos", alumno.getApellidos())
+				.addValue("pdni", alumno.getDni())
+				.addValue("pcodigopostal", alumno.getCodigopostal())
+				.addValue("pdireccion", alumno.getDireccion())
+				.addValue("pemail", alumno.getEmail())
+				.addValue("pfNacimiento", alumno.getfNacimiento())
+				.addValue("ppoblacion", alumno.getPoblacion())
+				.addValue("pnHermanos", alumno.getnHermanos())
+				.addValue("pcodigo", alumno.getCodigo())
+				.addValue("ptelefono", alumno.getTelefono());
+		
+		logger.info(alumno.toString());
+		
+		// Se ejecuta, no tiene parametro out.
+		jdbcCall.execute(in);
+		return alumno;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		// TODO Auto-generated method stub
+		final String SQL = "alumnoDelete";
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		jdbcCall.withProcedureName(SQL);
+		logger.error(String.valueOf(codigo));
+		SqlParameterSource in = new MapSqlParameterSource()
+			.addValue("pcodigo", codigo);
+		
+		logger.info(String.valueOf(codigo));
+		
+		jdbcCall.execute(in);
 		
 	}
 

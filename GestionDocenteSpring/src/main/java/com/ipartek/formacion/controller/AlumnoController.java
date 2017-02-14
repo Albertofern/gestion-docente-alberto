@@ -98,6 +98,8 @@ public class AlumnoController {
 	@RequestMapping(value="/deleteAlumno/{id}") 
 	public String delete(@PathVariable("id") int id){  // Cuando borro, mando el codigo
 						// me parsea el id del: @RequestMapping(value="/deleteAlumno/(id)") 
+		System.out.println("Codigo alumno: "+id);
+		logger.error("Codigo alumno: "+id);
 		aS.delete(id);								   // Envia a AlumnoService
 		return"redirect:/alumnos";  				   // Que hace esto? Hace una redireccion a "public ModelAndView getAll()"  LO RECICLA el codigo de getAll()
 	}
