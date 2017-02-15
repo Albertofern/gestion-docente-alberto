@@ -48,6 +48,7 @@ public class Profesor implements Comparable<Profesor>,Serializable {
  	@Phone(message = "Phone.telefono")
 	private String telefono;
 	private int codigoPostal;
+	private boolean activo;
 	
 
 	public Profesor() {
@@ -62,6 +63,7 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 		this.direccion = "";
 		this.telefono = "94";
 		this.codigoPostal = 48;
+		this.activo = true;
 		
 	}
 
@@ -82,6 +84,23 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 		return this.apellidos.compareToIgnoreCase(o.getApellidos());
 	}
 
+	
+	/**
+	 * @return the activo
+	 */
+	public boolean isActivo() {
+		return activo;
+	}
+
+	/**
+	 * @param activo
+	 *            the activo to set
+	 */
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
+	
 	/**
 	 * @return the dni
 	 */

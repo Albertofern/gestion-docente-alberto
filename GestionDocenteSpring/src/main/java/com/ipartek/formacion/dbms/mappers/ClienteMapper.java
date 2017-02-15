@@ -13,6 +13,7 @@ public class ClienteMapper implements RowMapper<Cliente>{
 	public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException { // es una factoria de objeto.
 		Cliente cliente = new Cliente();
 		cliente.setCodigo(rs.getInt("codigo"));
+		cliente.setActivo(rs.getBoolean("activo"));
 		cliente.setNombre(rs.getString("nombre"));
 		cliente.setIdentificador(rs.getString("identificador"));
 		cliente.setCodigoPostal(rs.getInt("codigopostal"));

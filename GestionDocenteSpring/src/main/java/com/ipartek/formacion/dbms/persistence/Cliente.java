@@ -21,6 +21,7 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 	private String poblacion;
  	private int codigoPostal;
 	private String identificador;
+	private boolean activo;
 	
 	public Cliente () {
 		super();
@@ -31,10 +32,25 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		this.poblacion = "";
  		this.codigoPostal = 48;
 		this.email = "";
-		this.identificador = "";	
+		this.identificador = "";
+		this.activo = true;
+		
 	}
 	
-	
+	/**
+	 * @return the activo
+	 */
+	public boolean isActivo() {
+		return activo;
+	}
+
+	/**
+	 * @param activo
+	 *            the activo to set
+	 */
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	
 	public int getCodigo() {
 		return codigo;
