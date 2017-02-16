@@ -20,7 +20,10 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 	public static final int CODIGO_NULO = -1;
 
 	private int codigo;
-	private long nSS;
+	@NotNull(message = "NotNull.nSS")
+	@NotBlank(message = "NotBlank.nSS")
+	@Pattern(regexp = "[0-9]{12}", message = "Pattern.nSS")
+	private String nSS;
 	
 	@Pattern(regexp = "[0-9]{8}[a-z-A-Z]", message="Pattern.dni")
 	private String dni;
@@ -54,7 +57,7 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 	public Profesor() {
 		super();
 		this.codigo = Profesor.CODIGO_NULO;
-		this.nSS = 0;
+		this.nSS = "";
 		this.dni = "";
 		this.nombre = "";
 		this.apellidos = "";
@@ -199,11 +202,11 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 		this.telefono = telefono;
 	}
 	
-	public long getnSS() {
+	public String getnSS() {
 		return nSS;
 	}
 
-	public void setnSS(long nSS) {
+	public void setnSS(String nSS) {
 		this.nSS = nSS;
 	}
 

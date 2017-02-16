@@ -44,4 +44,10 @@ public class ClienteServiceImp implements ClienteService{
 		
 	}
 
+	@Override
+	public Cliente getByIdentificador(String identificador) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

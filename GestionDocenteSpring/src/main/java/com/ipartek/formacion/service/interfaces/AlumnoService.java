@@ -16,5 +16,7 @@ public interface AlumnoService { // estamos definiendo los métodos de la capa D
 	public Alumno update(Alumno alumno);
 	
 	public void delete(int codigo);
+
+	Alumno getByDni(String dni);
 	
 }

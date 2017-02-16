@@ -15,7 +15,7 @@ public class ProfesorMapper implements RowMapper<Profesor>{
 		profesor.setCodigo(rs.getInt("codigo"));
 		profesor.setNombre(rs.getString("nombre"));
 		profesor.setApellidos(rs.getString("apellidos"));
-		profesor.setnSS(rs.getLong("nss"));
+		profesor.setnSS(rs.getString("nss"));
 		profesor.setDni(rs.getString("dni"));
 		profesor.setfNacimiento(rs.getDate("fNacimiento"));
 		profesor.setActivo(rs.getBoolean("activo"));

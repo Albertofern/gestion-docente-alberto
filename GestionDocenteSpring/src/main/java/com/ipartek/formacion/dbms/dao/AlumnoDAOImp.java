@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -30,6 +31,19 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	private SimpleJdbcCall jdbcCall;
 	
 	private Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
+	
+	@Value("${alumno.crear}")
+	private String sqlCreate;
+	@Value("${alumno.borrar}")
+	private String sqlDelete;
+	@Value("${alumno.editar}")
+	private String sqlUpdate;
+	@Value("${alumno.obtener.todos}")
+	private String sqlReadall;
+	@Value("${alumno.obtener.id}")
+	private String sqlReadbyid;
+	@Value("${alumno.obtener.dni}")
+	private String sqlReadbydni;
 	
 	@Autowired
 	@Override
@@ -100,7 +114,7 @@ public class AlumnoDAOImp implements AlumnoDAO{
 			alumno = jdbctemplate.queryForObject(SQL, new AlumnoMapper(),new Object[] { codigo });
 			logger.info(alumno.toString());
 		} catch (EmptyResultDataAccessException e){
-			alumno = new Alumno();
+			alumno = null;
 			logger.info("No se ha encontrado Alumno para codigo: " + codigo + " " + e.getMessage());
 		}
 		
@@ -135,7 +149,7 @@ public class AlumnoDAOImp implements AlumnoDAO{
 
 	@Override
 	public void delete(int codigo) {
-		final String SQL = "alumnoDelete";
+		String SQL = "alumnoDelete";
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
 		jdbcCall.withProcedureName(SQL);
 		logger.error(String.valueOf(codigo));
@@ -146,6 +160,19 @@ public class AlumnoDAOImp implements AlumnoDAO{
 		
 		jdbcCall.execute(in);
 		
+	}
+	@Override
+	public Alumno getByDni(String dni) {
+		Alumno alumno = null;
+		sqlReadbydni = "call " + sqlReadbydni + "(?);";
+		try {
+			alumno = jdbctemplate.queryForObject(sqlReadbydni, new AlumnoMapper(), new Object[] { dni });
+			logger.info(alumno.toString());
+		} catch (EmptyResultDataAccessException e) {
+			alumno = null;
+			logger.info("No se ha encontrado Alumno para el dni: " + dni + " " + e.getMessage());
+		}
+		return alumno;
 	}
 
 }

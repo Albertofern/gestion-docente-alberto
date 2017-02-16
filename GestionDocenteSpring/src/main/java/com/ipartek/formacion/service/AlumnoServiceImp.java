@@ -41,6 +41,11 @@ public class AlumnoServiceImp implements AlumnoService{
 		alumnoDao.delete(codigo);
 		
 	}
-
+	
+	@Override
+	public Alumno getByDni(String dni) {
+		
+		return alumnoDao.getByDni(dni);
+	}
 
 }

@@ -132,5 +132,11 @@ public class ClienteDAOImp  implements ClienteDAO{
 		jdbcCall.execute(in);
 		
 	}
+	
+	@Override
+	public Cliente getByIdentificador(String identificador) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

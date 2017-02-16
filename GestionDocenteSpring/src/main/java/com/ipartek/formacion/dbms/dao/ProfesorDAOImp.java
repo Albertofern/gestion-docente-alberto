@@ -137,5 +137,17 @@ public class ProfesorDAOImp implements ProfesorDAO{
 		jdbcCall.execute(in);
 		
 	}
+	
+	@Override
+	public Profesor getByDni(String dni) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Profesor getByNss(String nss) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

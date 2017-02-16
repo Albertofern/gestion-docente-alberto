@@ -20,4 +20,6 @@ public interface ProfesorService { // estamos definiendo los métodos de la capa
 	// Quiero un setter de AlumnoDAO
 	public void setProfesorDao(ProfesorDAO profesorDao);
 
+	Profesor getByNss(String nss);
+
 }

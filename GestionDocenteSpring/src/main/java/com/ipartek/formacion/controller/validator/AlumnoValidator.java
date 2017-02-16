@@ -1,15 +1,28 @@
 package com.ipartek.formacion.controller.validator;
 
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.ipartek.formacion.dbms.persistence.Alumno;
 import com.ipartek.formacion.service.Util;
+import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 public class AlumnoValidator implements Validator {
 
-
+	
+	@Value("${alumno.nombre.size.min}")
+ 	private int nombreTamMin;
+	
+	@Value("${alumno.nombre.size.max}")
+ 	private int nombreTamMax;
+	
+	@Inject
+	AlumnoService aS;
+	
 	// -------- Sirve para definir que tipos de datos..
 	
 	@Override
@@ -79,6 +92,12 @@ public class AlumnoValidator implements Validator {
 		if (!Util.validarEmail(alum.getEmail())) {
 			errors.rejectValue("email", "form.formatoCodigoPostalIncorrecto", new Object[] { "'email'" },
 					"El email introducido no es correcto.");
+		}
+		
+		if (alum.getCodigo() == Alumno.CODIGO_NULO && aS.getByDni(alum.getDni()) != null) {
+			errors.rejectValue("dni", "form.dniExiste", new Object[] { alum.getDni() },
+					"el dni ya existe en la base de datos");
+
 		}
 		
 

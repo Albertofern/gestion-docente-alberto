@@ -37,6 +37,10 @@ public interface ProfesorDAO extends DAOSetter{
 	
 	public void delete(int codigo);
 	
+	public Profesor getByDni(String dni);
+	
+	public Profesor getByNss(String nss);
+	
 	
 	
 }

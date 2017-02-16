@@ -17,5 +17,7 @@ public interface ClienteService { // estamos definiendo los métodos de la capa 
 	public Cliente update(Cliente cliente);
 	
 	public void delete(int codigo);
+
+	Cliente getByIdentificador(String identificador);
 	
 }

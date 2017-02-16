@@ -47,4 +47,10 @@ public class ProfesorServiceImp implements ProfesorService {
 		this.profesorDao = profesorDao;
 	}
 
+	@Override
+	public Profesor getByNss(String nss) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
