@@ -42,7 +42,7 @@
 			<form:errors path="email" />
 		</div>
 		
-		<input type="submit" value="${mens}">
+		<input type="submit" value="${men}">
 	
 	</form:form>
 </main>

@@ -10,9 +10,9 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Nombre</th>
+				<th><spring:message code="alumno.nombre" /></th>
 				<th>Apellidos</th>
-				<th></th>
+				<th>Dni</th>
 			</tr>	
 		</thead>
 		
@@ -23,6 +23,7 @@
 			<tr>	
 				<td>${alumno.nombre}</td> 
 				<td>${alumno.apellidos}</td> 
+				<td>${alumno.dni}</td>
 				<td>
 					<a href="<c:url value='/alumnos/${alumno.codigo}'/>">Editar</a>
 					<a href="<c:url value='/alumnos/deleteAlumno/${alumno.codigo}'/>">Borrar</a>

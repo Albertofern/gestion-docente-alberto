@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.ipartek.formacion">
-		<level value="warn" />
+		<level value="all" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

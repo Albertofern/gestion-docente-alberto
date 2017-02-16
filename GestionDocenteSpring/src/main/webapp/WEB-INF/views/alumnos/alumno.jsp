@@ -25,7 +25,7 @@
 			<form:errors path="nombre" cssClass="" />
 		</div>
 		<div>
-			<form:label path="apellidos">Apellidos:</form:label>
+			<form:label path="apellidos"><spring:message code="alumno.apellidos" />:</form:label>
 			<form:input path="apellidos" cssErrorClass="" cssClass="" />
 			<form:errors path="apellidos"/>
 		</div>
@@ -46,7 +46,7 @@
 		</div>
 		<div>
 			<form:label path="fNacimiento">F. Nacimiento:</form:label>
-			<form:input path="fNacimiento" placeholder="dd/mm/yyyy" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
+			<form:input path="fNacimiento" placeholder="dd/MM/yyyy" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
 			<form:errors path="fNacimiento" />
 		</div>
 		<div>

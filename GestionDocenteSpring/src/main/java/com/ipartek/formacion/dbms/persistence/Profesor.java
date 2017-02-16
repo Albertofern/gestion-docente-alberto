@@ -31,7 +31,7 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 	@Size(min=7, max=150, message="Size.apellidos")
 	private String apellidos;
 	
-	//@NotNull(message="Past.fNacimiento")
+	@NotNull(message="Past.fNacimiento")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Past(message = "Past.fNacimiento") //Tiene que ser mas antigua que HOY
 	private Date fNacimiento;

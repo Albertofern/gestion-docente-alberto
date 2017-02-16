@@ -12,8 +12,9 @@
 		<thead>
 			<tr>
 				<th>Nombre</th>
-				<th>Apellidos</th>
-				<th></th>
+				<th>Email</th>
+				<th>Identificador</th>
+				<th>Telefono</th>
 			</tr>	
 		</thead>
 	<tbody>	
