@@ -60,7 +60,7 @@ public class ProfesorController {
 			destino = "profesores/profesor";
 		} else {
 			destino = "redirect:/profesores"; // Que hace esto? Hace una redireccion a "public ModelAndView getAll()"  LO RECICLA el codigo de getAll()
-			if(profesor.getCodigo() > profesor.CODIGO_NULO){
+			if(profesor.getCodigo() > Profesor.CODIGO_NULO){
 				logger.info(profesor.toString());
 				pS.update(profesor);
 			} else {

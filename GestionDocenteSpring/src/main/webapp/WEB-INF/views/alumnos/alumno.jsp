@@ -60,9 +60,9 @@
 			<form:errors path="poblacion" />
 		</div>
 		<div>
-			<form:label path="codigopostal">Codigo Postal:</form:label>
-			<form:input path="codigopostal" />
-			<form:errors path="codigopostal" />
+			<form:label path="codigoPostal">Codigo Postal:</form:label>
+			<form:input path="codigoPostal" />
+			<form:errors path="codigoPostal" />
 		</div>
 		<div>
 			<form:label path="nHermanos">Numero de hermanos:</form:label>

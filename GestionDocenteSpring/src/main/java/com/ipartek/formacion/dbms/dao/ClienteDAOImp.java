@@ -90,7 +90,7 @@ public class ClienteDAOImp  implements ClienteDAO{
 			logger.info(cliente.toString());
 		}catch (EmptyResultDataAccessException e) {
 			cliente = new Cliente();
-			logger.info("No se ha encontrado Alumno para codigo: " + codigo + " " + e.getMessage());
+			logger.info("No se ha encontrado Curso para codigo: " + codigo + " " + e.getMessage());
 		}
 
 		

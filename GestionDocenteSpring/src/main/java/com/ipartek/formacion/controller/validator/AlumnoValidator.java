@@ -13,12 +13,34 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 
 public class AlumnoValidator implements Validator {
 
+	// ------------------------------ Constantes ----------------------------------------
 	
+	// ------------------------------  NOMBRE  ----------------------------------------
 	@Value("${alumno.nombre.size.min}")
  	private int nombreTamMin;
-	
 	@Value("${alumno.nombre.size.max}")
  	private int nombreTamMax;
+	// ------------------------------ APELLIDOS ----------------------------------------
+	@Value("${alumno.apellidos.size.min}")
+	private int apellidosTamMin;
+	@Value("${alumno.apellidos.size.max}")
+	private int apellidosTamMax;
+	// ------------------------------ DIRECCION ----------------------------------------
+	@Value("${alumno.direccion.size.min}")
+	private int direccionTamMin;
+	@Value("${alumno.direccion.size.max}")
+	private int direccionTamMax;
+	// ----------------------------- POBLACION ------------------------------------------
+	@Value("${alumno.poblacion.size.min}")
+	private int poblacionTamMin;
+	@Value("${alumno.poblacion.size.max}")
+	private int poblacionTamMax;
+	// ----------------------------- CODIGOPOSTAL -------------------------------------
+	@Value("${alumno.codigopostal.size}")
+	private int codigoPostalTam;
+	// ----------------------------- EMAIL ----------------------------------------------
+	@Value("${alumno.telefono.size}")
+	private int emailTam;
 	
 	@Inject
 	AlumnoService aS;
@@ -43,7 +65,7 @@ public class AlumnoValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"fNacimiento", "formAlumno.fNacimiento" , "Tiene que introducir la fecha de nacimiento");
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors,"direccion", "formAlumno.poblacion", "Tiene que introducir una poblacion");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"codigopostal", "formAlumno.codigopostal", "Tiene que introducir una poblacion");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"codigoPostal", "formAlumno.codigopostal", "Tiene que introducir una poblacion");
 		
 		// Para cubirnos de los datos que insertamos a la BBDD
 		// Se le añadira el validation a todos los campos de la BBDD para que no metan campos en blanco "WhiteSpace"
@@ -66,33 +88,35 @@ public class AlumnoValidator implements Validator {
 					errors.rejectValue("dni", "form.letraDniIncorrecta", new Object[] { "'dni'" },
 								"El DNI introducido es incorrecto");
 		}
-		if (alum.getNombre().length() < 3 || alum.getNombre().length() > 50) {
-					errors.rejectValue("nombre", "form.longitudNombreIncorrecta", new Object[] { "'nombre'" },
+		if (alum.getNombre().length() < nombreTamMin || alum.getNombre().length() > nombreTamMax) {
+					errors.rejectValue("nombre", "form.longitudNombreIncorrecta", new Object[] { nombreTamMin,nombreTamMax },
 								"El nombre tiene que ocupar entre 3 y 50 caracteres.");
 		}
 		
-		if (alum.getApellidos().length() < 7 || alum.getApellidos().length() > 250) {
-					errors.rejectValue("apellidos", "form.longitudNombreIncorrecta", new Object[] { "'apellidos'" },
+		if (alum.getApellidos().length() < apellidosTamMin || alum.getApellidos().length() > apellidosTamMax) {
+					errors.rejectValue("apellidos", "form.longitudNombreIncorrecta", new Object[] { apellidosTamMin,apellidosTamMax },
 								"Los dos apellidos tienen que ocupar entre 7 y 250 caracteres.");
 		}
 		
-		if (alum.getDireccion().length() > 250) {
-					errors.rejectValue("direccion", "form.longitudDireccionIncorrecta", new Object[] { "'direccion'" },
-							"La dirección tiene que tener una longitud máxima de 250 caracteres.");
+		if (alum.getDireccion().length() < direccionTamMin || alum.getDireccion().length() > direccionTamMax) {
+					errors.rejectValue("direccion", "form.longitudDireccionIncorrecta", new Object[] { direccionTamMin,direccionTamMax },
+							"La dirección tiene que tener una longitud entre 10 y 250 caracteres.");
 		}
-		if (alum.getPoblacion().length() > 150) {
-			 		errors.rejectValue("poblacion", "form.longitudPoblacionIncorrecta", new Object[] { "'poblacion'" },
-							"La poblacion tiene que tener una longitud máxima de 250 caracteres.");
+		if (alum.getPoblacion().length() < poblacionTamMin || alum.getPoblacion().length() > poblacionTamMax) {
+			 		errors.rejectValue("poblacion", "form.longitudPoblacionIncorrecta", new Object[] { poblacionTamMin,poblacionTamMax },
+							"La poblacion tiene que tener una longitud entre 4 y 150 caracteres.");
 		}
 			
-		if (alum.getCodigo() > 50 && !Util.validarCodigoPostal(alum.getCodigopostal())) {
-					errors.rejectValue("codigopostal", "form.formatoCodigoPostalIncorrecto", new Object[] { "'codigopostal'" },
+		if (alum.getCodigo() > 50 && !Util.validarCodigoPostal(alum.getCodigoPostal())) {
+					errors.rejectValue("codigoPostal", "form.formatoCodigoPostalIncorrecto", new Object[] { codigoPostalTam },
 							"El código postal introducido no es correcto.");
 		}
 		if (!Util.validarEmail(alum.getEmail())) {
-			errors.rejectValue("email", "form.formatoCodigoPostalIncorrecto", new Object[] { "'email'" },
+			errors.rejectValue("email", "form.formatoEmailIncorrecto", new Object[] { "'email'" },
 					"El email introducido no es correcto.");
 		}
+		
+		
 		
 		if (alum.getCodigo() == Alumno.CODIGO_NULO && aS.getByDni(alum.getDni()) != null) {
 			errors.rejectValue("dni", "form.dniExiste", new Object[] { alum.getDni() },

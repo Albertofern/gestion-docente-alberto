@@ -38,7 +38,7 @@
         </beans:bean>
     </interceptors>
 	
-	
+	<context:property-placeholder location="classpath*:/constantes/constantes.properties"/>
 	<context:component-scan base-package="com.ipartek.formacion" />
 	
 	

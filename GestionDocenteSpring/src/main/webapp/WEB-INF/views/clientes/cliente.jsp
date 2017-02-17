@@ -27,6 +27,11 @@
 			<form:errors path="direccion" />
 		</div>
 		<div>
+			<form:label path="codigoPostal">Codigo postal::</form:label>
+			<form:input path="codigoPostal"/>
+			<form:errors path="codigoPostal" />
+		</div>
+		<div>
 			<form:label path="identificador">DNI o CIF:</form:label>
 			<form:input path="identificador" cssErrorClass="" cssClass="" />
 			<form:errors path="identificador" />

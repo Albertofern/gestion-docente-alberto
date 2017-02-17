@@ -147,19 +147,14 @@ public class Curso implements Serializable, Comparable<Curso>{
 	public String toString() {
 		return this.nombreCurso+ ", " + this.duracion;
 	}
-	
-	/*
-  	 * (non-Javadoc)
-  	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
 
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
- 	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + codigo;
+		return result;
+	}
 	@Override
   	public boolean equals(Object obj) {
 
@@ -172,4 +167,14 @@ public class Curso implements Serializable, Comparable<Curso>{
   		}
  		return iguales;
 	}
+	
+	/*
+  	 * (non-Javadoc)
+  	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+
+
+
+	
 }

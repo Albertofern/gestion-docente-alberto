@@ -68,13 +68,13 @@ public class AlumnoDAOImp implements AlumnoDAO{
 				.addValue("pnombre", alumno.getNombre())
 				.addValue("papellidos", alumno.getApellidos())
 				.addValue("pdni", alumno.getDni())
-				.addValue("pcodigopostal", alumno.getCodigopostal())
-				.addValue("pdireccion", alumno.getDireccion())
 				.addValue("pemail", alumno.getEmail())
+				.addValue("ptelefono", alumno.getTelefono())
 				.addValue("pfNacimiento", alumno.getfNacimiento())
+				.addValue("pdireccion", alumno.getDireccion())
 				.addValue("ppoblacion", alumno.getPoblacion())
-				.addValue("pnHermanos", alumno.getnHermanos())
-				.addValue("ptelefono", alumno.getTelefono());
+				.addValue("pcodigopostal", alumno.getCodigoPostal())
+				.addValue("pnHermanos", alumno.getnHermanos());
 		// Como se ejecuta la consulta?
 		//jdbcCall.execute(in);
 		
@@ -128,17 +128,18 @@ public class AlumnoDAOImp implements AlumnoDAO{
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
 		jdbcCall.withProcedureName(SQL);
 		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("pcodigo", alumno.getCodigo())
 				.addValue("pnombre", alumno.getNombre())
 				.addValue("papellidos", alumno.getApellidos())
 				.addValue("pdni", alumno.getDni())
-				.addValue("pcodigopostal", alumno.getCodigopostal())
-				.addValue("pdireccion", alumno.getDireccion())
 				.addValue("pemail", alumno.getEmail())
+				.addValue("ptelefono", alumno.getTelefono())
 				.addValue("pfNacimiento", alumno.getfNacimiento())
+				.addValue("pdireccion", alumno.getDireccion())
 				.addValue("ppoblacion", alumno.getPoblacion())
-				.addValue("pnHermanos", alumno.getnHermanos())
-				.addValue("pcodigo", alumno.getCodigo())
-				.addValue("ptelefono", alumno.getTelefono());
+				.addValue("pcodigopostal", alumno.getCodigoPostal())
+				.addValue("pnHermanos", alumno.getnHermanos());
+				
 		
 		logger.info(alumno.toString());
 		
