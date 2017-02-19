@@ -12,6 +12,7 @@
 <jsp:include page="../includes/header.jsp" />
 <main>
 	<form:form action="save" method="post" modelAttribute="profesor">
+			<form:errors path=""/>
 		
 		<form:errors paht=""/> <!-- Para la validacion de profesor por Spring y que muestre el mensaje de ERROR-->
 		

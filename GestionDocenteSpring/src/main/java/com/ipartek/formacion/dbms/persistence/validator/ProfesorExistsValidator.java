@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ipartek.formacion.dbms.persistence.Profesor;
 import com.ipartek.formacion.service.interfaces.ProfesorService;
 
 public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExists, Object> {
@@ -35,20 +36,28 @@ public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExis
 			final String codeValue = BeanUtils.getProperty(object, code);
 			final String keyValue = BeanUtils.getProperty(object, key);
 			Object obj = null;
-			if ("nSS".equalsIgnoreCase(key)) {
-				obj = pS.getByNss(keyValue);
-			} else if ("dni".equalsIgnoreCase(key)) {
-				obj = pS.getByDni(keyValue);
+			if (keyValue != null && keyValue != "") {
+				Logger.info(key + ": " + keyValue);
+				if ("nSS".equalsIgnoreCase(key)) {
+					Logger.info("nss:" + ": " + keyValue);
+					obj = pS.getByNss(keyValue);
+				} else if ("dni".equalsIgnoreCase(key)) {
+					obj = pS.getByDni(keyValue);
+					if (obj != null) {
+						Logger.info("profe: " + obj.toString());
+					}
+				}
+				if (Integer.parseInt(codeValue) == Profesor.CODIGO_NULO && obj != null) {
+					valid = false;
+					Logger.info("deberia fallar " + obj.toString());
+				}
 			}
-
-			valid = true;
-		} catch (
-
-		final Exception ignore) {
-			// ignore
-			valid = false;
-		}
-		return valid;
-	}
+		
+		} catch (final Exception e) {
+ 			valid = false;
+ 			Logger.info(e.getMessage());
+ 		}
+ 		return valid;
+ 	}
 
 }

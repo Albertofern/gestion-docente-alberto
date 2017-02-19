@@ -17,7 +17,7 @@ public @interface ProfesorExists {
 
 	String message()
 	
-		default "{ProfesorExists}";
+		default "{com.ipartek.formacion.dbms.persistence.validator.ProfesorExists.message}";
 	
 		Class<?>[] groups() default {};
 	

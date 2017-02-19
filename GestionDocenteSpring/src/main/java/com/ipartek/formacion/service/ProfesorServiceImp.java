@@ -49,7 +49,7 @@ public class ProfesorServiceImp implements ProfesorService {
 
 	@Override
 	public Profesor getByNss(String nss) {
-		return profesorDao.getByDni(nss);
+		return profesorDao.getByNss(nss);
 	}
 	@Override
 	public Profesor getByDni(String dni) {
