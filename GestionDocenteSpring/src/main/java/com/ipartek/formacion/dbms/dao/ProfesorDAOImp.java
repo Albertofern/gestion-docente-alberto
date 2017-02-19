@@ -44,7 +44,8 @@ public class ProfesorDAOImp implements ProfesorDAO{
 
 	@Override
 	public Profesor create(Profesor profesor) {
-		final String SQL = "profesorCreate";
+		
+		String SQL = "profesorCreate";
 		
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
 		
@@ -52,24 +53,20 @@ public class ProfesorDAOImp implements ProfesorDAO{
 		
 		//crear un mapa con los parametros de procedimientos almacenados
 		SqlParameterSource in = new MapSqlParameterSource()
-				.addValue("pnombre", profesor.getNombre())
-				.addValue("papellidos", profesor.getApellidos())
-				.addValue("pdni", profesor.getDni())
-				.addValue("pnss", profesor.getnSS())
-				.addValue("pemail", profesor.getEmail())
-				.addValue("pdireccion", profesor.getDireccion())
-				.addValue("pcodigopostal", profesor.getCodigoPostal())
-				.addValue("pfNacimiento", profesor.getfNacimiento())
-				.addValue("ptelefono", profesor.getTelefono());
-		logger.info(profesor.toString());
-		
-		//Como se recoge los datos?
-		Map<String, Object> out = jdbcCall.execute(in);
-		// En out se han recogido los parametros out de la consulta a BBDD.		
-		
-		profesor.setCodigo((Integer) out.get("pcodigo"));
-		
-		return profesor;
+						.addValue("pnombre", profesor.getNombre())
+						.addValue("papellidos", profesor.getApellidos())
+						.addValue("pcodigopostal", profesor.getCodigoPostal())
+						.addValue("pnss", profesor.getnSS())
+						.addValue("pdireccion", profesor.getDireccion())
+						.addValue("ptelefono", profesor.getTelefono())
+						.addValue("pdni", profesor.getDni())
+						.addValue("pemail", profesor.getEmail())
+						.addValue("pfNacimiento", profesor.getfNacimiento());
+				logger.info(profesor.toString());
+				Map<String, Object> out = jdbcCall.execute(in);
+				profesor.setCodigo((Integer) out.get("pcodigo"));
+				logger.info(profesor.toString());
+				return profesor;
 	}
 
 	@Override
@@ -79,7 +76,7 @@ public class ProfesorDAOImp implements ProfesorDAO{
 		
 		try { // Prueba si te devuelve registros (tuplas) del sql
 			  // estructura de usar la conexión. Por cada registro un objeto de tipo alumno	
-		profesores =  jdbctemplate.query(SQL, new ProfesorMapper());
+			profesores =  jdbctemplate.query(SQL, new ProfesorMapper());
 		}catch (EmptyResultDataAccessException e){
 			logger.trace(e.getMessage());
 			//profesores = new ArrayList<Profesor>();
@@ -105,9 +102,9 @@ public class ProfesorDAOImp implements ProfesorDAO{
 
 	@Override
 	public Profesor update(Profesor profesor) {
-		final String SQL = "profesorUpdate";
-		
+		String SQL = "profesorUpdate";
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		
 		jdbcCall.withProcedureName(SQL);
 		SqlParameterSource in = new MapSqlParameterSource()
 				.addValue("pnombre", profesor.getNombre())
@@ -128,11 +125,10 @@ public class ProfesorDAOImp implements ProfesorDAO{
 
 	@Override
 	public void delete(int codigo) {
-		final String SQL = "profesorDelete";
+		String SQL = "profesorDelete";
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
 		jdbcCall.withProcedureName(SQL);
-		SqlParameterSource in = new MapSqlParameterSource()
-		.addValue("pcodigo", codigo);
+		SqlParameterSource in = new MapSqlParameterSource().addValue("pcodigo", codigo);
 		
 		jdbcCall.execute(in);
 		
@@ -140,14 +136,32 @@ public class ProfesorDAOImp implements ProfesorDAO{
 	
 	@Override
 	public Profesor getByDni(String dni) {
-		// TODO Auto-generated method stub
-		return null;
+		Profesor profesor = null;
+				final String SQL = "CALL profesorgetByDni(?);";
+				try {
+					profesor = jdbctemplate.queryForObject(SQL, new ProfesorMapper(), new Object[] { dni });
+					logger.info(profesor.toString());
+				} catch (EmptyResultDataAccessException e) {
+					logger.info("Sin datos: " + e.getMessage());
+				}
+		
+				return profesor;
 	}
 
 	@Override
 	public Profesor getByNss(String nss) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Profesor profesor = null;
+		final String SQL = "CALL profesorgetByNss(?);";
+		try {
+			profesor = jdbctemplate.queryForObject(SQL, new ProfesorMapper(), new Object[] { nss });
+			logger.info(profesor.toString());
+		} catch (EmptyResultDataAccessException e) {
+			logger.info("Sin datos: " + e.getMessage());
+		}
+
+		return profesor;
+
 	}
 
 }

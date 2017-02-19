@@ -1,7 +1,7 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
-import java.util.Map;
+
 
 import javax.sql.DataSource;
 
@@ -28,26 +28,28 @@ public class ClienteDAOImp  implements ClienteDAO{
 	
 	private SimpleJdbcCall jdbcCall;
 	
-	private Logger logger = LoggerFactory.getLogger(ClienteDAOImp.class);
+	private final static Logger logger = LoggerFactory.getLogger(ClienteDAOImp.class);
 	
 	@Autowired
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbctemplate = new JdbcTemplate(dataSource); // para crear la QUERY en el getAll()
-		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		//this.jdbcCall = new SimpleJdbcCall(dataSource);
 	}
 		
 
 
 	@Override
 	public Cliente create(Cliente cliente) {
-		final String SQL = "clienteCreate";
 		
+		final String SQL = "profesorCreate";
+				this.jdbcCall = new SimpleJdbcCall(dataSource);
+				jdbcCall.withProcedureName(SQL);
+				return cliente;
+		/*final String SQL = "clienteCreate";
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
-		
 		jdbcCall.withProcedureName(SQL);
-		
 		SqlParameterSource in = new MapSqlParameterSource()
 				.addValue("pnombre", cliente.getNombre())
 				.addValue("pidentificador", cliente.getIdentificador())
@@ -56,18 +58,16 @@ public class ClienteDAOImp  implements ClienteDAO{
 				.addValue("pdireccion", cliente.getDireccion())
 				.addValue("pcodigopostal", cliente.getCodigoPostal())
 				.addValue("ppoblacion", cliente.getPoblacion());
-		
 		logger.info(cliente.toString());
-		
 		Map<String, Object> out = jdbcCall.execute(in);
-		
 		cliente.setCodigo((Integer) out.get("pcodigo"));
-		return cliente;
+		return cliente;*/
 	}
 	
 
 	@Override
 	public List<Cliente> getAll() {
+	
 		//final String SQL = "SELECT * FROM cliente";
 		final String SQL = "CALL clientegetAll();";
 		List<Cliente> clientes = null;

@@ -12,8 +12,11 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ipartek.formacion.dbms.persistence.validator.ProfesorExists;
 import com.ipartek.formacion.dbms.persistence.validator.Phone;
 
+@ProfesorExists.List({ @ProfesorExists(code = "codigo", key = "dni", message = "El dni ya existe en la base de datos"),
+@ProfesorExists(code = "codigo", key = "nSS", message = "El nss ya existe en la base de datos"), })
 public class Profesor implements Comparable<Profesor>,Serializable {
 
 	private static final long serialVersionUID = -8239371384272787185L;

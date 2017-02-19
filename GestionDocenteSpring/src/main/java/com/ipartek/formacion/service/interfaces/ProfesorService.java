@@ -21,5 +21,7 @@ public interface ProfesorService { // estamos definiendo los métodos de la capa
 	public void setProfesorDao(ProfesorDAO profesorDao);
 
 	Profesor getByNss(String nss);
+	
+	public Profesor getByDni(String dni);
 
 }

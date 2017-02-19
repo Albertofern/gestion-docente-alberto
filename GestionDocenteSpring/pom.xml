@@ -17,8 +17,16 @@
 			<mysql.version>5.1.40</mysql.version>
 			<javax.validation.version>1.0.0.GA</javax.validation.version>
 			<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
+			<commons.beanutils.version>1.9.3</commons.beanutils.version>
 		</properties> 
-		<dependencies>
+	<dependencies>
+				<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>${commons.beanutils.version}</version>
+		</dependency>
+		
 				<!-- MySQL JDBC Driver -->
 		<dependency>
 			    <groupId>mysql</groupId>
