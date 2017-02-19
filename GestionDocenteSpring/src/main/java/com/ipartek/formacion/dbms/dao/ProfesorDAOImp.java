@@ -157,6 +157,7 @@ public class ProfesorDAOImp implements ProfesorDAO{
 			logger.info(profesor.toString());
 		} catch (EmptyResultDataAccessException e) {
 			logger.info("Sin datos: " + e.getMessage());
+			profesor = null;
 		}
 
 		return profesor;

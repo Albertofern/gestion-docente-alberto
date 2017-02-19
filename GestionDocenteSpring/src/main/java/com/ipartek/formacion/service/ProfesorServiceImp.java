@@ -10,7 +10,7 @@ import com.ipartek.formacion.dbms.persistence.Profesor;
 import com.ipartek.formacion.service.interfaces.ProfesorService;
 
 @Service
-public class ProfesorServiceImp implements ProfesorService {
+public class ProfesorServiceImp implements ProfesorService<Profesor> {
 
 	@Autowired // Con esto instancio la clase. 
 	private ProfesorDAO profesorDao; // El objeto (BEN del root-context) que esta en el .xml

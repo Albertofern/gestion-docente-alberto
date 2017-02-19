@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ipartek.formacion.dbms.persistence.Profesor;
-import com.ipartek.formacion.service.interfaces.ProfesorService;
+import com.ipartek.formacion.service.interfaces.TrabajadorService;
 
 public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExists, Object> {
 	private static final Logger Logger = LoggerFactory.getLogger(ProfesorExistsValidator.class);
@@ -17,7 +17,7 @@ public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExis
 	private String key;
 	
 	@Autowired
-	private ProfesorService pS;
+	private TrabajadorService pS;
 
 	@Override
 	public void initialize(ProfesorExists dniexits) {
@@ -31,8 +31,6 @@ public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExis
 		Logger.info(object.toString());
 		boolean valid = true;
 		try {
-			Logger.info(object.toString());
-
 			final String codeValue = BeanUtils.getProperty(object, code);
 			final String keyValue = BeanUtils.getProperty(object, key);
 			Object obj = null;
@@ -43,9 +41,6 @@ public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExis
 					obj = pS.getByNss(keyValue);
 				} else if ("dni".equalsIgnoreCase(key)) {
 					obj = pS.getByDni(keyValue);
-					if (obj != null) {
-						Logger.info("profe: " + obj.toString());
-					}
 				}
 				if (Integer.parseInt(codeValue) == Profesor.CODIGO_NULO && obj != null) {
 					valid = false;

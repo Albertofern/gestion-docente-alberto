@@ -5,7 +5,7 @@ import java.util.List;
 import com.ipartek.formacion.dbms.dao.interfaces.ProfesorDAO;
 import com.ipartek.formacion.dbms.persistence.Profesor;
 
-public interface ProfesorService { // estamos definiendo los métodos de la capa DAO
+public interface ProfesorService<T> extends TrabajadorService<T> { // estamos definiendo los métodos de la capa DAO
 
 	public Profesor create(Profesor profesor);
 	
@@ -20,8 +20,5 @@ public interface ProfesorService { // estamos definiendo los métodos de la capa
 	// Quiero un setter de AlumnoDAO
 	public void setProfesorDao(ProfesorDAO profesorDao);
 
-	Profesor getByNss(String nss);
-	
-	public Profesor getByDni(String dni);
 
 }
