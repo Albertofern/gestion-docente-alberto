@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jee="http://www.springframework.org/schema/jee" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/jee
+    					http://www.springframework.org/schema/jee/spring-jee.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
 	<bean id="databaseProperties"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:/database/database.properties" />
@@ -17,6 +22,7 @@
     </bean>	
     
     <!--  -->
+    
     <bean id="alumnoDaoImp" class="com.ipartek.formacion.dbms.dao.AlumnoDAOImp">
     	<property name="dataSource" ref="mysqlDataSource"/>
     </bean>
@@ -35,5 +41,11 @@
            </list>
         </property>
         <property name="defaultEncoding" value="UTF-8"></property>
-    </bean>
+     </bean> 
+        
+        <!-- la forma de recoger recursos(objetos = DataSource) para el projecto de Spring -->
+        <!--  lo recursos pueden ser: locales, remotos y jndi-lookup -->
+        
+        <jee:jndi-lookup id="jpaDataSource" jndi-name="java:/GestionDocenteRS" />
+        
 </beans>

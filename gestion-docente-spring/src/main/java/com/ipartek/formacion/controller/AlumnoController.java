@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ipartek.formacion.dbms.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
-@Controller
+@Controller 
 @RequestMapping(value="/alumnos")
 public class AlumnoController {
 	

@@ -9,7 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ipartek.formacion.dbms.persistence.Profesor;
-import com.ipartek.formacion.service.interfaces.TrabajadorService;
+import com.ipartek.formacion.service.interfaces.ProfesorService;
+
 
 public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExists, Object> {
 	private static final Logger Logger = LoggerFactory.getLogger(ProfesorExistsValidator.class);
@@ -17,7 +18,7 @@ public class ProfesorExistsValidator implements ConstraintValidator<ProfesorExis
 	private String key;
 	
 	@Autowired
-	private TrabajadorService pS;
+	private ProfesorService pS;
 
 	@Override
 	public void initialize(ProfesorExists dniexits) {

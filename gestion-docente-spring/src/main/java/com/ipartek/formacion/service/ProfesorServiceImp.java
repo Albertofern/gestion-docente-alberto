@@ -10,7 +10,7 @@ import com.ipartek.formacion.dbms.persistence.Profesor;
 import com.ipartek.formacion.service.interfaces.ProfesorService;
 
 @Service
-public class ProfesorServiceImp implements ProfesorService<Profesor> {
+public class ProfesorServiceImp implements ProfesorService {
 
 	@Autowired // Con esto instancio la clase. 
 	private ProfesorDAO profesorDao; // El objeto (BEN del root-context) que esta en el .xml
@@ -42,10 +42,6 @@ public class ProfesorServiceImp implements ProfesorService<Profesor> {
 		
 	}
 
-	@Override
-	public void setProfesorDao(ProfesorDAO profesorDao) {
-		this.profesorDao = profesorDao;
-	}
 
 	@Override
 	public Profesor getByNss(String nss) {
