@@ -11,11 +11,12 @@ public class Curso implements Serializable, Comparable<Curso>{
 
 	private static final long serialVersionUID = 1L;
 	public static final int CODIGO_NULO = -1;
-	private int codigo;
-	private String nombreCurso;
+	private long codigo;
+	private String nombre;
 	private int duracion;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private int nhoras;
 	private List<Alumno> alumnos;
 	private Profesor profesor;
 	
@@ -23,10 +24,11 @@ public class Curso implements Serializable, Comparable<Curso>{
 
 	public Curso() {
 		super();
-		this.nombreCurso = "";
+		this.nombre = "";
 		this.duracion= 0;
 		this.fechaInicio= new Date();
 		this.fechaFin= new Date();
+		this.nhoras = 0;
 		this.alumnos = new ArrayList<Alumno>();
 		this.profesor = new Profesor();	
 	}
@@ -34,7 +36,7 @@ public class Curso implements Serializable, Comparable<Curso>{
 	/**
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public long getCodigo() {
 			return codigo;
 	}
 	
@@ -42,23 +44,23 @@ public class Curso implements Serializable, Comparable<Curso>{
 	 * @param codigo
 	 *            the codigo to set
 	 */
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 			this.codigo = codigo;
 	}
 	
 	/**
 	 * @return the nombreCurso
 	 */
-	public String getNombreCurso() {
-			return nombreCurso;
+	public String getNombre() {
+			return nombre;
 	}
 	
 	/**
 	 * @param nombre
 	 *            the nombreCurso to set
 	 */
-	public void setNombreCurso(String nombreCurso) {
-			this.nombreCurso = nombreCurso;
+	public void setNombre(String nombre) {
+			this.nombre = nombre;
 	}
 	
 	
@@ -140,21 +142,24 @@ public class Curso implements Serializable, Comparable<Curso>{
 	
 	@Override
 	public int compareTo(Curso o) {
-		return this.nombreCurso.compareToIgnoreCase(o.nombreCurso);
+		return this.nombre.compareToIgnoreCase(o.nombre);
 	}
 	
 	@Override
 	public String toString() {
-		return this.nombreCurso+ ", " + this.duracion;
+		return this.nombre+ ", " + this.duracion;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + codigo;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
 		return result;
 	}
+
 	@Override
   	public boolean equals(Object obj) {
 
@@ -166,6 +171,14 @@ public class Curso implements Serializable, Comparable<Curso>{
   			}
   		}
  		return iguales;
+	}
+
+	public int getNhoras() {
+		return nhoras;
+	}
+
+	public void setNhoras(int nhoras) {
+		this.nhoras = nhoras;
 	}
 	
 	/*

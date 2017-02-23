@@ -74,12 +74,12 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
-					<!-- JPA para acceder al proyecto common -->
+		<!-- JPA para acceder al proyecto common -->
 		<dependency>
             <groupId>com.ipartek.formacion</groupId>
             <artifactId>gestion-docente-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-             <scope>provided</scope>
+             <scope>compile</scope>
         </dependency>
 					<!-- Logging -->
 		<dependency>

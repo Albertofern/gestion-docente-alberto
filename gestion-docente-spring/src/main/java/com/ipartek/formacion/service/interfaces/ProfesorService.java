@@ -2,7 +2,7 @@ package com.ipartek.formacion.service.interfaces;
 
 import java.util.List;
 
-import com.ipartek.formacion.dbms.dao.interfaces.ProfesorDAO;
+
 import com.ipartek.formacion.dbms.persistence.Profesor;
 
 public interface ProfesorService { // estamos definiendo los métodos de la capa DAO

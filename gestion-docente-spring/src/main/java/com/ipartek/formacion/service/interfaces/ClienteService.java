@@ -20,4 +20,8 @@ public interface ClienteService { // estamos definiendo los métodos de la capa 
 
 	Cliente getByIdentificador(String identificador);
 	
+	//--------------------- Para el proyecto common ------------------------------
+	// ---------- las funcionalidades se definen primero en el interfaz-----------
+	
+	public Cliente getInforme(int codigo);
 }

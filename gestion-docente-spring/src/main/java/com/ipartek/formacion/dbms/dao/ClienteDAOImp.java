@@ -1,7 +1,7 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.util.List;
-
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dbms.dao.interfaces.ClienteDAO;
+import com.ipartek.formacion.dbms.mappers.ClienteExtractor;
 import com.ipartek.formacion.dbms.mappers.ClienteMapper;
 import com.ipartek.formacion.dbms.persistence.Cliente;
 
@@ -92,8 +93,6 @@ public class ClienteDAOImp  implements ClienteDAO{
 			cliente = new Cliente();
 			logger.info("No se ha encontrado Curso para codigo: " + codigo + " " + e.getMessage());
 		}
-
-		
 		return cliente;
 	}
 
@@ -137,6 +136,26 @@ public class ClienteDAOImp  implements ClienteDAO{
 	public Cliente getByIdentificador(String identificador) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public Cliente getInforme(int codigo) {
+		final String SQL = "CALL clienteInforme(?)"; //es la sentencia SQL se se ejecuta en la BBDD. (?) porque se pasa un parametro "el codigo"
+		
+		Cliente cliente = null;
+		try{
+			Map<Long, Cliente> clientes = jdbctemplate.query(SQL, new ClienteExtractor(), new Object[] { codigo });
+			cliente = clientes.get(codigo);
+		}catch(EmptyResultDataAccessException e){
+			cliente = null;
+			logger.info("sin datos" + e.getMessage() + " " + SQL);
+		}
+		
+		
+		
+		return cliente;
 	}
 
 }

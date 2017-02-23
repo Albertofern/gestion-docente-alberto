@@ -16,8 +16,6 @@ public class ClienteServiceImp implements ClienteService{
 	private ClienteDAO clienteDao; // El objeto (BEN del root-context) que esta en el .xml
 	
 	
-	
-	
 	@Override
 	public Cliente create(Cliente cliente) {
 		return clienteDao.create(cliente);
@@ -46,6 +44,11 @@ public class ClienteServiceImp implements ClienteService{
 
 	@Override
 	public Cliente getByIdentificador(String identificador) {
+		return clienteDao.getByIdentificador(identificador);
+	}
+
+	@Override
+	public Cliente getInforme(int codigo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

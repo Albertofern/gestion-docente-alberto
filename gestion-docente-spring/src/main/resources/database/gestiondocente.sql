@@ -582,7 +582,6 @@ BEGIN
             /*,SUM(cd.precio) as preciocurso*/
     FROM cliente as c
         LEFT JOIN curso as cu ON cu.cliente_codigo = c.codigo
-        INNER JOIN curso_detalle as cd ON cd.curso_codigo = cu.codigo
     WHERE c.codigo = pcodigo;
 END ;;
 DELIMITER ;
@@ -758,4 +757,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-23  9:45:31
+-- Dump completed on 2017-02-23  9:49:45

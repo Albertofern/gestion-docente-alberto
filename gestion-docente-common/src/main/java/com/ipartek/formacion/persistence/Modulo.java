@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +23,6 @@ public class Modulo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO) // strategy = Como se genera el valor. 
 	@Column(name="codigo") // si no se llama codigo, esta anotacion no la añadiriamos (ejemplo)
 	private long codigo;
-	
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="nhoras")
@@ -32,12 +31,6 @@ public class Modulo implements Serializable {
 	private String descripcion;
 	@Column(name="precio")
 	private double precio;
-	
-	@ManyToMany
-	
-	
-	
-	
 	
 	@Override
 	public int hashCode() {

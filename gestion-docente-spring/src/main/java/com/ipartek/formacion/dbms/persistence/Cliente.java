@@ -1,11 +1,10 @@
 package com.ipartek.formacion.dbms.persistence;
 
+
 import java.io.Serializable;
+import java.util.Map;
 
-public class Cliente implements Comparable<Cliente>, Serializable {
-
-
-
+public class Cliente implements Comparable<Cliente>, Serializable  {
 
 
 	/**
@@ -22,6 +21,8 @@ public class Cliente implements Comparable<Cliente>, Serializable {
  	private int codigoPostal;
 	private String identificador;
 	private boolean activo;
+	private Map<Long ,com.ipartek.formacion.persistence.Curso> cursos;
+	
 	
 	public Cliente () {
 		super();
@@ -34,6 +35,7 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		this.email = "";
 		this.identificador = "";
 		this.activo = true;
+		cursos = null;
 		
 	}
 	
@@ -117,20 +119,52 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 	}
 
 
+
+
+	
+
+
+
+	@Override
+	public String toString() {
+		return "Cliente [codigo=" + codigo + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", email=" + email + ", identificador=" + identificador + "]";
+	}
+
+	public String getPoblacion() {
+		return poblacion;
+	}
+
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
+
+	public int getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	
+	public Map<Long, com.ipartek.formacion.persistence.Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(Map<Long, com.ipartek.formacion.persistence.Curso> cursos) {
+		this.cursos = cursos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-			int result = 1;
-			result = prime * result + codigo;
-			return result;
+		int result = 1;
+		result = prime * result + codigo;
+		result = prime * result + ((identificador == null) ? 0 : identificador.hashCode());
+		return result;
 	}
-
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
+	
 	@Override
 	public boolean equals(Object obj) {
 		boolean iguales = false;
@@ -143,43 +177,10 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		return iguales;
 	}
 
-	
 	@Override
 	public int compareTo(Cliente o) {
+		
 		return this.nombre.compareToIgnoreCase(o.getNombre());
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "Cliente [codigo=" + codigo + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
-				+ telefono + ", email=" + email + ", identificador=" + identificador + "]";
-	}
-
-
-
-	public String getPoblacion() {
-		return poblacion;
-	}
-
-
-
-	public void setPoblacion(String poblacion) {
-		this.poblacion = poblacion;
-	}
-
-
-
-	public int getCodigoPostal() {
-		return codigoPostal;
-	}
-
-
-
-	public void setCodigoPostal(int codigoPostal) {
-		this.codigoPostal = codigoPostal;
-	}
-
 
 }
