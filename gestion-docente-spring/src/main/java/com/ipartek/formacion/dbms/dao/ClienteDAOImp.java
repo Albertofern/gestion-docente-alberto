@@ -146,15 +146,12 @@ public class ClienteDAOImp  implements ClienteDAO{
 		
 		Cliente cliente = null;
 		try{
-			Map<Long, Cliente> clientes = jdbctemplate.query(SQL, new ClienteExtractor(), new Object[] { codigo });
+			Map<Integer, Cliente> clientes = jdbctemplate.query(SQL, new ClienteExtractor(), new Object[] { codigo });
 			cliente = clientes.get(codigo);
 		}catch(EmptyResultDataAccessException e){
 			cliente = null;
 			logger.info("sin datos" + e.getMessage() + " " + SQL);
 		}
-		
-		
-		
 		return cliente;
 	}
 

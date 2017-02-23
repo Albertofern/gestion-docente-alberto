@@ -2,6 +2,10 @@ package com.ipartek.formacion.service;
 
 import java.util.List;
 
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +16,12 @@ import com.ipartek.formacion.service.interfaces.ClienteService;
 @Service
 public class ClienteServiceImp implements ClienteService{
 
+	
+
 	@Autowired // Con esto instancio la clase. 
 	private ClienteDAO clienteDao; // El objeto (BEN del root-context) que esta en el .xml
+	private final static Logger logger = LoggerFactory.getLogger(ClienteServiceImp.class);
+	
 	
 	
 	@Override
@@ -49,8 +57,9 @@ public class ClienteServiceImp implements ClienteService{
 
 	@Override
 	public Cliente getInforme(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Cliente cliente = clienteDao.getInforme(codigo);
+		logger.info("descripcion:" + cliente.toString());
+		return cliente;
 	}
 	
 }

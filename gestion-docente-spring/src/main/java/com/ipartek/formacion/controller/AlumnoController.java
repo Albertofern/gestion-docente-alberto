@@ -109,6 +109,12 @@ public class AlumnoController {
 		model.addAttribute("alumno", new Alumno());  //es identico al getbyid, este mandara un objeto en blanco no nulo y el getbyid uno objeto rellenado.
 		return "alumnos/alumno";
 	}
+	@RequestMapping(value = "/getInforme/{codigo}")
+	public String getInforme(Model model, @PathVariable("codigo") int codigo) {
+
+		return "/alumnos/informe";
+
+	}
 	
 	
 }

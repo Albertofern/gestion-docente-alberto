@@ -31,7 +31,7 @@ public class Profesor implements Comparable<Profesor>,Serializable {
 	@Pattern(regexp = "[0-9]{8}[a-z-A-Z]", message="Pattern.dni")
 	private String dni;
 	
-	@Size(min=3, max=50, message="Size.nombre")
+	@Size(min=3, max=50, message="{min} {max}")
 	private String nombre;
 	
 	@Size(min=7, max=150, message="Size.apellidos")

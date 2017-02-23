@@ -2,9 +2,7 @@ package com.ipartek.formacion.dbms.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
@@ -13,12 +11,12 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import com.ipartek.formacion.dbms.persistence.Cliente;
 import com.ipartek.formacion.persistence.Curso;
 
-public class ClienteExtractor implements ResultSetExtractor<Map<Long,Cliente>> {
+public class ClienteExtractor implements ResultSetExtractor<Map<Integer,Cliente>> {
 
 	@Override
-	public Map<Long, Cliente> extractData(ResultSet rs) throws SQLException, DataAccessException {
+	public Map<Integer, Cliente> extractData(ResultSet rs) throws SQLException, DataAccessException {
 		
-		Map<Long, Cliente> clientes = new HashMap<Long, Cliente>();
+		Map<Integer, Cliente> clientes = new HashMap<Integer, Cliente>();
 		
 		
 		while (rs.next()){
@@ -55,7 +53,7 @@ public class ClienteExtractor implements ResultSetExtractor<Map<Long,Cliente>> {
 			//guardas el mapa en el cliente
 			cliente.setCursos(cursos);
 			//guarda el cliente en su mapa
-			clientes.put((long) cliente.getCodigo(),cliente);
+			clientes.put(cliente.getCodigo(),cliente);
 		}
 		
 		return clientes;

@@ -101,4 +101,19 @@ public class ClienteController {
 		}
 		return destino;
 	}
+	
+	// ----------------- METODOS PARA LA QUERY ------------------------
+	
+	@RequestMapping(value = "/getInforme/{codigo}")
+	public String getInforme(Model model, @PathVariable("codigo") int codigo) {
+		logger.info("codigo: " + codigo);
+		Cliente cliente = cS.getInforme(codigo);
+		logger.info(cliente.toString());
+		model.addAttribute("cliente", cliente);
+		return "/clientes/informe";
+
+	}
+	
+	
+	
 }

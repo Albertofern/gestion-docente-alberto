@@ -14,7 +14,7 @@
 				<th>Nombre</th>
 				<th>Email</th>
 				<th>Identificador</th>
-				<th>Telefono</th>
+				<th>Télefono</th>
 			</tr>	
 		</thead>
 	<tbody>	
@@ -29,7 +29,7 @@
 				<td>
 					<a href="<c:url value='/clientes/${cliente.codigo}'/>">Editar</a>
 					<a href="<c:url value='/clientes/deleteCliente/${cliente.codigo}'/>">Borrar</a>
-					<a href="<c:url value='/clientes/informe/${cliente.codigo }'/>">Informe</a>
+					<a href="<c:url value='/clientes/informe/${cliente.codigo }'/>">Ver Informe</a>
 				</td>
 				
 			</tr>	
@@ -37,7 +37,7 @@
 		</c:when>
 		<c:otherwise><!-- Cuando la lista NO tiene datos -->
 			<tr>
-				<td colspan="3">No se han encontrado clientes en la Base de Datos</td>
+				<td colspan="4">No se han encontrado clientes en la Base de Datos</td>
 			</tr>
 		</c:otherwise>
 	</c:choose>
