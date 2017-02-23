@@ -26,14 +26,14 @@ CREATE TABLE `alumno` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'El campo clave de la tabla',
   `nombre` varchar(50) COLLATE utf8_bin NOT NULL,
   `apellidos` varchar(250) COLLATE utf8_bin NOT NULL,
-  `fNacimiento` date DEFAULT NULL,
+  `fnacimiento` date DEFAULT NULL,
   `direccion` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `poblacion` varchar(150) COLLATE utf8_bin DEFAULT NULL,
   `codigopostal` int(5) unsigned zerofill DEFAULT NULL,
   `telefono` int(9) NOT NULL,
   `email` varchar(150) COLLATE utf8_bin NOT NULL,
   `dni` varchar(9) COLLATE utf8_bin NOT NULL,
-  `nHermanos` int(2) DEFAULT '0',
+  `nhermanos` int(2) DEFAULT '0',
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `dni_UNIQUE` (`dni`)
@@ -120,9 +120,9 @@ CREATE TABLE `curso` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `identificador` varchar(12) COLLATE utf8_bin NOT NULL,
-  `fInicio` date DEFAULT NULL,
-  `fFin` date DEFAULT NULL,
-  `nHoras` int(4) NOT NULL,
+  `finicio` date DEFAULT NULL,
+  `ffin` date DEFAULT NULL,
+  `nhoras` int(4) NOT NULL,
   `temario` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `activo` tinyint(4) NOT NULL DEFAULT '1',
   `cliente_codigo` int(11) DEFAULT NULL,
@@ -153,8 +153,8 @@ CREATE TABLE `curso_detalle` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `curso_modulo` int(11) NOT NULL,
   `curso_curso` int(11) NOT NULL,
-  `fInicion` date DEFAULT NULL,
-  `fFin` date DEFAULT NULL,
+  `finicion` date DEFAULT NULL,
+  `ffin` date DEFAULT NULL,
   `precion` double(7,2) DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   KEY `fk_curso_detalle_curso_codigo_idx` (`curso_curso`),
@@ -184,7 +184,7 @@ CREATE TABLE `evaluacion` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `imparticion_codigo` int(11) NOT NULL,
   `alumno_codigo` int(11) NOT NULL,
-  `fExamen` date NOT NULL,
+  `fexamen` date NOT NULL,
   `nota` int(11) NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `fk_evaluacion_modulo_idx` (`imparticion_codigo`),
@@ -241,9 +241,8 @@ DROP TABLE IF EXISTS `modulo`;
 CREATE TABLE `modulo` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
-  `nHoras` int(3) NOT NULL,
+  `nhoras` int(3) NOT NULL,
   `descripcion` text COLLATE utf8_bin,
-  `modulocol` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `precio` double(7,2) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -267,11 +266,11 @@ DROP TABLE IF EXISTS `profesor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profesor` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `NSS` bigint(12) NOT NULL,
+  `nss` bigint(12) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_bin NOT NULL,
   `apellidos` varchar(250) COLLATE utf8_bin NOT NULL,
-  `fNacimiento` date DEFAULT NULL,
-  `DNI` varchar(9) COLLATE utf8_bin NOT NULL,
+  `fnacimiento` date DEFAULT NULL,
+  `dni` varchar(9) COLLATE utf8_bin NOT NULL,
   `direccion` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `poblacion` varchar(150) COLLATE utf8_bin DEFAULT NULL,
   `codigopostal` int(5) unsigned zerofill DEFAULT NULL,
@@ -327,18 +326,18 @@ email,
 direccion,
 codigopostal,
 poblacion,
-fNacimiento,
+fnacimiento,
 telefono,
-nHermanos) VALUES(LOWER(pnombre),
+nhermanos) VALUES(LOWER(pnombre),
 LOWER(papellidos),
 LOWER(pdni),
 LOWER(pemail),
 LOWER(pdireccion),
 pcodigopostal,
 LOWER(ppoblacion),
-pfNacimiento,
+pfnacimiento,
 ptelefono,
-pnHermanos);
+pnhermanos);
 SET pcodigo = LAST_INSERT_ID();
 END ;;
 DELIMITER ;
@@ -370,17 +369,17 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnogetAll`()
     NO SQL
 BEGIN
-	SELECT a.codigo,a.nombre,a.apellidos,a.fNacimiento,a.direccion,
-    a.poblacion,a.codigopostal,a.telefono,a.email,a.dni,a.nHermanos,
+	SELECT a.codigo,a.nombre,a.apellidos,a.fnacimiento,a.direccion,
+    a.poblacion,a.codigopostal,a.telefono,a.email,a.dni,a.nhermanos,
     a.activo
     FROM alumno as a;
 END ;;
@@ -401,8 +400,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnogetByDni`(IN `pdni` VARCHAR(9))
 BEGIN
-	SELECT a.codigo,a.nombre,a.apellidos,a.fNacimiento,a.direccion,
-    a.poblacion,a.codigopostal,a.telefono,a.email,a.dni,a.nHermanos,
+	SELECT a.codigo,a.nombre,a.apellidos,a.fnacimiento,a.direccion,
+    a.poblacion,a.codigopostal,a.telefono,a.email,a.dni,a.nhermanos,
     a.activo
     FROM alumno as a
     WHERE dni = pdni;  
@@ -416,17 +415,17 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnogetById`(IN `pcodigo` INT)
     NO SQL
 BEGIN
-	SELECT a.codigo,a.nombre,a.apellidos,a.fNacimiento,a.direccion,
-    a.poblacion,a.codigopostal,a.telefono,a.email,a.dni,a.nHermanos,
+	SELECT a.codigo,a.nombre,a.apellidos,a.fnacimiento,a.direccion,
+    a.poblacion,a.codigopostal,a.telefono,a.email,a.dni,a.nhermanos,
     a.activo
     FROM alumno as a
     WHERE codigo = pcodigo;  
@@ -450,7 +449,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnoUpdate`(IN `papellidos` VARCH
     NO SQL
 BEGIN
 UPDATE alumno 
-SET nombre = LOWER(pnombre), apellidos =LOWER(papellidos), dni = LOWER(pdni),email = LOWER(pemail),direccion=LOWER(pdireccion),codigopostal=pcodigopostal,poblacion=LOWER(ppoblacion),fNacimiento=pfNacimiento,telefono=ptelefono,nHermanos=pnHermanos
+SET nombre = LOWER(pnombre), apellidos =LOWER(papellidos), dni = LOWER(pdni),email = LOWER(pemail),direccion=LOWER(pdireccion),codigopostal=pcodigopostal,poblacion=LOWER(ppoblacion),fnacimiento=pfnacimiento,telefono=ptelefono,nhermanos=pnhermanos
 WHERE codigo = pcodigo;
 END ;;
 DELIMITER ;
@@ -574,22 +573,17 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `clienteInforme`(in pcodigo int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clienteInforme`(in pcodigo INT)
 BEGIN
-	
-    SELECT c.codigo, c.nombre, c.codigo, c.email, c.telefono, c.direccion,
-			c.poblacion, c.codigopostal, c.identificador, c.activo,
-            cu.codigo as codigocurso, cu.nombre as nombrecurso,
-            c.identificador as identificadorcurso, cu.fIninci, cu.fFin, cu.nHoras,
-            sum(im.precio) as preciocurso
-	FROM cliente as c
-		LEFT JOIN curso as cu ON cu.cliente_codigo = c.codigo
-        INNER JOIN curso_modulo as cm ON cm.curso_codigo = cu.codigo
-        INNER JOIN imparticion as im ON im.curso_modulo_codigo = cm.codigo_curso_modulo
+    SELECT c.codigo, c.nombre, c.email, c.telefono, c.direccion, 
+            c.poblacion, c.codigopostal, c.identificador,c.activo,
+            cu.codigo as codigocurso,cu.nombre as nombrecurso,cu.identificador as idenficadorcurso,
+            cu.finicio,cu.ffin,cu.nhoras,cu.precio
+            /*,SUM(cd.precio) as preciocurso*/
+    FROM cliente as c
+        LEFT JOIN curso as cu ON cu.cliente_codigo = c.codigo
+        INNER JOIN curso_detalle as cd ON cd.curso_codigo = cu.codigo
     WHERE c.codigo = pcodigo;
-
-	
-
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -635,7 +629,7 @@ IN `pdni` VARCHAR(9),
 IN `ptelefono` INT(9), 
 IN `pemail` VARCHAR(150), 
 IN `pnss` VARCHAR(12), 
-IN `pfNacimiento` DATE, 
+IN `pfnacimiento` DATE, 
 IN `pdireccion` VARCHAR(150), 
 IN `pcodigopostal` INT(5), 
 OUT `pcodigo` INT)
@@ -647,7 +641,7 @@ BEGIN
     telefono,
     email,
     nss,
-    fNacimiento,
+    fnacimiento,
     direccion,
     codigopostal
     ) VALUES(LOWER(pnombre),
@@ -656,7 +650,7 @@ BEGIN
     ptelefono,
     pemail,
     pnss,
-    pfNacimiento,
+    pfnacimiento,
     pdireccion,
     pcodigopostal);
     SET pcodigo = LAST_INSERT_ID();
@@ -690,16 +684,16 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `profesorgetAll`()
     NO SQL
 BEGIN
-	SELECT p.codigo,p.nombre,p.apellidos,p.fNacimiento,p.direccion,
+	SELECT p.codigo,p.nombre,p.apellidos,p.fnacimiento,p.direccion,
     p.poblacion,p.codigopostal,p.telefono,p.email,p.dni,
     p.activo,p.nss,p.dni
     FROM profesor as p;
@@ -713,9 +707,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -723,7 +717,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `profesorgetById`(IN `pcodigo` INT)
     NO SQL
     DETERMINISTIC
 BEGIN
-	SELECT p.codigo,p.nombre,p.apellidos,p.fNacimiento,p.direccion,p.codigopostal,p.telefono,p.email,p.dni,p.nss,p.activo
+	SELECT p.codigo,p.nombre,p.apellidos,p.fnacimiento,p.direccion,p.codigopostal,p.telefono,p.email,p.dni,p.nss,p.activo
     FROM profesor as p
     WHERE codigo = pcodigo;  
 END ;;
@@ -736,9 +730,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -746,7 +740,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `profesorUpdate`(IN `pnombre` VARCHA
     NO SQL
 BEGIN
 UPDATE profesor
-SET nombre = LOWER(pnombre),apellidos = LOWER(papellidos), dni = LOWER(pdni),nss=pnss,email = LOWER(pemail),direccion=pdireccion,codigopostal=pcodigopostal,fNacimiento=LOWER(pfNacimiento),telefono=ptelefono
+SET nombre = LOWER(pnombre),apellidos = LOWER(papellidos), dni = LOWER(pdni),nss=pnss,email = LOWER(pemail),direccion=pdireccion,codigopostal=pcodigopostal,fnacimiento=LOWER(pfnacimiento),telefono=ptelefono
 WHERE codigo = pcodigo;
 END ;;
 DELIMITER ;
@@ -764,4 +758,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-21 10:00:14
+-- Dump completed on 2017-02-23  9:45:31
