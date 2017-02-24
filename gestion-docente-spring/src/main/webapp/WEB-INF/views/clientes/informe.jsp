@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-<meta  content= charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>       
 <spring:message var="seccion" code="clientes.informe.titulo"/>
@@ -50,6 +40,5 @@
 		No se han encontrador datos del cliente
 		</c:otherwise>
 </c:choose>
->>>>>>> refs/remotes/origin/afernandez
 </body>
 </html>

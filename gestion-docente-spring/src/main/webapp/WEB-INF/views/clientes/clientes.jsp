@@ -29,11 +29,11 @@
 				<td>
 					<a href="<c:url value='/clientes/${cliente.codigo}'/>">Editar</a>
 					<a href="<c:url value='/clientes/deleteCliente/${cliente.codigo}'/>">Borrar</a>
-<<<<<<< HEAD
+
 					<a href="<c:url value='/clientes/informe/${cliente.codigo }'/>">Informe</a>
-=======
+
 					<a href="<c:url value='/clientes/informe/${cliente.codigo }'/>">Ver Informe</a>
->>>>>>> refs/remotes/origin/afernandez
+
 				</td>
 				
 			</tr>	

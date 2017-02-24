@@ -55,14 +55,10 @@ public class ClienteServiceImp implements ClienteService{
 
 	@Override
 	public Cliente getInforme(int codigo) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-		return null;
-=======
+
 		Cliente cliente = clienteDao.getInforme(codigo);
 		logger.info("descripcion:" + cliente.toString());
 		return cliente;
->>>>>>> refs/remotes/origin/afernandez
 	}
 	
 }
