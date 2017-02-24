@@ -45,7 +45,7 @@
         
         <!-- la forma de recoger recursos(objetos = DataSource) para el projecto de Spring -->
         <!--  lo recursos pueden ser: locales, remotos y jndi-lookup -->
-        <!-- 
+         <!--  
         <jee:jndi-lookup id="jpaDataSource" jndi-name="java:/GestionDocenteRS" />
          -->
 </beans>

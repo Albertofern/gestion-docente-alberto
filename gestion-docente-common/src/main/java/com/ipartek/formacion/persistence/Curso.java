@@ -3,7 +3,7 @@ package com.ipartek.formacion.persistence;
 import java.io.Serializable;
 import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +27,7 @@ public class Curso implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) // strategy = Como se genera el valor. 
 	private long codigo;
+	@Column(name = "nombre")
 	private String nombre;
 	private String identificador;
 	private Date finicio;
@@ -38,7 +39,7 @@ public class Curso implements Serializable{
 	//------------------------------- RELACIONES ENTRE CLASES ----------------------------------------
 	
 	//@ManyToOne(fetch)
-	Cliente cliente;
+	//Cliente cliente;
 
 	
 
@@ -116,14 +117,11 @@ public class Curso implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) {
-  		boolean iguales = false;
-		if (obj != null && obj instanceof Curso) {
-  			Curso curso = (Curso) obj;
-			if (this == curso || curso.getCodigo() == this.codigo) {
-  				iguales = true;
-  			}
-  		}
- 		return iguales;
+		boolean iguales = false;
+		if (obj != null && obj instanceof Curso && this.codigo == ((Curso) obj).getCodigo()) {
+			iguales = true;
+		}
+		return iguales;
 	}
 	
 	@Override

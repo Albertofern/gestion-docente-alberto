@@ -2,7 +2,10 @@ package com.ipartek.formacion.dbms.persistence;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
+
+import com.ipartek.formacion.persistence.Curso;
 
 public class Cliente implements Comparable<Cliente>, Serializable  {
 
@@ -21,7 +24,7 @@ public class Cliente implements Comparable<Cliente>, Serializable  {
  	private int codigoPostal;
 	private String identificador;
 	private boolean activo;
-	private Map<Long ,com.ipartek.formacion.persistence.Curso> cursos;
+	private Map<Long, Curso> cursos;
 	
 	
 	public Cliente () {
@@ -35,7 +38,7 @@ public class Cliente implements Comparable<Cliente>, Serializable  {
 		this.email = "";
 		this.identificador = "";
 		this.activo = true;
-		cursos = null;
+		cursos = new HashMap<Long, Curso>();
 		
 	}
 	
@@ -147,14 +150,7 @@ public class Cliente implements Comparable<Cliente>, Serializable  {
 		this.codigoPostal = codigoPostal;
 	}
 
-	
-	public Map<Long, com.ipartek.formacion.persistence.Curso> getCursos() {
-		return cursos;
-	}
 
-	public void setCursos(Map<Long, com.ipartek.formacion.persistence.Curso> cursos) {
-		this.cursos = cursos;
-	}
 
 	@Override
 	public int hashCode() {
@@ -181,6 +177,14 @@ public class Cliente implements Comparable<Cliente>, Serializable  {
 	public int compareTo(Cliente o) {
 		
 		return this.nombre.compareToIgnoreCase(o.getNombre());
+	}
+
+	public Map<Long, Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(Map<Long, Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 }
