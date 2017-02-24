@@ -146,6 +146,7 @@ public class ClienteDAOImp  implements ClienteDAO{
 		
 		Cliente cliente = null;
 		try{
+<<<<<<< HEAD
 			Map<Long, Cliente> clientes = jdbctemplate.query(SQL, new ClienteExtractor(), new Object[] { codigo });
 			cliente = clientes.get(codigo);
 		}catch(EmptyResultDataAccessException e){
@@ -155,6 +156,14 @@ public class ClienteDAOImp  implements ClienteDAO{
 		
 		
 		
+=======
+			Map<Integer, Cliente> clientes = jdbctemplate.query(SQL, new ClienteExtractor(), new Object[] { codigo });
+			cliente = clientes.get(codigo);
+		}catch(EmptyResultDataAccessException e){
+			cliente = null;
+			logger.info("sin datos" + e.getMessage() + " " + SQL);
+		}
+>>>>>>> refs/remotes/origin/afernandez
 		return cliente;
 	}
 
