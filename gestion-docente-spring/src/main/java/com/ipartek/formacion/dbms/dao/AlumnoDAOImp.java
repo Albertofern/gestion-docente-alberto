@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,17 +19,19 @@ import org.springframework.stereotype.Repository;
 
 
 import com.ipartek.formacion.dbms.dao.interfaces.AlumnoDAO;
+import com.ipartek.formacion.dbms.mappers.AlumnoExtractor;
 import com.ipartek.formacion.dbms.mappers.AlumnoMapper;
 import com.ipartek.formacion.dbms.persistence.Alumno;
+
 
 
 @Repository("alumnoDaoImp")
 public class AlumnoDAOImp implements AlumnoDAO{
 
 	@Autowired 
+	@Qualifier("mysqlDataSource")
 	private DataSource dataSource;  // Todas las clases DAO implementaran este metodo
 	private JdbcTemplate jdbctemplate;
-	
 	private SimpleJdbcCall jdbcCall;
 	
 	private Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
@@ -47,12 +50,13 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	private String sqlReadbydni;
 	
 	@Autowired
+	@Qualifier("mysqlDataSource")
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource; //  esto es un setter!! Que se usara para la injección de dependencias.
 									  //  (la conexion del OBJETO (Ben del root-contex: mysqlDataSource en el xml.))
 		this.jdbctemplate = new JdbcTemplate(dataSource); // para crear la QUERY en el getAll()
-		this.jdbcCall = new SimpleJdbcCall(dataSource);
+	
 	}
 
 	@Override
@@ -174,6 +178,20 @@ public class AlumnoDAOImp implements AlumnoDAO{
 			alumno = null;
 			logger.info("No se ha encontrado Alumno para el dni: " + dni + " " + e.getMessage());
 		}
+		return alumno;
+	}
+	
+	@Override
+	public Alumno getInforme(int codigo) {
+		Alumno alumno = null;
+		final String SQL = "CALL alumnoInforme(?)"; //es la sentencia SQL se se ejecuta en la BBDD. (?) porque se pasa un parametro "el codigo"
+	
+		try{
+			alumno = jdbctemplate.query(SQL, new AlumnoExtractor(), new Object[] { codigo }).get(codigo);
+		}catch(EmptyResultDataAccessException e){
+			logger.info("sin datos" + e.getMessage() + " " + SQL);
+		}
+
 		return alumno;
 	}
 	

@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -22,8 +23,8 @@ import com.ipartek.formacion.dbms.persistence.Profesor;
 @Repository("profesorDaoImp")
 public class ProfesorDAOImp implements ProfesorDAO{
 
-	
-	@Autowired 
+	@Autowired
+	@Qualifier("mysqlDataSource")
 	private DataSource dataSource;  // Todas las clases DAO implementaran este metodo
 	private JdbcTemplate jdbctemplate;
 	
@@ -33,7 +34,7 @@ public class ProfesorDAOImp implements ProfesorDAO{
 	
 	
 	@Autowired
-	@Override
+	@Qualifier("mysqlDataSource")
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource; //  esto es un setter!! Que se usara para la injección de dependencias.
 									  //  (la conexion del OBJETO (Ben del root-contex: mysqlDataSource en el xml.))

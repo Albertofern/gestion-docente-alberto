@@ -40,6 +40,6 @@ public interface AlumnoDAO extends DAOSetter{
 	
 	public Alumno getByDni(String dni);
 	
-	
+	public Alumno getInforme(int codigo);
 
 }

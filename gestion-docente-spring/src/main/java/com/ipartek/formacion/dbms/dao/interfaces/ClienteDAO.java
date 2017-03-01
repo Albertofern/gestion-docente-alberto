@@ -37,7 +37,6 @@ public interface ClienteDAO extends DAOSetter{
 	
 	public Cliente getByIdentificador(String identificador);
 	
-	
 	public Cliente getInforme(int codigo);
 	
 }

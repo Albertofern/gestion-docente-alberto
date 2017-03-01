@@ -22,7 +22,9 @@ public class Cliente  implements Serializable{
 	private String nombre;
 	
 	
-	
+	public Cliente() {
+		super();
+	}
 	
 	
 	public long getCodigo() {

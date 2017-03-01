@@ -2,19 +2,26 @@ package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 
-@Entity
-@Table(name="Curso")
+
+@Table(name="curso")
+@Entity(name="curso")
+@NamedQueries({@NamedQuery(name= "curso.getAll)", query = "SELECT c FROM curso as c") })
 public class Curso implements Serializable{
 
 	
@@ -37,10 +44,20 @@ public class Curso implements Serializable{
 	private double precio;
 
 	//------------------------------- RELACIONES ENTRE CLASES ----------------------------------------
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="")
+	private Set<CursoDetalle> modulos; // determinados modulos que se van a dar en un curso en determinada fecha.
 	
 	//@ManyToOne(fetch)
 	//Cliente cliente;
 
+
+	public Curso() {
+		super();
+	}
+
+	
+	
+	
 	
 
 	public long getCodigo() {

@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +32,14 @@ public class Modulo implements Serializable {
 	private String descripcion;
 	@Column(name="precio")
 	private double precio;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modulo") // 
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public int hashCode() {

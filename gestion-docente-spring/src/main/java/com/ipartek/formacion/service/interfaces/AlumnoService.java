@@ -19,4 +19,5 @@ public interface AlumnoService { // estamos definiendo los métodos de la capa D
 
 	Alumno getByDni(String dni);
 	
+	public Alumno getInforme(int codigo);
 }

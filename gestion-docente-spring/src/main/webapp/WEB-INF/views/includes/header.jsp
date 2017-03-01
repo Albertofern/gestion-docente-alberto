@@ -17,6 +17,7 @@
 			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
 			<li><a href="<c:url value='/profesores'/>">G. Profesores</a></li>
 			<li><a href="<c:url value='/clientes'/>">G. Clientes</a></li>
+			<li><a href="<c:url value='/cursos'/>">G. Cursos</a></li>
 		</ul>
 	</nav>
 	<a href="?locale=es">				

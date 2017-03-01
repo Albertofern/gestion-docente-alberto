@@ -81,6 +81,14 @@
             <version>1.0.0-SNAPSHOT</version>
              <scope>compile</scope>
         </dependency>
+        <!-- para acceder al proyecto ejb -->
+        <dependency>
+            <groupId>com.ipartek.formacion</groupId>
+            <artifactId>gestion-docente-ejb</artifactId>
+        	<version>1.0.0-SNAPSHOT</version>
+        	<scope>compile</scope>
+        </dependency>
+
 					<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

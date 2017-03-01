@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -24,14 +25,15 @@ import com.ipartek.formacion.dbms.persistence.Cliente;
 public class ClienteDAOImp  implements ClienteDAO{
 
 	@Autowired 
+	@Qualifier("mysqlDataSource")
 	private DataSource dataSource;  // Todas las clases DAO implementaran este metodo
 	private JdbcTemplate jdbctemplate;
-	
 	private SimpleJdbcCall jdbcCall;
 	
 	private final static Logger logger = LoggerFactory.getLogger(ClienteDAOImp.class);
 	
 	@Autowired
+	@Qualifier("mysqlDataSource")
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -143,14 +145,13 @@ public class ClienteDAOImp  implements ClienteDAO{
 
 	@Override
 	public Cliente getInforme(int codigo) {
-		final String SQL = "CALL clienteInforme(?)"; //es la sentencia SQL se se ejecuta en la BBDD. (?) porque se pasa un parametro "el codigo"
-	
 		Cliente cliente = null;
+		final String SQL = "CALL clienteInforme(?)"; //es la sentencia SQL se se ejecuta en la BBDD. (?) porque se pasa un parametro "el codigo"
+
 		try{
 			Map<Integer, Cliente> clientes = jdbctemplate.query(SQL, new ClienteExtractor(), new Object[] { codigo });
 			cliente = clientes.get(codigo);
 		}catch(EmptyResultDataAccessException e){
-			cliente = null;
 			logger.info("sin datos" + e.getMessage() + " " + SQL);
 		}
 

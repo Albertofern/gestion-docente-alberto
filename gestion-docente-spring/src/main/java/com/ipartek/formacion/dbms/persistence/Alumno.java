@@ -1,7 +1,11 @@
 package com.ipartek.formacion.dbms.persistence;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.ipartek.formacion.persistence.Curso;
 
 
 public class Alumno implements Comparable<Alumno>, Serializable {
@@ -25,7 +29,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 		private String telefono;
 		private String poblacion;
 		private int codigoPostal;
-		
+		private List<Curso> cursos;
 
 	public Alumno() {
 		super();// constructor de la clase padre
@@ -41,6 +45,7 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 		this.codigoPostal = 48;
 		this.activo = true;
 		this.nHermanos = 0;
+		this.cursos =  new ArrayList<Curso>();
 
 	}
 
@@ -264,5 +269,13 @@ public class Alumno implements Comparable<Alumno>, Serializable {
 			int result = 1;
 			result = prime * result + codigo;
 			return result;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 }

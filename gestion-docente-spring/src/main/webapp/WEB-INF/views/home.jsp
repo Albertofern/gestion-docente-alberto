@@ -4,5 +4,7 @@
 <spring:message var="seccion" code="home.titulo" />
 <c:set scope="request" var="seccion" value="${seccion}"/>
 <jsp:include page="includes/header.jsp" />
+
+
 </body>
 </html>

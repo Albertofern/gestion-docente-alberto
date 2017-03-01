@@ -111,7 +111,8 @@ public class AlumnoController {
 	}
 	@RequestMapping(value = "/getInforme/{codigo}")
 	public String getInforme(Model model, @PathVariable("codigo") int codigo) {
-
+		Alumno alumno = aS.getInforme(codigo);
+		model.addAttribute("alumno", alumno);
 		return "/alumnos/informe";
 
 	}

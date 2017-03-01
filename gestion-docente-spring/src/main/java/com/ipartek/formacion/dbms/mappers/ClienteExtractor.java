@@ -41,7 +41,7 @@ public class ClienteExtractor implements ResultSetExtractor<Map<Integer,Cliente>
 			}	
 			// Aqui es donde cargamos el mapa/coleccion de cursos
 			Long cCurso = rs.getLong("codigocurso");
-			if (cCurso != null) {
+			if (cCurso != null && cCurso > 0) {
 				
 				Curso curso = new Curso(); //coge los datos de la consulta de BBDD
 				curso.setCodigo(rs.getLong("codigocurso"));
