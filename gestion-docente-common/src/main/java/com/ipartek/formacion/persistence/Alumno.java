@@ -26,7 +26,7 @@ public class Alumno implements Serializable{
 	private long codigo;
 	private String nombre;
 	private String apellidos;
-	private Date fNacimienteo;
+	private Date fNacimiento;
 	private String dni;
 	private String email;
 	private String poblacion;
@@ -69,11 +69,11 @@ public class Alumno implements Serializable{
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public Date getfNacimienteo() {
-		return fNacimienteo;
+	public Date getfNacimiento() {
+		return fNacimiento;
 	}
-	public void setfNacimienteo(Date fNacimienteo) {
-		this.fNacimienteo = fNacimienteo;
+	public void setfNacimienteo(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
 	}
 	public String getDni() {
 		return dni;
@@ -124,10 +124,45 @@ public class Alumno implements Serializable{
 		this.activo = activo;
 	}
 	
+	/* Metodo que asigna un codigo unitario al objeto. */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		return result;
+	}
 	
-	
-	
-	
-	
+	/* Metodo que implementa la comparación. */
+	@Override
+	public boolean equals(Object obj) {
+		/* Se declara la variable que contendra la comparaci�n de objetos.*/
+		boolean valido = false;
+		/* Se compruebasi el objeto recibido es nulo.*/
+		if (obj != null){
+			/* Se comprueba si el objeto recogido es del tipo de la clase.*/
+			if (obj instanceof Alumno){
+				/* Se comparan los codigos de la clase actual y el objeto recibido por parametro.*/
+				if (this.getCodigo() == ((Alumno) obj).getCodigo()){
+					/* Se asigna verdadero a la comparai�n.*/
+					valido = true;				
+				}			
+			}
+		}	
+		/* Se devuelve el resultado de la comparacion.*/
+		return valido;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Alumno [codigo=" + this.codigo + ", dni=" + this.dni + ", nombre=" + this.nombre + ", "+
+					   "apellidos=" + this.apellidos + ", fNacimiento=" + this.fNacimiento + ", " +
+				       "email=" + this.email + ", direccion=" + this.direccion + ", " +
+					   "codigopostal=" + this.codigopostal + ", poblacion=" + this.poblacion + ", " +
+					   "telefono=" + this.telefono + "]";
+	}
 	
 }

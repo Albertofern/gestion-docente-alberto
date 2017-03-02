@@ -9,11 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="modulo")  // si no se llama modulo, esta anotacion no la añadiriamos (ejemplo)
+@Table(name="modulo")// si no se llama modulo, esta anotacion no la añadiriamos (ejemplo)
+@NamedQueries({@NamedQuery(name="modulo.getAll",query="Select m From modulo as m")})
 public class Modulo implements Serializable {
 	
 	/**
@@ -28,13 +31,13 @@ public class Modulo implements Serializable {
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="nhoras")
-	private int nhoras;
+	private Integer nhoras;
 	@Column(name="descripcion")
 	private String descripcion;
 	@Column(name="precio")
 	private double precio;
 
-	
+	/* Se enlaza la clase curso detalle usando como join la el atributo curso de la clase curso detalle. */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modulo") 
 	private Set<CursoDetalle> detalle;
 	
@@ -82,7 +85,7 @@ public class Modulo implements Serializable {
 	public int getNhoras() {
 		return nhoras;
 	}
-	public void setNhoras(int nhoras) {
+	public void setNhoras(Integer nhoras) {
 		this.nhoras = nhoras;
 	}
 	public String getDescripcion() {
@@ -104,6 +107,14 @@ public class Modulo implements Serializable {
 
 	public void setDetalle(Set<CursoDetalle> detalle) {
 		this.detalle = detalle;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Modulo [codigo=" + codigo + ", nombre=" + nombre + ", nhoras=" + nhoras + ", descripcion=" + descripcion
+				+ ", precio=" + precio + ", detalle=" + detalle + "]";
 	}
 	
 	

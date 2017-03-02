@@ -9,10 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name= "curso_detalle")
+@NamedQueries({@NamedQuery(name="curso_detalle.getAll",query="Select c From curso_detalle as c")})
 public class CursoDetalle implements Serializable  {
 
 	/**
@@ -23,16 +27,25 @@ public class CursoDetalle implements Serializable  {
 	@GeneratedValue
 	private long codigo;
 
+	/* Se asocia con el curso. */
 	// Curso donde se a generado
 	// y el modulo que ....  AMBOS ManyToOne
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="curso_codigo")
 	private Curso curso;
+	
+	/* Se asocia con el modulo. */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="modulo_codigo")
 	private Modulo modulo;
-	private Date fInicio;
-	private Date fFin;
+	
+	/* Se une con el curso detalle.*/
+	@OneToOne(fetch=FetchType.EAGER,mappedBy="cursodetalle")
+	private Imparticion imparticion; 
+	
+	
+	private Date finicio;
+	private Date ffin;
 	
 	
 	public CursoDetalle() {
@@ -67,21 +80,81 @@ public class CursoDetalle implements Serializable  {
 	}
 
 	public Date getfInicio() {
-		return fInicio;
+		return finicio;
 	}
 
-	public void setfInicio(Date fInicio) {
-		this.fInicio = fInicio;
+	public Date getFinicio() {
+		return finicio;
 	}
 
-	public Date getfFin() {
-		return fFin;
+	public void setFinicio(Date finicio) {
+		this.finicio = finicio;
 	}
 
-	public void setfFin(Date fFin) {
-		this.fFin = fFin;
+	public Date getFfin() {
+		return ffin;
 	}
-	
+
+	public void setFfin(Date ffin) {
+		this.ffin = ffin;
+	}
+
+
+
+
+	public Imparticion getImparticion() {
+		return imparticion;
+	}
+
+
+
+
+	public void setImparticion(Imparticion imparticion) {
+		this.imparticion = imparticion;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "CursoDetalle [codigo=" + codigo + ", curso=" + curso + ", modulo=" + modulo + ", imparticion="
+				+ imparticion + ", finicio=" + finicio + ", ffin=" + ffin + "]";
+	}
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		return result;
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		/* Se declara la variable que contendra la comparaci�n de objetos.*/
+		boolean valido = false;
+		/* Se compruebasi el objeto recibido es nulo.*/
+		if (obj != null){
+			/* Se comprueba si el objeto recogido es del tipo de la clase.*/
+			if (obj instanceof CursoDetalle){
+				/* Se comparan los codigos de la clase actual y el objeto recibido por parametro.*/
+				if (this.getCodigo() == ((CursoDetalle) obj).getCodigo()){
+					/* Se asigna verdadero a la comparai�n.*/
+					valido = true;				
+				}			
+			}
+		}	
+		/* Se devuelve el resultado de la comparaci�n.*/
+		return valido;
+	}
+
 	
 	
 }
