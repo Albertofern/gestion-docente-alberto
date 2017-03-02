@@ -6,11 +6,11 @@
 
 <jsp:include page="../includes/header.jsp" />
 <main>
-	<c:forEach var="" items="${listadoCursos}">
+	<c:forEach var="curso" items="${listadoCursos}">
 		<!-- De aqui tenemos acceso a todos los atributos -->
 		<div>
 			<a href="<c:url value='/cursos/${curso.codigo}'/>">${curso.nombre }</a>
-			${curso.ffnicio}
+			${curso.finicio}
 			${curso.ffin}
 		</div>	
 	

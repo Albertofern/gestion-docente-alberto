@@ -1,6 +1,7 @@
 package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,15 +33,19 @@ public class Modulo implements Serializable {
 	private String descripcion;
 	@Column(name="precio")
 	private double precio;
+
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modulo") // 
-	
-	
-	
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modulo") 
+	private Set<CursoDetalle> detalle;
 	
 	
 	
+	public Modulo() {
+		super();
+	}
+	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +96,14 @@ public class Modulo implements Serializable {
 	}
 	public void setPrecio(double precio) {
 		this.precio = precio;
+	}
+
+	public Set<CursoDetalle> getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(Set<CursoDetalle> detalle) {
+		this.detalle = detalle;
 	}
 	
 	

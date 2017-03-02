@@ -17,10 +17,11 @@ public class Imparticion  implements Serializable {
 	
 
 
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6354577982488490172L;
 
 	@Id
 	@GeneratedValue
@@ -33,6 +34,42 @@ public class Imparticion  implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="profesor_codigo")
 	private Profesor profesor;
+
+	
+	public Imparticion() {
+		super();
+	}
+
+	
+	
+	
+	
+	public long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+	public CursoDetalle getCursodetalle() {
+		return cursodetalle;
+	}
+
+	public void setCursodetalle(CursoDetalle cursodetalle) {
+		this.cursodetalle = cursodetalle;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+	
+	
+	
 	
 	
 }

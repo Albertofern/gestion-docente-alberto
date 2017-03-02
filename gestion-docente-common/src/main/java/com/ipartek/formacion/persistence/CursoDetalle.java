@@ -38,6 +38,9 @@ public class CursoDetalle implements Serializable  {
 	public CursoDetalle() {
 		super();
 	}
+	
+	
+	
 
 	public long getCodigo() {
 		return codigo;

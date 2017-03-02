@@ -19,14 +19,14 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAll(Model model){
 		model.addAttribute("listadoCursos", cS.getAll());
-		return "curso/cursos";
+		return "cursos/cursos";
 	}
 	
 	@RequestMapping("/{codigo}")
 	public String getById(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("curso", cS.getById(codigo));
 
-		return "curso/curso";
+		return "cursos/curso";
 	}
 	
 }

@@ -10,10 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -21,7 +20,7 @@ import javax.persistence.Table;
 
 @Table(name="curso")
 @Entity(name="curso")
-@NamedQueries({@NamedQuery(name= "curso.getAll)", query = "SELECT c FROM curso as c") })
+@NamedQueries({@NamedQuery(name= "curso.getAll", query = "SELECT c FROM curso as c") })
 public class Curso implements Serializable{
 
 	
@@ -44,11 +43,10 @@ public class Curso implements Serializable{
 	private double precio;
 
 	//------------------------------- RELACIONES ENTRE CLASES ----------------------------------------
-	@OneToOne(fetch = FetchType.LAZY, mappedBy="")
+
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="curso")
 	private Set<CursoDetalle> modulos; // determinados modulos que se van a dar en un curso en determinada fecha.
 	
-	//@ManyToOne(fetch)
-	//Cliente cliente;
 
 
 	public Curso() {
@@ -145,6 +143,15 @@ public class Curso implements Serializable{
 	public String toString() {
 		return "Curso [codigo=" + codigo + ", nombre=" + nombre + ", identificador=" + identificador + "]";
 	}
-	
+
+
+	public Set<CursoDetalle> getModulos() {
+		return modulos;
+	}
+
+	public void setModulos(Set<CursoDetalle> modulos) {
+		this.modulos = modulos;
+	}
+
 	
 }

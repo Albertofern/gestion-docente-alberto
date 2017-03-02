@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ipartek.formacion.dbms.dao.interfaces.AlumnoDAO;
 import com.ipartek.formacion.dbms.persistence.Alumno;
@@ -16,6 +17,7 @@ public class AlumnoServiceImp implements AlumnoService{
 	@Autowired // Con esto instancio la clase. 
 	private AlumnoDAO alumnoDao; // El objeto (BEN del root-context) que esta en el .xml
 
+	@Transactional
 	@Override
 	public Alumno create(Alumno alumno) {
 		return alumnoDao.create(alumno);
@@ -31,11 +33,13 @@ public class AlumnoServiceImp implements AlumnoService{
 		return alumnoDao.getById(codigo);
 	}
 
+	@Transactional
 	@Override
 	public Alumno update(Alumno alumno) {
 		return alumnoDao.update(alumno);
 	}
 
+	@Transactional
 	@Override
 	public void delete(int codigo) {
 		alumnoDao.delete(codigo);

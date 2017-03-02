@@ -38,7 +38,7 @@ public class Alumno implements Serializable{
 	//@Fetch(FetchMode.JOIN) // porque son datos subceptibles a repeticion. Si fuese imprescindible una List se tendria
 	// que incluir esta anotacion  con JOIN o SUBSELECT
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "asistente", 
 		joinColumns= @JoinColumn(name="alumno_codigo", referencedColumnName  = "codigo"),
 		inverseJoinColumns = @JoinColumn(name="imparticion_codigo", referencedColumnName="codigo"))

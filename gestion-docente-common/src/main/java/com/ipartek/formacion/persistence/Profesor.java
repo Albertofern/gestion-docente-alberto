@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -119,6 +118,21 @@ public class Profesor implements Serializable{
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+
+	public Set<Imparticion> getImparticiones() {
+		return imparticiones;
+	}
+
+
+	public void setImparticiones(Set<Imparticion> imparticiones) {
+		this.imparticiones = imparticiones;
+	}
+
+
+	public void setCodigopostal(Integer codigopostal) {
+		this.codigopostal = codigopostal;
 	}
 	
 	

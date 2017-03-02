@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.ipartek.formacion.persistence.Curso;
@@ -35,6 +34,8 @@ public class CursoServiceBean implements CursoServiceRemote {
 		return curso;
 	}
 
+	// el metodo try catch es lo mismo que usar en la CAPA servide del proyecto spring la anotacion @transactional.
+	
 	@Override
 	public Curso update(Curso curso) {
 		EntityTransaction tx = entityManager.getTransaction(); 
@@ -42,10 +43,10 @@ public class CursoServiceBean implements CursoServiceRemote {
 		try {
 			entityManager.persist(curso);
 			/* Se devuevle el curso.*/
+			tx.commit();
 		}catch (Exception e){
 			tx.rollback();
-		}
-		
+		}	
 		return curso;
 	}
 

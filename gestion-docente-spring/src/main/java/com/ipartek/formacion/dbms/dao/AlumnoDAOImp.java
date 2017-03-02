@@ -51,11 +51,11 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	
 	@Autowired
 	@Qualifier("mysqlDataSource")
-	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource; //  esto es un setter!! Que se usara para la injección de dependencias.
 									  //  (la conexion del OBJETO (Ben del root-contex: mysqlDataSource en el xml.))
 		this.jdbctemplate = new JdbcTemplate(dataSource); // para crear la QUERY en el getAll()
+		
 	
 	}
 
