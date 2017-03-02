@@ -12,38 +12,47 @@
 <c:set scope="request" var="seccion" value="${men} ${seccion}"/>
 <jsp:include page="../includes/header.jsp" />
 
-<form:form action="save" method="post" modelAttribute="curso">
-		<c:if test="${!empty curso}">
-			<form:hidden path="codigo"/>
-		</c:if>
+
+<c:choose>
+		<c:when test="${not empty curso}">
 		<div>
-			<form:label path="nombre">
-				<spring:message code="curso.nombre" />:
- 			</form:label>
-			<form:input path="nombre" cssErrorClass="" cssClass="" />
-			<form:errors path="nombre" cssClass="" />
+			<p>${curso.nombre}</p>
+			<p>${curso.identificador}</p>
+			<p></p>
 		</div>
-		<div>
-			<form:label path="finicio">Fecha inicio:</form:label>
-			<form:input path="finicio" placeholder="dd/MM/yyyy" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
-			<form:errors path="finicio" />
-		</div>
-		<div>
-			<form:label path="ffin">Fecha fin:</form:label>
-			<form:input path="ffin" placeholder="dd/MM/yyyy" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
-			<form:errors path="ffin" />
-		</div>
-		<div>
-			<form:label path="nhoras">Nuemero de horas:</form:label>
-			<form:input path="nhoras" />
-			<form:errors path="nhoras" />
-		</div>
-		
-		<input type="submit" value="${men}">
-	</form:form>
+		<c:choose>
+			<c:when test="${not empty curso.modulos}" >
+				<table>
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Fecha Inicio</th>	
+							<th>Fecha Fin</th>		
+						</tr>
+					</thead>
+					<c:forEach var="curso" items="${curso.cursos}">
+					<tbody>
+						<tr>
+							<td>${curso.nombre}</td>
+							<td>${curso.finicio}</td>
+							<td>${curso.finicio}</td>
+						</tr>
+					</tbody>
+					
+					</c:forEach>
+					</table>
+				</c:when>
+				<c:otherwise>
+				<p>En el Curso no participan ningun alumno.</p>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+		No se han encontrador datos del curso.
+		</c:otherwise>
+</c:choose>
 </main>
 <footer>
 </footer>
 </body>
 </html>
-		</div>
