@@ -2,6 +2,7 @@ package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,7 +54,7 @@ public class Imparticion  implements Serializable {
 		inverseJoinColumns=@JoinColumn(name="alumno_codigo",
 		referencedColumnName="codigo"))
 	@Fetch(FetchMode.JOIN)
-	private List<Alumno> alumnos;
+	private Set<Alumno> alumnos;
 	
 	
 	
@@ -95,7 +96,7 @@ public class Imparticion  implements Serializable {
 
 
 
-	public List<Alumno> getAlumnos() {
+	public Set<Alumno> getAlumnos() {
 		return alumnos;
 	}
 
@@ -103,7 +104,7 @@ public class Imparticion  implements Serializable {
 
 
 
-	public void setAlumnos(List<Alumno> alumnos) {
+	public void setAlumnos(Set<Alumno> alumnos) {
 		this.alumnos = alumnos;
 	}
 

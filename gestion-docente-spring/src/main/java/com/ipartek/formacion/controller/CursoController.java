@@ -25,7 +25,6 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	@RequestMapping("/{codigo}")
 	public String getById(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("curso", cS.getById(codigo));
-
 		return "cursos/curso";
 	}
 	

@@ -6,14 +6,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/*@NamedQueries({@NamedQuery(name="evaluacion.getAll",query="Select e From evaluacion as e")})*/
 
 @Entity
 @Table(name="evaluacion")
-@NamedQueries({@NamedQuery(name="evaluacion.getAll",query="Select e From evaluacion as e")})
 public class Evaluacion implements Serializable {
 
 	/**

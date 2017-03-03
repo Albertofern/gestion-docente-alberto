@@ -9,14 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+/*
+ * @NamedQueries({@NamedQuery(name="curso_detalle.getAll",query="Select c From curso_detalle as c")})
+ */
 @Entity
 @Table(name= "curso_detalle")
-@NamedQueries({@NamedQuery(name="curso_detalle.getAll",query="Select c From curso_detalle as c")})
 public class CursoDetalle implements Serializable  {
 
 	/**

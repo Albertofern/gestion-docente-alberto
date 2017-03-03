@@ -1,58 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- JSTL -->    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<!-- Validador de Spring -->
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<!-- Encasula los objetos en un formulario. -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-		<!-- BOTON Crear//Editar formulario -->
-<c:set var="men" value="Crear" />
-	<c:if test="${curso.codigo > 0}" >
-		<spring:message var="men"  code="form.editar" text="nombre" />
-	</c:if> 
-<spring:message var="seccion" code="cursos.titulo" text="curso" />
-<c:set scope="request" var="seccion" value="${men} ${seccion}"/>
+
+
+<c:set scope="request" var="seccion" value="Datos del curso"/>
 <jsp:include page="../includes/header.jsp" />
-
-
-<c:choose>
-		<c:when test="${not empty curso}">
+	<main>
 		<div>
-			<p>${curso.nombre}</p>
-			<p>${curso.identificador}</p>
-			<p></p>
+			Codigo: ${curso.identificador} 
+			Nombre: ${curso.nombre} 
 		</div>
-		<c:choose>
-			<c:when test="${not empty curso.modulos}" >
-				<table>
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Fecha Inicio</th>	
-							<th>Fecha Fin</th>		
-						</tr>
-					</thead>
-					<c:forEach var="curso" items="${curso.cursos}">
-					<tbody>
-						<tr>
-							<td>${curso.nombre}</td>
-							<td>${curso.finicio}</td>
-							<td>${curso.finicio}</td>
-						</tr>
-					</tbody>
-					
-					</c:forEach>
-					</table>
-				</c:when>
-				<c:otherwise>
-				<p>En el Curso no participan ningun alumno.</p>
-				</c:otherwise>
-			</c:choose>
-		</c:when>
-		<c:otherwise>
-		No se han encontrador datos del curso.
-		</c:otherwise>
-</c:choose>
-</main>
-<footer>
-</footer>
+			<c:forEach var="cdetalle" items="${curso.modulos}">
+				<!-- Línea de datos de cursodetalle. -->
+				<div>
+					Codigo del modulo: ${cdetalle.modulo.codigo}
+				 	Nombre del modulo: ${cdetalle.modulo.nombre}
+					Numero de horas: ${cdetalle.modulo.nhoras} hrs.
+				</div>
+
+							<!-- Columnas de cabecera de la tabla.  -->
+
+						
+	
+						<!-- Se comprueba si el listado de cusos asociado al cliente no está vacio. 
+						 En tal caso se recorre la lista de cursos sobre el objeto curso.-->	
+
+							<c:forEach var="alumno" items="${cdetalle.imparticion.alumnos}">
+								<!-- Línea de datos de curso. 
+						     		Es necesario llamar a las propiedades con value porque se esta trabajando 
+						     		con mapas en vez de listas.-->
+						
+									<!-- Celda con el d.n.i. del alumno. -->
+									${alumno.dni}
+									<!-- Celda con el nombre del alumno. -->
+									${alumno.nombre}
+									<!-- Celda con los apellidos del alumno. -->
+									${alumno.apellidos}
+				
+							</c:forEach>
+			</c:forEach>
+
+	</main>
+	<footer>
+	
+	</footer>
 </body>
 </html>

@@ -9,14 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+/*@NamedQueries({@NamedQuery(name="modulo.getAll",query="Select m From modulo as m")})*/
+
 @Entity
 @Table(name="modulo")// si no se llama modulo, esta anotacion no la añadiriamos (ejemplo)
-@NamedQueries({@NamedQuery(name="modulo.getAll",query="Select m From modulo as m")})
 public class Modulo implements Serializable {
 	
 	/**
