@@ -66,7 +66,7 @@ CREATE TABLE `asistente` (
   KEY `fk_asistente_imparticion_codigo_idx` (`imparticion_codigo`),
   CONSTRAINT `fk_asistente_alumno_codigo` FOREIGN KEY (`alumno_codigo`) REFERENCES `alumno` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_asistente_imparticion_codigo` FOREIGN KEY (`imparticion_codigo`) REFERENCES `imparticion` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,6 +75,7 @@ CREATE TABLE `asistente` (
 
 LOCK TABLES `asistente` WRITE;
 /*!40000 ALTER TABLE `asistente` DISABLE KEYS */;
+INSERT INTO `asistente` VALUES (1,1,1),(2,2,2);
 /*!40000 ALTER TABLE `asistente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +131,7 @@ CREATE TABLE `curso` (
   PRIMARY KEY (`codigo`),
   KEY `fk_curso_cliente_codigo_idx` (`cliente_codigo`),
   CONSTRAINT `fk_curso_cliente_codigo` FOREIGN KEY (`cliente_codigo`) REFERENCES `cliente` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +140,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (1,'Desarrrollo de Aplicaciones con Tecnologias Web','18482673','2017-01-09','2017-06-13',510,NULL,1,1,300000.00);
+INSERT INTO `curso` VALUES (1,'Desarrollo de Aplicaciones con Tecnologias Web','181','2017-01-09','2017-06-13',510,NULL,1,1,3000.00),(2,'Desarrollo de BBDD','182','2017-01-09','2017-06-13',510,NULL,1,2,2000.00);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +163,7 @@ CREATE TABLE `curso_detalle` (
   KEY `fk_curso_detalle_modulo_codigo` (`modulo_codigo`),
   CONSTRAINT `fk_curso_detalle_curso_codigo` FOREIGN KEY (`curso_codigo`) REFERENCES `curso` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_curso_detalle_modulo_codigo` FOREIGN KEY (`modulo_codigo`) REFERENCES `modulo` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +172,7 @@ CREATE TABLE `curso_detalle` (
 
 LOCK TABLES `curso_detalle` WRITE;
 /*!40000 ALTER TABLE `curso_detalle` DISABLE KEYS */;
+INSERT INTO `curso_detalle` VALUES (5,1,1,'2017-01-09','2017-01-18',NULL),(6,1,2,'2017-01-18','2017-02-03',NULL),(7,1,3,'2017-02-03','2017-02-23',NULL),(8,1,4,'2017-02-23','2017-03-13',NULL),(9,1,5,'2017-03-13','2017-03-30',NULL);
 /*!40000 ALTER TABLE `curso_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +194,7 @@ CREATE TABLE `evaluacion` (
   KEY `fk_evaluacion_alumno_codigo_idx` (`alumno_codigo`),
   CONSTRAINT `fk_evaluacion_alumno_codigo` FOREIGN KEY (`alumno_codigo`) REFERENCES `alumno` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_evaluacion_imparticion_codigo` FOREIGN KEY (`imparticion_codigo`) REFERENCES `imparticion` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,6 +203,7 @@ CREATE TABLE `evaluacion` (
 
 LOCK TABLES `evaluacion` WRITE;
 /*!40000 ALTER TABLE `evaluacion` DISABLE KEYS */;
+INSERT INTO `evaluacion` VALUES (1,1,1,'0000-00-00',0),(2,2,2,'0000-00-00',0);
 /*!40000 ALTER TABLE `evaluacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +223,7 @@ CREATE TABLE `imparticion` (
   KEY `fk_imparticion_curso_modulo_codigo_idx` (`curso_detalle_codigo`),
   CONSTRAINT `fk_imparticion_curso_detalle_codigo` FOREIGN KEY (`curso_detalle_codigo`) REFERENCES `curso_detalle` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_imparticion_profesor_codigo` FOREIGN KEY (`profesor_codigo`) REFERENCES `profesor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,6 +232,7 @@ CREATE TABLE `imparticion` (
 
 LOCK TABLES `imparticion` WRITE;
 /*!40000 ALTER TABLE `imparticion` DISABLE KEYS */;
+INSERT INTO `imparticion` VALUES (1,6,0),(2,5,1);
 /*!40000 ALTER TABLE `imparticion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +250,7 @@ CREATE TABLE `modulo` (
   `descripcion` text COLLATE utf8_bin,
   `precio` double(7,2) DEFAULT '0.00',
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,6 +259,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
+INSERT INTO `modulo` VALUES (1,'Java EE',120,NULL,600.00),(2,'Java EE Spring',120,NULL,600.00),(3,'BBDD',100,NULL,450.00),(4,'SQL',60,NULL,325.00),(5,'JPA',60,NULL,325.00);
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,6 +371,32 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `alumnogetAll`()
 BEGIN
 	SELECT `codigo`, `nombre`, `apellidos`, `fNacimiento`, `direccion`, `poblacion`, `codigopostal`, `telefono`, `email`, `dni`, `nHermanos`, `activo` 
 	FROM `alumno`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `alumnogetByCurso` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`127.0.0.1` PROCEDURE `alumnogetByCurso`(in pcursocodigo int)
+BEGIN
+   SELECT a.codigo as codigo, a.nombre, a.apellidos, a.fNacimiento, a.direccion, a.poblacion, a.codigopostal, a.telefono, a.email, a.dni, a.nHermanos, a.activo
+    FROM `alumno` as a 
+        inner join asistente as asi ON asi.alumno_codigo = a.codigo
+        inner join imparticion as i ON i.codigo = asi.imparticion_codigo
+        inner join curso_detalle as cd ON cd.codigo = i.curso_detalle_codigo
+        inner join curso as c ON c.codigo = cd.curso_codigo
+    WHERE c.codigo = pcursocodigo
+    group by a.codigo;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -843,4 +874,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-01  9:38:45
+-- Dump completed on 2017-03-03 11:22:17

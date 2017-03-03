@@ -11,18 +11,25 @@
 <c:set scope="request" var="seccion" value="Datos del curso"/>
 <jsp:include page="../includes/header.jsp" />
 	<main>
-		<div>
-			Codigo: ${curso.identificador} 
-			Nombre: ${curso.nombre} 
-		</div>
+		<section>
+			<header><h2>Datos del curso:</h2></header> 
+				Codigo: ${curso.identificador} 
+				Nombre: ${curso.nombre} 
+				Fecha Inicio: ${curso.finicio}
+				Fecha fin: ${curso.ffin}
+		</section>
+		
+		<section>
+			<header><h3>Listado de Modulos</h3></header>
 			<c:forEach var="cdetalle" items="${curso.modulos}">
-				<!-- Línea de datos de cursodetalle. -->
 				<div>
 					Codigo del modulo: ${cdetalle.modulo.codigo}
 				 	Nombre del modulo: ${cdetalle.modulo.nombre}
 					Numero de horas: ${cdetalle.modulo.nhoras} hrs.
 				</div>
-
+			</c:forEach>				
+				
+		</section>
 							<!-- Columnas de cabecera de la tabla.  -->
 
 						
@@ -30,21 +37,16 @@
 						<!-- Se comprueba si el listado de cusos asociado al cliente no está vacio. 
 						 En tal caso se recorre la lista de cursos sobre el objeto curso.-->	
 
-							<c:forEach var="alumno" items="${cdetalle.imparticion.alumnos}">
-								<!-- Línea de datos de curso. 
-						     		Es necesario llamar a las propiedades con value porque se esta trabajando 
-						     		con mapas en vez de listas.-->
-						
-									<!-- Celda con el d.n.i. del alumno. -->
-									${alumno.dni}
-									<!-- Celda con el nombre del alumno. -->
-									${alumno.nombre}
-									<!-- Celda con los apellidos del alumno. -->
-									${alumno.apellidos}
-				
-							</c:forEach>
-			</c:forEach>
-
+		
+		<section>
+			<header><h4>Listado de alumnos</h4></header>		
+				<c:forEach var="alumno" items="${curso.alumnos}">
+					<div>
+						${alumno.nombre} ${alumno.apellidos} ${alumno.email}
+					</div>
+				</c:forEach>
+		</section>				
+			
 	</main>
 	<footer>
 	

@@ -1,7 +1,9 @@
 package com.ipartek.formacion.persistence;
 
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,8 +16,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 
@@ -23,6 +33,11 @@ import javax.persistence.Table;
 @Table(name="curso")
 @Entity(name="curso")
 @NamedQueries({@NamedQuery(name= "curso.getAll", query = "SELECT c FROM curso as c") })
+@NamedStoredProcedureQueries({
+	@NamedStoredProcedureQuery(name="curso.getAlumnos",
+				procedureName="alumnogetByCurso", resultClasses= Alumno.class, 
+				parameters={@StoredProcedureParameter(mode= ParameterMode.IN,
+				type=Long.class)})})
 public class Curso implements Serializable{
 
 	
@@ -46,7 +61,8 @@ public class Curso implements Serializable{
 
 	//------------------------------- RELACIONES ENTRE CLASES ----------------------------------------
 
-	@OneToMany(fetch = FetchType.EAGER,mappedBy="curso")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="curso")
+	@Fetch(FetchMode.JOIN)
 	private Set<CursoDetalle> modulos; // determinados modulos que se van a dar en un curso en determinada fecha.
 	
 	/* Se enlaza la clase curso detalle usando como join la el atributo curso de la clase curso detalle. */
@@ -54,6 +70,9 @@ public class Curso implements Serializable{
 	@JoinColumn(name="cliente_codigo")
 	private Cliente cliente;	
 
+	@Transient
+	private List<Alumno> alumnos;
+	
 
 	public Curso() {
 		super();
@@ -172,6 +191,42 @@ public class Curso implements Serializable{
 
 	public void setModulos(Set<CursoDetalle> modulos) {
 		this.modulos = modulos;
+	}
+
+
+
+
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
+
+
+
+	public List<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+
+
+
+
+
+	public void setAlumnos(List<Alumno> alumnos) {
+		this.alumnos = alumnos;
 	}
 
 	
