@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -15,6 +16,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 
 	@Autowired
 	private CursoService cS;
+	private ModelAndView mav = null;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAll(Model model){
@@ -27,5 +29,20 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 		model.addAttribute("curso", cS.getById(codigo));
 		return "cursos/curso";
 	}
+	
+	// funcionalidades
+	
+	@RequestMapping("/{codigocurso}/detalles/{codigodetalle}")
+	public ModelAndView getDetalleByCurso(@PathVariable("codigocurso")long codigocuro,
+			@PathVariable("codigodetalle")long codigodeltalle){
+		return mav;
+	}
+	
+	@RequestMapping("/{codigocurso}/alumnos/{codigoalumno}")
+	public ModelAndView getAlumnoByCurso(@PathVariable("codigocurso")long codigocuro,
+			@PathVariable("codigodetalle")long codigodeltalle){
+		return mav;
+	}
+	
 	
 }

@@ -23,6 +23,12 @@
 			<header><h3>Listado de Modulos</h3></header>
 			<c:forEach var="cdetalle" items="${curso.modulos}">
 				<div>
+					<a href='<c:url value="/cursos/${curso.codigo}/detalles/${cdetalle.codigo}"/>'>${modulo.nombre}
+					<fmt:formatDate pattern="dd/MM/yyyy"
+						value="${cdetalle.fInicio}" />
+					<fmt:formatDate pattern="dd/MM/yyyy"
+						value="${cdetalle.fFin}" />
+					</a>
 					Codigo del modulo: ${cdetalle.modulo.codigo}
 				 	Nombre del modulo: ${cdetalle.modulo.nombre}
 					Numero de horas: ${cdetalle.modulo.nhoras} hrs.
