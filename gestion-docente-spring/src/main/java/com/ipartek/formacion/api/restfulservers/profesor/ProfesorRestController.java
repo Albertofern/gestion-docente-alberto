@@ -1,4 +1,4 @@
-package com.ipartek.formacion.api.restfulservers;
+package com.ipartek.formacion.api.restfulservers.profesor;
 
 import java.util.List;
 
