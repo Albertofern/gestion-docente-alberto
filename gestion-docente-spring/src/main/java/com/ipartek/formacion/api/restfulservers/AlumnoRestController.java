@@ -2,18 +2,26 @@ package com.ipartek.formacion.api.restfulservers;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
 
 import com.ipartek.formacion.dbms.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
@@ -28,13 +36,24 @@ public class AlumnoRestController {
 	@Autowired
 	AlumnoService aS;
 	
-	//	http://gestionformacion/api/alumnos/{1}
+	//	http://gestiondocente/api/alumnos/{1}
 	//	PUT ----> UPDATE
 	//	DELETE -> DELETE
 	//  GET ----> GETBYID
-	//	http://gestionformacion/api/alumno
+	//	http://gestiondocente/api/alumno
 	//	POST ---> GETALL
 	//	GET	----> CREATE
+	
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+	    binder.setValidator(validator);
+	}
+	
+	@Resource(name ="alumnoValidator")
+	Validator validator;
+	// validaremos en el PUT y en el POST cuando se prevee que necesite validacion.
+	
 	
 	@RequestMapping(value="/{codigo}", method = RequestMethod.GET)
 	public ResponseEntity<Alumno> getById(@PathVariable("codigo") int id){
@@ -66,7 +85,7 @@ public class AlumnoRestController {
 	}
 	
 	@RequestMapping(method= RequestMethod.POST)
-	public ResponseEntity<Void> create(@RequestBody Alumno alumno,
+	public ResponseEntity<Void> create(@Valid @RequestBody Alumno alumno,
 									UriComponentsBuilder ucBuilder){ // tengo que recivir el objeto serializado a traves de la uri
 		
 		Alumno alum = aS.getByDni(alumno.getDni());
@@ -99,7 +118,7 @@ public class AlumnoRestController {
 	}
 	
 	@RequestMapping(value="/{codigo}", method = RequestMethod.PUT)
-	public ResponseEntity<Alumno> update(@PathVariable("codigo")int id , @RequestBody Alumno alumno){
+	public ResponseEntity<Alumno> update(@PathVariable("codigo")int id ,@Valid @RequestBody Alumno alumno){
 		Alumno alum = aS.getById(id);
 		ResponseEntity<Alumno> response = null;
 		
