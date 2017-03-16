@@ -29,12 +29,12 @@ public class AlumnoRestController {
 	AlumnoService aS;
 	
 	//	http://gestionformacion/api/alumnos/{1}
-	//	PUT ----> 
-	//	DELETE -> 
-	//  GET ----> 
+	//	PUT ----> UPDATE
+	//	DELETE -> DELETE
+	//  GET ----> GETBYID
 	//	http://gestionformacion/api/alumno
-	//	POST ---> 
-	//	GET	----> 
+	//	POST ---> GETALL
+	//	GET	----> CREATE
 	
 	@RequestMapping(value="/{codigo}", method = RequestMethod.GET)
 	public ResponseEntity<Alumno> getById(@PathVariable("codigo") int id){
@@ -43,6 +43,7 @@ public class AlumnoRestController {
 		
 		if(alumno == null){ //404
 			response = new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND);
+			LOG.info("codigo alumno: "+id);
 		}else{ //200   // el ResponseEntity usa el constructor con BODY que nos enviara el alumno!
 			response = new ResponseEntity<Alumno>(alumno, HttpStatus.OK); 
 		}
@@ -56,6 +57,7 @@ public class AlumnoRestController {
 		
 		if (alumnos == null || alumnos.isEmpty()){  // si es nula o si esta vacia 
 			response = new ResponseEntity<List<Alumno>>(HttpStatus.NO_CONTENT); //204
+			LOG.info("Pasa por getAll()");
 		}else{
 			response = new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
 		}
@@ -109,7 +111,7 @@ public class AlumnoRestController {
 				alum = aS.update(alumno);
 				response = new ResponseEntity<Alumno>(alum, HttpStatus.ACCEPTED);
 			}catch (Exception e){
-				response = new ResponseEntity<Alumno>(alum, HttpStatus.NOT_ACCEPTABLE);
+				response = new ResponseEntity<Alumno>( HttpStatus.NOT_ACCEPTABLE);
 			}
 			
 		}
