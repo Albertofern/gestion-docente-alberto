@@ -18,6 +18,7 @@
 			<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 			<commons.beanutils.version>1.9.3</commons.beanutils.version>
 			<jackson.library>2.7.5</jackson.library>
+			<springfox-swagger>2.4.0</springfox-swagger>
 		</properties> 
 	<dependencies>
 				<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
@@ -176,6 +177,18 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.library}</version>
         </dependency> 
+		<!-- Swagger -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${springfox-swagger}</version>
+		</dependency>
+		<!-- Swagger UI -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>${springfox-swagger}</version>
+		</dependency>
 		     
 	</dependencies>
     <build>
