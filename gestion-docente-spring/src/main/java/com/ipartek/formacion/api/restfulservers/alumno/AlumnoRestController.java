@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +28,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.ipartek.formacion.dbms.persistence.Alumno;
 import com.ipartek.formacion.service.interfaces.AlumnoService;
 
-
+@CrossOrigin(origins= "*", maxAge = 3600, methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RestController
 @RequestMapping(value= "/api/alumnos")
 public class AlumnoRestController {
@@ -55,7 +57,8 @@ public class AlumnoRestController {
 	// validaremos en el PUT y en el POST cuando se prevee que necesite validacion.
 	
 	
-	@RequestMapping(value="/{codigo}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Alumno> getById(@PathVariable("codigo") int id){
 		Alumno alumno = aS.getById(id);
 		ResponseEntity<Alumno> response = null;
@@ -69,7 +72,8 @@ public class AlumnoRestController {
 		return response;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
+						MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Alumno>> getAll(){
 		List<Alumno> alumnos = aS.getAll();
 		ResponseEntity<List<Alumno>> response = null;
@@ -84,7 +88,9 @@ public class AlumnoRestController {
 		return response;
 	}
 	
-	@RequestMapping(method= RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
+			 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Void> create(@Valid @RequestBody Alumno alumno,
 									UriComponentsBuilder ucBuilder){ // tengo que recivir el objeto serializado a traves de la uri
 		
@@ -117,7 +123,9 @@ public class AlumnoRestController {
 		return response;
 	}
 	
-	@RequestMapping(value="/{codigo}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{codigo}", consumes = { MediaType.APPLICATION_JSON_VALUE,
+			 			MediaType.APPLICATION_XML_VALUE }, method = RequestMethod.PUT, produces = {
+						MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Alumno> update(@PathVariable("codigo")int id ,@Valid @RequestBody Alumno alumno){
 		Alumno alum = aS.getById(id);
 		ResponseEntity<Alumno> response = null;
@@ -137,7 +145,8 @@ public class AlumnoRestController {
 		return response;
 	}
 
-	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE, produces = { MediaType.APPLICATION_JSON_VALUE,
+				MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Alumno> deleteById(@PathVariable("codigo") int id){
 		Alumno alum = aS.getById(id);
 		ResponseEntity<Alumno> response = null;
