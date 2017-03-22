@@ -13,16 +13,16 @@
 <jsp:include page="../includes/header.jsp" />
 <main>
 	<!-- @ModelAttribute("alumno") de AlumnoController -->
-	<form:form action="save" method="post" modelAttribute="alumno">
+	<form:form action="save" method="post" cssClass="" modelAttribute="alumno">
 		<c:if test="${!empty alumno}">
 			<form:hidden path="codigo"/>
 		</c:if>
 		<div>
-			<form:label path="nombre">
+			<form:label cssClass="" path="nombre">
 				<spring:message code="alumno.nombre" />:
  			</form:label>
-			<form:input path="nombre" cssErrorClass="" cssClass="" />
-			<form:errors path="nombre" cssClass="" />
+			<form:input placeholder="Introduzca su nombre" path="nombre" cssErrorClass="text-danger" cssClass="" />
+			<form:errors path="nombre" cssClass="text-danger" />
 		</div>
 		<div>
 			<form:label path="apellidos"><spring:message code="alumno.apellidos" />:</form:label>

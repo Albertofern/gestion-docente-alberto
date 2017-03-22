@@ -43,13 +43,26 @@
 			<li><a href="<c:url value='/cursos'/>">G. Cursos</a></li>
 		</ul>
 	</nav>
-	<a href="?locale=es">				
-		<spring:message code="idioma.castellano" text="castellano" />
-	</a>
-	<a href="?locale=en">
-		<spring:message code="idioma.ingles" text="ingles"/>
-	</a>
-	<a href="?locale=eu">
-		<spring:message code="idioma.euskera" text="euskera" />
-	</a>
-</header>
+	<div class="btn-group">
+		<button class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" >
+			Idiomas <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+		<li>
+					<a class="btn btn-default " href="?locale=es">				
+					<spring:message code="idioma.castellano" text="castellano"/>
+					</a>
+				</li>
+				<li>
+					<a class="btn btn-default" href="?locale=en">
+						<spring:message code="idioma.ingles" text="ingles"/>
+					</a>
+				</li>
+				<li>
+					<a class="btn btn-default" href="?locale=eu">
+						<spring:message code="idioma.euskera" text="euskera"/>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</header> 
