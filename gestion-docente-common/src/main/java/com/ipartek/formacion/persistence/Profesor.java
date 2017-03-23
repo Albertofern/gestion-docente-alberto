@@ -39,7 +39,7 @@ public class Profesor implements Serializable{
 	// En un Set no puede haber dos datos iguales.
 	
 	
-	@OneToMany(fetch = FetchType.LAZY , mappedBy="profesor")
+	@OneToMany(fetch = FetchType.EAGER , mappedBy="profesor")
 	private Set<Imparticion> imparticiones;
 	
 	public Profesor() {

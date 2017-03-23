@@ -32,7 +32,7 @@
 
 
 <meta charset="UTF-8">
-<title>${nombreApp} - ${seccion} </title>
+
 </head>
 <body>
 <header class="container-fluid">
