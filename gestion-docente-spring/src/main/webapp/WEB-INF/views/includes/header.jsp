@@ -13,7 +13,9 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<script
+<spring:url var="myestilo" value="/resources/css/style.css"></spring:url>
+<link rel="stylesheet" href="${myestilo}" >
+  <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
@@ -33,8 +35,8 @@
 <title>${nombreApp} - ${seccion} </title>
 </head>
 <body>
-<header>
-	<h1>${nombreApp} - ${seccion}</h1>
+<header class="container-fluid">
+	<h1 class="col-xs-12"><span class="text-uppercase text-center">${nombreApp} - ${seccion}</span></h1> <!-- En Mayus y Centrado -->
 	<nav>
 		<ul>
 			<li><a href="<c:url value='/alumnos'/>">G. Alumnos</a></li>
