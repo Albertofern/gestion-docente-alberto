@@ -1,7 +1,6 @@
 package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -34,10 +33,7 @@ public class Imparticion  implements Serializable {
 	@GeneratedValue
 	private long codigo;
 	
-	/* Se une con el curso detalle.*/
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="curso_detalle_codigo")
-	private CursoDetalle cursodetalle;
+
 	
 	/* Se une con el curso profesor.*/
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -76,13 +72,6 @@ public class Imparticion  implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public CursoDetalle getCursodetalle() {
-		return cursodetalle;
-	}
-
-	public void setCursodetalle(CursoDetalle cursodetalle) {
-		this.cursodetalle = cursodetalle;
-	}
 
 	public Profesor getProfesor() {
 		return profesor;
@@ -114,7 +103,7 @@ public class Imparticion  implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Imparticion [codigo=" + codigo + ", cursodetalle=" + cursodetalle + ", profesor=" + profesor
+		return "Imparticion [codigo=" + codigo + ", cursodetalle=" + ", profesor=" + profesor
 				+ ", alumnos=" + alumnos + "]";
 	}
 
@@ -158,4 +147,3 @@ public class Imparticion  implements Serializable {
 	
 	
 }
-

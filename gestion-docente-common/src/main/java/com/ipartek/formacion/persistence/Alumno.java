@@ -2,21 +2,22 @@ package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
-@Entity
+@Entity(name="alumno")
 @Table(name="alumno")
+@NamedQueries({ @NamedQuery(name = "alumno.getAll", query = "SELECT a FROM alumno as a WHERE a.activo =true") })
 public class Alumno implements Serializable{
 
 	private static final long serialVersionUID = -468805280262731464L;
@@ -38,12 +39,8 @@ public class Alumno implements Serializable{
 	//@Fetch(FetchMode.JOIN) // porque son datos subceptibles a repeticion. Si fuese imprescindible una List se tendria
 	// que incluir esta anotacion  con JOIN o SUBSELECT
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "asistente", 
-		joinColumns= @JoinColumn(name="alumno_codigo", referencedColumnName  = "codigo"),
-		inverseJoinColumns = @JoinColumn(name="imparticion_codigo", referencedColumnName="codigo"))
-	private Set<Imparticion> imparticiones;
-	
+	@Transient
+	private List<Curso> curso;
 	
 	
 	public Alumno() {
@@ -163,6 +160,38 @@ public class Alumno implements Serializable{
 				       "email=" + this.email + ", direccion=" + this.direccion + ", " +
 					   "codigopostal=" + this.codigopostal + ", poblacion=" + this.poblacion + ", " +
 					   "telefono=" + this.telefono + "]";
+	}
+
+
+	/**
+	 * @return the curso
+	 */
+	public List<Curso> getCurso() {
+		return curso;
+	}
+
+
+	/**
+	 * @param curso the curso to set
+	 */
+	public void setCurso(List<Curso> curso) {
+		this.curso = curso;
+	}
+
+
+	/**
+	 * @param fNacimiento the fNacimiento to set
+	 */
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
+	}
+
+
+	/**
+	 * @param codigopostal the codigopostal to set
+	 */
+	public void setCodigopostal(Integer codigopostal) {
+		this.codigopostal = codigopostal;
 	}
 	
 }

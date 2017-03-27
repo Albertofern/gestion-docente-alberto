@@ -12,5 +12,7 @@ public interface CursoServiceRemote {
 	public List<Curso> getAll();
 	public Curso getById(long codigo);
 	public Curso update(Curso curso);
+	public Curso create(Curso curso);
+	public void delete(long codigo);
 	
 }

@@ -33,8 +33,8 @@ public class CursoServiceBean implements CursoServiceRemote {
 	public Curso getById(long codigo) {
 		Curso curso = entityManager.find(Curso.class, codigo);
 		StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
-		spq.setParameter(1, curso.getCodigo());
-		//spq.setParameter(1, codigo);  indistintamente
+		//spq.setParameter(1, curso.getCodigo());
+		spq.setParameter(1, codigo);  //indistintamente
 		List<Alumno> alumnos = spq.getResultList();
 		curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
 		return curso;
@@ -55,5 +55,35 @@ public class CursoServiceBean implements CursoServiceRemote {
 		}	
 		return curso;
 	}
+	
+	@Override
+	public Curso create(Curso curso) {
+		EntityTransaction tx = entityManager.getTransaction(); 
+		tx.begin();
+		try {
+			entityManager.persist(curso);
+			/* Se devuevle el curso.*/
+			tx.commit();
+			entityManager.flush();
+		}catch (Exception e){
+			tx.rollback();
+		}	
+		return curso;
+	}
+	
+	@Override
+	public void delete(long codigo) {
+		EntityTransaction tx = entityManager.getTransaction(); 
+		tx.begin();
+		try {
+			entityManager.remove(entityManager.find(Curso.class, codigo));
+			/* Se devuevle el curso.*/
+			tx.commit();
+		}catch (Exception e){
+			tx.rollback();
+		}	
+	}
+
+
 
 }

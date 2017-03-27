@@ -3,15 +3,14 @@ package com.ipartek.formacion.persistence;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
 
 /*@NamedQueries({@NamedQuery(name="evaluacion.getAll",query="Select e From evaluacion as e")})*/
 
-@Entity
-@Table(name="evaluacion")
+
 public class Evaluacion implements Serializable {
 
 	/**

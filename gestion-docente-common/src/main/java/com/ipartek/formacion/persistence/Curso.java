@@ -4,7 +4,7 @@ package com.ipartek.formacion.persistence;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,14 +18,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedStoredProcedureQueries;
 import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 
 
@@ -40,7 +37,7 @@ import org.hibernate.annotations.FetchMode;
 				type=Long.class)})})
 public class Curso implements Serializable{
 
-	
+	public static final int CODIGO_NULO = -1;
 
 	/**
 	 * 
@@ -61,14 +58,18 @@ public class Curso implements Serializable{
 
 	//------------------------------- RELACIONES ENTRE CLASES ----------------------------------------
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="curso")
-	@Fetch(FetchMode.JOIN)
-	private Set<CursoDetalle> modulos; // determinados modulos que se van a dar en un curso en determinada fecha.
+	//@OneToMany(fetch = FetchType.LAZY,mappedBy="curso")
+	//@Fetch(FetchMode.JOIN)
+	
 	
 	/* Se enlaza la clase curso detalle usando como join la el atributo curso de la clase curso detalle. */
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="cliente_codigo")
-	private Cliente cliente;	
+	private Cliente cliente;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="profesor_codigo")
+	private Profesor profesor;
 
 	@Transient
 	private List<Alumno> alumnos;
@@ -181,18 +182,11 @@ public class Curso implements Serializable{
  		return "Curso [codigo=" + this.codigo + ", nombre=" + this.nombre + ", " +
  	                  "identificador=" + this.identificador + ", "+
  	                  "finicio=" + this.finicio + ", ffin=" + this.ffin + ", " +
- 	                  "nhoras=" + this.nhoras + ", temario=" + this.temario + "]";
+ 	                  "nhoras=" + this.nhoras + ", temario=" + this.temario + ",profesor=" + profesor.toString() + "]";
  	}
 
 
-	public Set<CursoDetalle> getModulos() {
-		return modulos;
-	}
-
-	public void setModulos(Set<CursoDetalle> modulos) {
-		this.modulos = modulos;
-	}
-
+	
 
 
 
@@ -227,6 +221,30 @@ public class Curso implements Serializable{
 
 	public void setAlumnos(List<Alumno> alumnos) {
 		this.alumnos = alumnos;
+	}
+
+
+
+
+
+
+	/**
+	 * @return the profesor
+	 */
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+
+
+
+
+
+	/**
+	 * @param profesor the profesor to set
+	 */
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
 	}
 
 	
