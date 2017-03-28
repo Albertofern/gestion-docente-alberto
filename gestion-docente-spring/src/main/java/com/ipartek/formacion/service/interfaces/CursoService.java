@@ -7,11 +7,17 @@ import com.ipartek.formacion.persistence.Curso;
 
 public interface CursoService  {
 
+	public Curso create(Curso curso);
+	
 	public void setCursoServiceRemote(CursoServiceRemote cursoService);
 
 	public Curso getById(long codigo);
 	
-	public List <Curso> getAll();
+	public List<Curso> getAll();
+	
+	public Curso update(Curso curso);
+	
+	public void delete(long codigo);
 
 	
 }

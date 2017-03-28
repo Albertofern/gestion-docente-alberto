@@ -6,38 +6,41 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!-- Encasula los objetos en un formulario. -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<c:set scope="request" var="seccion" value="Datos del curso" />
-<jsp:include page="../includes/header.jsp" />
-<main class="">
-<section>
-	<header><h2>Datos del curso:</h2></header>
-	<div>
+<main class="container-fluid">
+<section class="row">
+	<header class="col-xs-12">
+		<h2>Datos del curso</h2>
+	</header>
+	<div class="col-xs-12">
 		<p>Nombre: ${curso.nombre}</p>
-		<p>F.Inicio: <fmt:formatDate pattern="dd/MM/yyyy" 
-	            value="${curso.finicio}" /></p>
-		<p>F.Fin: <fmt:formatDate pattern="dd/MM/yyyy" 
-	            value="${curso.ffin}" /></p>
-	    <p>Horas: ${curso.nhoras}</p>
-	    <p>Temario: ${curso.temario}</p>
-	    <p>Precio: ${curso.precio}</p>
-	    <p>Cliente: ${curso.cliente.nombre}</p>
-    </div>
-		<section>
-			<header><h3>Listado de alumnos</h3></header>
-			<c:forEach var="alumno" items="${curso.alumnos}">
-				<div>
-					<a href="<c:url value='/cursos/${curso.codigo}/alumnos/${alumno.codigo}'/>">${alumno.nombre} ${alumno.apellidos} ${alumno.email}</a>
-				</div>
-			</c:forEach>
-		</section>
+		<p>
+			F.Inicio:
+			<fmt:formatDate pattern="dd/MM/yyyy" value="${curso.finicio}" />
+		</p>
+		<p>
+			F.Fin:
+			<fmt:formatDate pattern="dd/MM/yyyy" value="${curso.ffin}" />
+		</p>
+		<p>Horas: ${curso.nhoras}</p>
+		<p>Temario: ${curso.temario}</p>
+		<p>Precio: ${curso.precio}</p>
+		<p>Cliente: ${curso.cliente.nombre}</p>
+	</div>
+	<section class="col-xs-12">
+		<header><h3>Listado de alumnos</h3></header>
+		<c:forEach var="alumno" items="${curso.alumnos}">
+			<div>
+				<a href="<c:url value='/cursos/${curso.codigo}/alumnos/${alumno.codigo}'/>">${alumno.nombre}
+					${alumno.apellidos} ${alumno.email}</a>
+			</div>
+		</c:forEach>
+	</section>
 </section>
-¡
-<!-- Columnas de cabecera de la tabla.  --> <!-- Se comprueba si el listado de cusos asociado al cliente no está vacio. 
+¡ <!-- Columnas de cabecera de la tabla.  --> <!-- Se comprueba si el listado de cusos asociado al cliente no está vacio. 
 						 En tal caso se recorre la lista de cursos sobre el objeto curso.-->
-
 </main>
 <footer> </footer>
 </body>

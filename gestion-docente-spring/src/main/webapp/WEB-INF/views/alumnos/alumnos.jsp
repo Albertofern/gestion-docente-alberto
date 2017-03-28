@@ -16,7 +16,7 @@
 		<div class="col-xs-12 col-md-12">
 			<!-- si se anidan las columnas tiene que haber un row -->
 			<div class="row">
-				<div class="col-xs-1 col-md-1"><input id="slectall" type="checkbox"></div>
+				<div class="col-xs-1 col-md-1"><input id="selectall" type="checkbox"></div>
 				<div class="col-xs-2 col-md-1">Nombre</div> <!--  <th><spring:message code="alumno.nombre" /></th> -->
 				<div class="col-xs-3 col-md-2">Apellidos</div>
 				<div class="hidden-xs hidden-sm col-md-1">DNI</div>
