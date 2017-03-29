@@ -45,7 +45,13 @@
         <property name="defaultEncoding" value="UTF-8"></property>
      </bean> 
        
-    <jee:jndi-lookup id="cursoServiceRemote" jndi-name="java:app/gestion-docente-spring/CursoServiceBean" />
+    <jee:jndi-lookup id="cursoServiceRemote" jndi-name="java:app/gestion-docente-spring/cursoServiceBean" />
+	<jee:jndi-lookup id="profesorServiceRemote" jndi-name="java:app/gestion-docente-spring/profesorServiceBean" />
+	
+	
+	<bean id="profesorServiceImp" class="com.ipartek.formacion.service.ProfesorServiceEJBImp">
+ 		<property name="profesorServiceRemote" ref="profesorServiceRemote" />
+ 	</bean>
 
 	<bean id="cursoServiceImp" class="com.ipartek.formacion.service.CursoServiceImp">
 		<property name="cursoServiceRemote" ref="cursoServiceRemote" />

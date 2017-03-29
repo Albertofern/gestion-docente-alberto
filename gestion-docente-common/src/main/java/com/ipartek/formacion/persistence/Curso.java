@@ -21,6 +21,8 @@ import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NotFound;
+
 @Table(name= "curso")
 @Entity(name= "curso")
 @NamedQueries({ @NamedQuery(name = "curso.getAll", query = "SELECT c FROM curso as c") })
@@ -166,6 +168,9 @@ public class Curso implements Serializable {
 		this.precio = precio;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -174,27 +179,25 @@ public class Curso implements Serializable {
 		return result;
 	}
 
-	/* Metodo que implementa la comparación. */
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		/* Se declara la variable que contendra la comparaci�n de objetos. */
-		boolean valido = false;
-		/* Se compruebasi el objeto recibido es nulo. */
-		if (obj != null) {
-			/* Se comprueba si el objeto recogido es del tipo de la clase. */
-			if (obj instanceof Curso) {
-				/*
-				 * Se comparan los codigos de la clase actual y el objeto
-				 * recibido por parametro.
-				 */
-				if (this.getCodigo() == ((Curso) obj).getCodigo()) {
-					/* Se asigna verdadero a la comparai�n. */
-					valido = true;
-				}
-			}
+		if (this == obj) {
+			return true;
 		}
-		/* Se devuelve el resultado de la comparaci�n. */
-		return valido;
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Curso)) {
+			return false;
+		}
+		Curso other = (Curso) obj;
+		if (codigo != other.codigo) {
+			return false;
+		}
+		return true;
 	}
 
 	/* Metodo que castea el objeto a String. */

@@ -56,7 +56,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 		return "cursos/cursoform";
 	}
 	
-    @RequestMapping(value ="/editarCurso/{id}")
+    @RequestMapping(value ="/editCurso/{id}")
     /* Metodo que añade un cusro pasado por parametro.*/
     public String editarCurso(@PathVariable("id") long id,Model model){
     	/* Se le pasa al modelo el curso recien creado.*/

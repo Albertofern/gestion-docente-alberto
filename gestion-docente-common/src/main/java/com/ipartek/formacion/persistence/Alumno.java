@@ -122,7 +122,9 @@ public class Alumno implements Serializable{
 		this.activo = activo;
 	}
 	
-	/* Metodo que asigna un codigo unitario al objeto. */
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -131,24 +133,25 @@ public class Alumno implements Serializable{
 		return result;
 	}
 	
-	/* Metodo que implementa la comparación. */
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		/* Se declara la variable que contendra la comparaci�n de objetos.*/
-		boolean valido = false;
-		/* Se compruebasi el objeto recibido es nulo.*/
-		if (obj != null){
-			/* Se comprueba si el objeto recogido es del tipo de la clase.*/
-			if (obj instanceof Alumno){
-				/* Se comparan los codigos de la clase actual y el objeto recibido por parametro.*/
-				if (this.getCodigo() == ((Alumno) obj).getCodigo()){
-					/* Se asigna verdadero a la comparai�n.*/
-					valido = true;				
-				}			
-			}
-		}	
-		/* Se devuelve el resultado de la comparacion.*/
-		return valido;
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Alumno)) {
+			return false;
+		}
+		Alumno other = (Alumno) obj;
+		if (codigo != other.codigo) {
+			return false;
+		}
+		return true;
 	}
 
 	/* (non-Javadoc)
