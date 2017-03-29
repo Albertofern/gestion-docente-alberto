@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
@@ -35,7 +34,7 @@ public class CursoServiceBean implements CursoServiceRemote {
 		StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
 		//spq.setParameter(1, curso.getCodigo());
 		spq.setParameter(1, codigo);  //indistintamente
-		List<Alumno> alumnos = spq.getResultList();
+		List<Alumno> alumnos = (List<Alumno>)spq.getResultList();
 		curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
 		return curso;
 	}
@@ -44,45 +43,46 @@ public class CursoServiceBean implements CursoServiceRemote {
 	
 	@Override
 	public Curso update(Curso curso) {
-		EntityTransaction tx = entityManager.getTransaction(); 
-		tx.begin();
+		//EntityTransaction tx = entityManager.getTransaction(); 
+		//tx.begin();
 		try {
-			entityManager.persist(curso);
+			entityManager.merge(curso);
 			/* Se devuevle el curso.*/
-			tx.commit();
+		//	tx.commit();
 		}catch (Exception e){
-			tx.rollback();
+		//	tx.rollback();
 		}	
 		return curso;
 	}
 	
 	@Override
 	public Curso create(Curso curso) {
-		EntityTransaction tx = entityManager.getTransaction(); 
-		tx.begin();
+		//EntityTransaction tx = entityManager.getTransaction(); 
+		//tx.begin();
 		try {
 			entityManager.persist(curso);
 			/* Se devuevle el curso.*/
-			tx.commit();
+			//tx.commit();
 			entityManager.flush();
 		}catch (Exception e){
-			tx.rollback();
+			//tx.rollback();
 		}	
 		return curso;
 	}
 	
 	@Override
 	public void delete(long codigo) {
-		EntityTransaction tx = entityManager.getTransaction(); 
-		tx.begin();
+		//EntityTransaction tx = entityManager.getTransaction(); 
+		//tx.begin();
 		try {
 			entityManager.remove(entityManager.find(Curso.class, codigo));
 			/* Se devuevle el curso.*/
-			tx.commit();
+			//tx.commit();
 		}catch (Exception e){
-			tx.rollback();
+			//tx.rollback();
 		}	
 	}
+
 
 
 

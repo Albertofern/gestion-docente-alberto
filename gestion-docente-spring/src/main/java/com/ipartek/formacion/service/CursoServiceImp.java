@@ -29,8 +29,7 @@ public class CursoServiceImp implements CursoService {
 
 	@Override
 	public Curso getById(long codigo) {
-		return this.cursoServiceRemote.getById(codigo);
-		//return new Curso();
+		return cursoServiceRemote.getById(codigo);
 	}
 
 	@Override
@@ -38,6 +37,26 @@ public class CursoServiceImp implements CursoService {
 		return cursoServiceRemote.getAll();
 		//return new ArrayList<Curso>();
 	}
+
+	@Override
+	public Curso create(Curso curso) {
+		return cursoServiceRemote.create(curso);
+	}
+
+	@Override
+	public Curso update(Curso curso) {
+		return cursoServiceRemote.update(curso);
+	}
+
+	@Override
+	public void delete(long codigo) {
+		Curso curso = cursoServiceRemote.getById(codigo);
+		curso.setActivo(false);
+		cursoServiceRemote.delete(codigo);
+		
+	}
+
+
 
 
 	

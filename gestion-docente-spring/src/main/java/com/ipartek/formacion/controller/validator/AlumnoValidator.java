@@ -96,7 +96,7 @@ public class AlumnoValidator implements Validator {
 		if (alum.getApellidos().length() < apellidosTamMin || alum.getApellidos().length() > apellidosTamMax) {
 					errors.rejectValue("apellidos", "form.longitudNombreIncorrecta", new Object[] { apellidosTamMin,apellidosTamMax },
 								"Los dos apellidos tienen que ocupar entre 7 y 250 caracteres.");
-		}
+		}	
 		
 		if (alum.getDireccion().length() < direccionTamMin || alum.getDireccion().length() > direccionTamMax) {
 					errors.rejectValue("direccion", "form.longitudDireccionIncorrecta", new Object[] { direccionTamMin,direccionTamMax },
