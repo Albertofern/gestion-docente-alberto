@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -75,7 +77,10 @@ public class Curso implements Serializable {
 	@JoinColumn(name = "profesor_codigo")
 	private Profesor profesor;
 
-	@Transient
+	//@Transient
+	@ManyToMany
+	@JoinTable(name="imparticion", joinColumns={@JoinColumn(name="curso_codigo")},
+			inverseJoinColumns = {@JoinColumn(name="alumno_codigo")})
 	private List<Alumno> alumnos;
 	
 	private boolean activo;
