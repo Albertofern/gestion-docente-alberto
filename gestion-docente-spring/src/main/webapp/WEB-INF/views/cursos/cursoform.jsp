@@ -76,14 +76,14 @@
 		            <form:errors cssClass="text-error"  path="profesor"/>   
 				</div>
 				<div class="form-group">
-					<form:label cssClass="control-label col-xs-2" path="profesor">Curso:</form:label>
+					<form:label cssClass="control-label col-xs-2" path="cliente">Cliente:</form:label>
 					<div class="col-xs-4">
-						<form:select cssClass="form-control" path="curso">
-			               <form:option value="0" label="Elija un curso"/>
-							<form:options items="${listadoCursos}" itemValue="codigo" itemLabel="nombre" />
+						<form:select cssClass="form-control" path="cliente">
+			               <form:option value="0" label="Elija un cliente"/>
+							<form:options items="${listadoClientes}" itemValue="codigo" itemLabel="nombre" />
 			            </form:select> 
 		            </div>
-		            <form:errors cssClass="text-error"  path="curso"/>   
+		            <form:errors cssClass="text-error"  path="cliente"/>   
 				</div>
 				<div class="form-group">
 					<div class="col-md-offset-3">

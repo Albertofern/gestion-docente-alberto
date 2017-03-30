@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ipartek.formacion.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 import com.ipartek.formacion.service.interfaces.ProfesorService;
+import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
 
 @Controller
 @RequestMapping("/cursos")    
@@ -25,7 +26,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	@Autowired
 	private CursoService cS;
 	@Autowired
-	private ProfesorService pS;
+	private ProfesorServiceEJB pSe;
 	
 	
 	
@@ -59,8 +60,10 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
     @RequestMapping(value ="/editCurso/{id}")
     /* Metodo que añade un cusro pasado por parametro.*/
     public String editarCurso(@PathVariable("id") long id,Model model){
+    	Curso cur = cS.getById(id);
+    	Curso curso = cS.update(cur);
     	/* Se le pasa al modelo el curso recien creado.*/
-    	model.addAttribute("curso",cS.getById(id));
+    	model.addAttribute("curso",curso);
     	/* Se redirecciona el formulario de curso.*/
     	return "cursos/cursoform";
     }
@@ -69,14 +72,15 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("curso") Curso curso){
 		mav=new ModelAndView("cursos/cursos");
+		Curso cur = null;
 
 		try {
 			if(curso.getCodigo()>0){
-				cS.update(curso);
+				cur = cS.update(curso);
 
 			} else {
 			
-				cS.create(curso);
+				cur = cS.create(curso);
 				
 			}
 			mav.addObject("mensaje", "mensaje.ok");

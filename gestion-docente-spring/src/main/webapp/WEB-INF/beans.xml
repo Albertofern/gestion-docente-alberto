@@ -49,7 +49,7 @@
 	<jee:jndi-lookup id="profesorServiceRemote" jndi-name="java:app/gestion-docente-spring/profesorServiceBean" />
 	
 	
-	<bean id="profesorServiceImp" class="com.ipartek.formacion.service.ProfesorServiceEJBImp">
+	<bean id="profesorServiceEJB" class="com.ipartek.formacion.service.ProfesorServiceEJBImp">
  		<property name="profesorServiceRemote" ref="profesorServiceRemote" />
  	</bean>
 

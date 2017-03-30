@@ -19,12 +19,15 @@ import com.ipartek.formacion.persistence.Profesor;
  *
  */
 
-@Stateless(name="profesorServiceBean")
-public class ProfesorServiceBean implements ProfesorServiceRemote{
+@Stateless(name = "profesorServiceBean")
+public class ProfesorServiceBean implements ProfesorServiceRemote {
 
 	@PersistenceContext(unitName = "gestiondocente")
 	private EntityManager entityManager;
-	
+
+	public ProfesorServiceBean() {
+	}
+
 	@Override
 	public List<Profesor> getAll() {
 		TypedQuery<Profesor> profesores = entityManager.createNamedQuery("profesor.getAll", Profesor.class);
@@ -34,14 +37,12 @@ public class ProfesorServiceBean implements ProfesorServiceRemote{
 	@Override
 	public Profesor getById(long codigo) {
 		Profesor profesor = entityManager.find(Profesor.class, codigo);
-		StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("profesor.getCursos");
-		spq.setParameter(1, codigo);
-		List<Curso> cursos = (List<Curso>)spq.getResultList();
-		profesor.setCursos(cursos);
+		// StoredProcedureQuery spq =
+		// entityManager.createNamedStoredProcedureQuery("profesor.getCursos");
+		// spq.setParameter(1, codigo);
+		// List<Curso> cursos = (List<Curso>)spq.getResultList();
+		// profesor.setCursos(cursos);
 		return profesor;
 	}
-
-
-
 
 }

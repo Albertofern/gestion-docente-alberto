@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.ipartek.formacion.persistence.Profesor;
 import com.ipartek.formacion.profesor.ProfesorServiceRemote;
 import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
@@ -16,7 +18,7 @@ import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
  *
  */
 
-
+@Service("profesorServiceEJB")
 public class ProfesorServiceEJBImp implements ProfesorServiceEJB{
 	
 	@Resource(name = "profesorServiceRemote")

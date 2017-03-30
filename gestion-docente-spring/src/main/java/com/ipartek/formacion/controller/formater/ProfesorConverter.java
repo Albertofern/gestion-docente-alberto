@@ -18,14 +18,14 @@ import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
 public class ProfesorConverter implements Converter<String, com.ipartek.formacion.persistence.Profesor> {
 	
 	@Autowired
-	ProfesorServiceEJB pS;
+	ProfesorServiceEJB pSe;
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProfesorConverter.class);
 
 	@Override
 	public com.ipartek.formacion.persistence.Profesor convert(String arg0) {
 
 		LOGGER.info(arg0.toString());
-		return pS.getById(Long.parseLong((String) arg0));
+		return pSe.getById(Long.parseLong((String) arg0));
 	}
 
 }
