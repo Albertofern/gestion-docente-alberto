@@ -8,10 +8,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
+
 import javax.persistence.TypedQuery;
 
-import com.ipartek.formacion.persistence.Curso;
+
 import com.ipartek.formacion.persistence.Profesor;
 
 /**

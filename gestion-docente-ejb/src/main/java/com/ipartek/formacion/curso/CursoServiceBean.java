@@ -6,10 +6,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
-import com.ipartek.formacion.persistence.Alumno;
+
 import com.ipartek.formacion.persistence.Curso;
 
 /**
@@ -20,6 +19,13 @@ public class CursoServiceBean implements CursoServiceRemote {
 
 	@PersistenceContext(unitName = "gestiondocente")
 	private EntityManager entityManager;
+	
+	/**
+	 * 
+	 */
+	public CursoServiceBean() {
+	
+	}
 
 	@Override
 	public List<Curso> getAll() {
@@ -31,11 +37,11 @@ public class CursoServiceBean implements CursoServiceRemote {
 	@Override
 	public Curso getById(long codigo) {
 		Curso curso = entityManager.find(Curso.class, codigo);
-		StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
-		spq.setParameter(1, curso.getCodigo());
+		//StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
+		//spq.setParameter(1, curso.getCodigo());
 		//spq.setParameter(1, codigo);  //indistintamente
-		List<Alumno> alumnos = (List<Alumno>)spq.getResultList();
-		curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
+		//List<Alumno> alumnos = (List<Alumno>)spq.getResultList();
+		//curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
 		return curso;
 	}
 

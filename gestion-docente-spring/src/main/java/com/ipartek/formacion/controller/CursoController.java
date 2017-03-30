@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ipartek.formacion.persistence.Cliente;
 import com.ipartek.formacion.persistence.Curso;
 import com.ipartek.formacion.persistence.Profesor;
+import com.ipartek.formacion.service.interfaces.ClienteServiceEJB;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
 import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
@@ -38,6 +40,8 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	private CursoService cS;
 	@Autowired
 	private ProfesorServiceEJB pSe;
+	@Autowired
+	private ClienteServiceEJB cSe;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -80,10 +84,10 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
     	Curso cur = cS.getById(id);
     	Curso curso = cS.update(cur);
     	List<Profesor> profesores = pSe.getAll();
-    	//List<Cliente> clientes = cl.getAll();
+    	List<Cliente> clientes = cSe.getAll();
     	model.addAttribute("curso",curso);
     	model.addAttribute("listadoProfesores", profesores);
-    	//model.addAttribute("listadoClientes", clientes);
+    	model.addAttribute("listadoClientes", clientes);
     	/* Se redirecciona el formulario de curso.*/
     	return "cursos/cursoform";
     }
@@ -98,7 +102,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
   			logger.trace("curso tiene errores");
   			destino = "cursos/cursoform";
 			model.addAttribute("listadoProfesores", pSe.getAll());
-			//model.addAttribute("listadoClientes", cl.getAll());
+			model.addAttribute("listadoClientes", cSe.getAll());
 			} else {
 				destino = "redirect:/cursos";
 				 

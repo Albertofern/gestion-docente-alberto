@@ -47,14 +47,14 @@
        
     <jee:jndi-lookup id="cursoServiceRemote" jndi-name="java:app/gestion-docente-spring/cursoServiceBean" />
 	<jee:jndi-lookup id="profesorServiceRemote" jndi-name="java:app/gestion-docente-spring/profesorServiceBean" />
-	
+	<jee:jndi-lookup id="clienteServiceRemote" jndi-name="java:app/gestion-docente-spring/clienteServiceBean" />
 	
 	<bean id="profesorServiceEJB" class="com.ipartek.formacion.service.ProfesorServiceEJBImp">
  		<property name="profesorServiceRemote" ref="profesorServiceRemote" />
  	</bean>
 
-	<bean id="cursoServiceImp" class="com.ipartek.formacion.service.CursoServiceImp">
-		<property name="cursoServiceRemote" ref="cursoServiceRemote" />
+	<bean id="clienteServiceEJB" class="com.ipartek.formacion.service.ClienteServiceEJBImp">
+		<property name="clienteServiceRemote" ref="clienteServiceRemote" />
 	</bean>
 
         <!-- la forma de recoger recursos(objetos = DataSource) para el projecto de Spring -->
