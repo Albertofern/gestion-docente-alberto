@@ -21,7 +21,6 @@ import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.NotFound;
 
 @Table(name= "curso")
 @Entity(name= "curso")

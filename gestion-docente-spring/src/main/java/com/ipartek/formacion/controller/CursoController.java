@@ -1,10 +1,20 @@
 package com.ipartek.formacion.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ipartek.formacion.persistence.Curso;
+import com.ipartek.formacion.persistence.Profesor;
 import com.ipartek.formacion.service.interfaces.CursoService;
-import com.ipartek.formacion.service.interfaces.ProfesorService;
+
 import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
 
 @Controller
@@ -28,7 +39,13 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	@Autowired
 	private ProfesorServiceEJB pSe;
 	
-	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAll(Model model){
@@ -62,36 +79,47 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
     public String editarCurso(@PathVariable("id") long id,Model model){
     	Curso cur = cS.getById(id);
     	Curso curso = cS.update(cur);
-    	/* Se le pasa al modelo el curso recien creado.*/
+    	List<Profesor> profesores = pSe.getAll();
+    	//List<Cliente> clientes = cl.getAll();
     	model.addAttribute("curso",curso);
+    	model.addAttribute("listadoProfesores", profesores);
+    	//model.addAttribute("listadoClientes", clientes);
     	/* Se redirecciona el formulario de curso.*/
     	return "cursos/cursoform";
     }
 
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("curso") Curso curso){
-		mav=new ModelAndView("cursos/cursos");
+	public String save(Model model,@ModelAttribute("curso") @Valid Curso curso,BindingResult bindingResult){
 		Curso cur = null;
-
-		try {
-			if(curso.getCodigo()>0){
-				cur = cS.update(curso);
-
+		String destino = " ";
+		if (bindingResult.hasErrors()) {
+			  
+  			logger.trace("curso tiene errores");
+  			destino = "cursos/cursoform";
+			model.addAttribute("listadoProfesores", pSe.getAll());
+			//model.addAttribute("listadoClientes", cl.getAll());
 			} else {
-			
-				cur = cS.create(curso);
-				
-			}
-			mav.addObject("mensaje", "mensaje.ok");
-
-		}catch(Exception e){
-			logger.info(e.getMessage());
-			mav.addObject("mensaje","mensaje.error");
-		}
-		
-		return mav;
-	}
-	
+				destino = "redirect:/cursos";
+				 
+	 			if (curso.getCodigo() > -1) {
+	 				logger.info(curso.toString());
+	 				cur = cS.update(curso);
+	 			} else {
+	 				logger.info(curso.toString());
+	 				cur = cS.create(curso);
+	 			}
+	 			model.addAttribute("curso", cur);
+	 		}
+	 		return destino;
+	 
+	 	}
+		@RequestMapping(value = "/deleteCurso/{codigo}")
+	 	public String deleteCurso(@PathVariable("codigo") long codigo) {
+	 
+	 		cS.delete(codigo);
+	 
+	 		return "redirect:/cursos";
+	 	}
 	
 }
