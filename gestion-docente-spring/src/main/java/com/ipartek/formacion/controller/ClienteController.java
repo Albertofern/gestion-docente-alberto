@@ -32,11 +32,12 @@ public class ClienteController {
 	
 	
 	@Inject
-	private ClienteService cS;
+	private ClienteService cS =null;
 	private static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 	ModelAndView mav = null;
 	
 	// --------------------  Para el validador de SPRING  --------------------------
+	
 	
 	@Resource(name="clienteValidator")
 	private Validator validator = null;
@@ -47,6 +48,7 @@ public class ClienteController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
  		sdf.setLenient(true);
  		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+ 		binder.setValidator(validator);
 	}
 	
 	// --------------------------- METODOS CRUD ------------------------------------

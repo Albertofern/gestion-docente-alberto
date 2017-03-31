@@ -26,7 +26,7 @@ public class ProfesorController {
 	
 	
 	@Inject
-	private ProfesorService pS;
+	private ProfesorService pS =null;
 	private static final Logger logger = LoggerFactory.getLogger(ProfesorController.class);
 	ModelAndView mav = null;
 	
@@ -74,8 +74,14 @@ public class ProfesorController {
 	
 	@RequestMapping(value= "/{id}") // PARA estructurar la URL
 	public ModelAndView getById(@PathVariable("id") int id) { // me parsea el id
-		mav = new ModelAndView("profesores/profesores");
-		mav.addObject("profesor", pS.getById(id)); // falta el requestMaping para que sea procesado
+		Profesor profesor=pS.getById(id);
+		if(profesor!=null){
+			mav = new ModelAndView("profesores/profesores");
+			mav.addObject("profesor", profesor);
+		}else{
+			mav=new ModelAndView("profesores/profesores");
+			mav.addObject("mensaje", "mensaje.profesorNoEncontrado");
+		}
 		return mav;
 	}
 	

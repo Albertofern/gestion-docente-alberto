@@ -38,7 +38,7 @@ public class Profesor implements Serializable {
 	private Date fNacimiento;
 
 	@Transient
-	private List<Curso> cursos;
+	List<Curso> cursos;
 
 	// esta clase es la que tiene varias. onetomany one (la primera) hace la
 	// referencia a la otra tabla

@@ -107,7 +107,7 @@ public class AlumnoValidator implements Validator {
 							"La poblacion tiene que tener una longitud entre 4 y 150 caracteres.");
 		}
 			
-		if (alum.getCodigo() > 50 && !Util.validarCodigoPostal(alum.getCodigoPostal())) {
+		if (alum.getCodigoPostal() > 50 && !Util.validarCodigoPostal(alum.getCodigoPostal())) {
 					errors.rejectValue("codigoPostal", "form.formatoCodigoPostalIncorrecto", new Object[] { codigoPostalTam },
 							"El código postal introducido no es correcto.");
 		}

@@ -85,6 +85,15 @@
 		            </div>
 		            <form:errors cssClass="text-error"  path="cliente"/>   
 				</div>
+				<div class="col-xs-12">
+					<form:label path="alumnos" class="col-xs-2">Alumnos:</form:label>
+					<div class="col-xs-4">
+						<form:select cssClass="form-control" path="alumnos" multiple="true">
+						<form:options items="${listadoAlumnos}" itemValue="codigo" itemLabel="nombre"/>
+						</form:select>
+					</div>
+						<form:errors path="alumnos" class="text-error col-xs-6"/>
+				</div> 
 				<div class="form-group">
 					<div class="col-md-offset-3">
 						<button type="submit" class="btn btn-success">${men}</button>

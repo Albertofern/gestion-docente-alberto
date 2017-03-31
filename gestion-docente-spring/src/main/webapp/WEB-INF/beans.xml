@@ -46,16 +46,25 @@
      </bean> 
        
     <jee:jndi-lookup id="cursoServiceRemote" jndi-name="java:app/gestion-docente-spring/cursoServiceBean" />
-	<jee:jndi-lookup id="profesorServiceRemote" jndi-name="java:app/gestion-docente-spring/profesorServiceBean" />
-	<jee:jndi-lookup id="clienteServiceRemote" jndi-name="java:app/gestion-docente-spring/clienteServiceBean" />
+	<bean id="cursoServiceImp" class="com.ipartek.formacion.service.CursoServiceImp">
+		<property name="cursoServiceRemote" ref="cursoServiceRemote" />
+	</bean>
 	
+	<jee:jndi-lookup id="profesorServiceRemote" jndi-name="java:app/gestion-docente-spring/profesorServiceBean" />
 	<bean id="profesorServiceEJB" class="com.ipartek.formacion.service.ProfesorServiceEJBImp">
  		<property name="profesorServiceRemote" ref="profesorServiceRemote" />
  	</bean>
-
+ 	
+	<jee:jndi-lookup id="clienteServiceRemote" jndi-name="java:app/gestion-docente-spring/clienteServiceBean" />
 	<bean id="clienteServiceEJB" class="com.ipartek.formacion.service.ClienteServiceEJBImp">
 		<property name="clienteServiceRemote" ref="clienteServiceRemote" />
 	</bean>
+		
+	<jee:jndi-lookup id="alumnoServiceRemote" jndi-name="java:app/gestion-docente-spring/alumnoServiceBean" />
+ 	<bean id="alumnoServiceEJB" class="com.ipartek.formacion.service.AlumnoServiceEJBImp">
+		<property name="alumnoServiceRemote" ref="alumnoServiceRemote" />
+	</bean>
+	
 
         <!-- la forma de recoger recursos(objetos = DataSource) para el projecto de Spring -->
         <!--  lo recursos pueden ser: locales, remotos y jndi-lookup -->

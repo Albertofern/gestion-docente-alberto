@@ -11,6 +11,12 @@
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/login.html" access="permitAll" />
         <intercept-url pattern="/cursos*" access="hasRole('ROLE_ADMIN')" />
+       		 <form-login  login-page="/login.html"
+                     username-parameter="userId"
+                     password-parameter="password"
+                     authentication-failure-url="/Access_Denied"
+                     />
+       
         <!-- 
         <form-login login-page="/login.html"  default-target-url="/login" always-use-default-target="true" />
         <logout logout-url="/logout"  invalidate-session="true" logout-success-url="/index.jsp" />

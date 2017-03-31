@@ -6,15 +6,16 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
-
+import com.ipartek.formacion.persistence.Alumno;
 import com.ipartek.formacion.persistence.Curso;
 
 /**
  * Session Bean implementation class CursoServiceBean
  */
-@Stateless(name="cursoServiceBean")
+@Stateless(name="cursoServiceBean")//lo que figura en el name de presistence.xml de jpa para el tag persistence-unit
 public class CursoServiceBean implements CursoServiceRemote {
 
 	@PersistenceContext(unitName = "gestiondocente")
@@ -37,11 +38,11 @@ public class CursoServiceBean implements CursoServiceRemote {
 	@Override
 	public Curso getById(long codigo) {
 		Curso curso = entityManager.find(Curso.class, codigo);
-		//StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
-		//spq.setParameter(1, curso.getCodigo());
-		//spq.setParameter(1, codigo);  //indistintamente
-		//List<Alumno> alumnos = (List<Alumno>)spq.getResultList();
-		//curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
+		StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
+		spq.setParameter(1, curso.getCodigo());
+		spq.setParameter(1, codigo);  //indistintamente
+		List<Alumno> alumnos = (List<Alumno>)spq.getResultList();
+		curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
 		return curso;
 	}
 
@@ -52,7 +53,7 @@ public class CursoServiceBean implements CursoServiceRemote {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
 		try {
-			entityManager.merge(curso);
+			entityManager.persist(curso);
 			/* Se devuevle el curso.*/
 		//	tx.commit();
 		}catch (Exception e){

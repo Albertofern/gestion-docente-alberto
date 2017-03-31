@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 
+
 @Table(name= "curso")
 @Entity(name= "curso")
 @NamedQueries({ @NamedQuery(name = "curso.getAll", query = "SELECT c FROM curso as c") })
@@ -40,8 +42,7 @@ public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // strategy = Como se genera
-													// el valor.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // strategy = Como se genera el valor.	
 	@Column
 	private long codigo;
 	@Column(name = "nombre")
@@ -69,16 +70,16 @@ public class Curso implements Serializable {
 	 * Se enlaza la clase curso detalle usando como join la el atributo curso de
 	 * la clase curso detalle.
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER ,cascade=CascadeType.MERGE)
 	@JoinColumn(name = "cliente_codigo")
 	private Cliente cliente;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER ,cascade=CascadeType.MERGE)
 	@JoinColumn(name = "profesor_codigo")
 	private Profesor profesor;
 
-	//@Transient
-	@ManyToMany
+	@Transient
+	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
 	@JoinTable(name="imparticion", joinColumns={@JoinColumn(name="curso_codigo")},
 			inverseJoinColumns = {@JoinColumn(name="alumno_codigo")})
 	private List<Alumno> alumnos;
@@ -100,12 +101,7 @@ public class Curso implements Serializable {
 	}
 
 	public Curso() {
-		super();
-		this.codigo = CODIGO_NULO;
-		this.identificador="";
-		this.nombre = "";
-		
-		
+		super();	
 	}
 
 	public long getCodigo() {

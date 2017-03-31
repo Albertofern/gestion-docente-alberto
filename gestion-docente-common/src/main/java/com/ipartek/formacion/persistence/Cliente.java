@@ -1,8 +1,8 @@
 package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity(name="cliente")
 @Table(name="cliente")
@@ -24,7 +24,9 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="codigo")
 	private long codigo;
+	@Column(name="nombre")
 	private String nombre;
 	private String email;
 	private String telefono;
@@ -33,9 +35,6 @@ public class Cliente implements Serializable {
 	private Integer codigopostal;
 	private String identificador;
 	private boolean activo;
-
-	@Transient
-	private List<Curso> cursos;
 
 	public Cliente() {
 		super();
@@ -57,20 +56,7 @@ public class Cliente implements Serializable {
 		this.nombre = nombre;
 	}
 
-	/**
-	 * @return the cursos
-	 */
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-
-	/**
-	 * @param cursos
-	 *            the cursos to set
-	 */
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+	
 
 	/**
 	 * @return the email

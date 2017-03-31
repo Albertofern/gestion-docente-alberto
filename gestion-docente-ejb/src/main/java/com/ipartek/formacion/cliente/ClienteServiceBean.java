@@ -21,10 +21,7 @@ public class ClienteServiceBean implements ClienteServiceRemote{
 
 	@PersistenceContext(unitName = "gestiondocente")
 	private EntityManager entityManager;
-	
-	public ClienteServiceBean() {
 
-	}
 	
 	@Override
 	public List<Cliente> getAll() {

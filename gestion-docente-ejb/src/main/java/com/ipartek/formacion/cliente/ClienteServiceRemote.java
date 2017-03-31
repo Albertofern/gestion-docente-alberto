@@ -5,6 +5,8 @@ package com.ipartek.formacion.cliente;
 
 import java.util.List;
 
+import javax.ejb.Remote;
+
 import com.ipartek.formacion.persistence.Cliente;
 
 
@@ -12,6 +14,7 @@ import com.ipartek.formacion.persistence.Cliente;
  * @author Alberto Fernandez
  *
  */
+@Remote
 public interface ClienteServiceRemote {
 
 	public List<Cliente> getAll();

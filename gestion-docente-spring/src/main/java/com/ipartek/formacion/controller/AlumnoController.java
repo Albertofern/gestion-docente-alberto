@@ -32,7 +32,7 @@ import com.ipartek.formacion.service.interfaces.AlumnoService;
 public class AlumnoController {
 	
 	@Inject // es lo mismo que @autowired
-	private AlumnoService aS;
+	private AlumnoService aS =null ;
 	private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class);
 	ModelAndView mav = null;
 	

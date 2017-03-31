@@ -37,6 +37,7 @@
 	
 	<beans:bean id="alumnoValidator" class="com.ipartek.formacion.controller.validator.AlumnoValidator" />
 	<beans:bean id="clienteValidator" class="com.ipartek.formacion.controller.validator.ClienteValidator" />
+	<beans:bean id="cursoValidator" class="com.ipartek.formacion.controller.validator.CursoValidator" />
 
 	
 	<beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
