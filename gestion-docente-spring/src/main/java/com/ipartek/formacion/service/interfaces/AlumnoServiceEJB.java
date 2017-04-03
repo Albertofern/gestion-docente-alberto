@@ -12,6 +12,7 @@ import com.ipartek.formacion.persistence.Alumno;
  * @author Alberto
  *
  */
+
 public interface AlumnoServiceEJB {
 	
 	public List<Alumno> getAll();

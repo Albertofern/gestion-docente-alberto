@@ -5,6 +5,7 @@ import java.util.Date;
 
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -18,7 +19,7 @@ public class Evaluacion implements Serializable {
 	 */
 	private static final long serialVersionUID = 5404111911084872480L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
 	private Date fExamen;
 	private int nota;

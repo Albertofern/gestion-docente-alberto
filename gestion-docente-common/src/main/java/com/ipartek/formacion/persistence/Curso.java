@@ -70,16 +70,16 @@ public class Curso implements Serializable {
 	 * Se enlaza la clase curso detalle usando como join la el atributo curso de
 	 * la clase curso detalle.
 	 */
-	@ManyToOne(fetch = FetchType.EAGER ,cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER,  cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "cliente_codigo")
 	private Cliente cliente;
 
-	@ManyToOne(fetch = FetchType.EAGER ,cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "profesor_codigo")
 	private Profesor profesor;
 
-	@Transient
-	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
+
+	@ManyToMany(fetch=FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name="imparticion", joinColumns={@JoinColumn(name="curso_codigo")},
 			inverseJoinColumns = {@JoinColumn(name="alumno_codigo")})
 	private List<Alumno> alumnos;

@@ -39,7 +39,7 @@
 		</c:forEach>
 	</section>
 </section>
-¡ <!-- Columnas de cabecera de la tabla.  --> <!-- Se comprueba si el listado de cusos asociado al cliente no está vacio. 
+<!-- Columnas de cabecera de la tabla.  --> <!-- Se comprueba si el listado de cusos asociado al cliente no está vacio. 
 						 En tal caso se recorre la lista de cursos sobre el objeto curso.-->
 </main>
 <footer> </footer>

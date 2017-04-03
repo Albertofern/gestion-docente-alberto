@@ -87,7 +87,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 		model.addAttribute("curso",new Curso());
 		model.addAttribute("listadoProfesores",pSe.getAll()); 
 		model.addAttribute("listadoClientes",cSe.getAll()); 
-		model.addAttribute("listadoClientes",aSe.getAll()); 
+		model.addAttribute("listadoAlumnos",aSe.getAll()); 
 		/*
 		mav = new ModelAndView("/cursos/cursoform")
 		Curso curso = new Curso();
@@ -113,8 +113,8 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
  		mav.addObject("listadoProfesores", profesores);
  		List<Cliente> clientes=cSe.getAll();
 		mav.addObject("listadoClientes", clientes);
-		List<Alumno> alumnos = aSe.getAll();
-		mav.addObject("listadoAlumnos", alumnos);
+		//List<Alumno> alumnos = aSe.getAll();
+		mav.addObject("listadoAlumnos", aSe.getAll());
     	return mav;
     }
 

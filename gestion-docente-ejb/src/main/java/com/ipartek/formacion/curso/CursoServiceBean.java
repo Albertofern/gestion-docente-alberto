@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.persistence.Alumno;
 import com.ipartek.formacion.persistence.Curso;
 
@@ -17,6 +19,7 @@ import com.ipartek.formacion.persistence.Curso;
  */
 @Stateless(name="cursoServiceBean")//lo que figura en el name de presistence.xml de jpa para el tag persistence-unit
 public class CursoServiceBean implements CursoServiceRemote {
+	private static final Logger LOGGER = Logger.getLogger(CursoServiceBean.class);
 
 	@PersistenceContext(unitName = "gestiondocente")
 	private EntityManager entityManager;
@@ -38,11 +41,13 @@ public class CursoServiceBean implements CursoServiceRemote {
 	@Override
 	public Curso getById(long codigo) {
 		Curso curso = entityManager.find(Curso.class, codigo);
+		/*
 		StoredProcedureQuery spq = entityManager.createNamedStoredProcedureQuery("curso.getAlumnos");
 		spq.setParameter(1, curso.getCodigo());
-		spq.setParameter(1, codigo);  //indistintamente
+		//spq.setParameter(1, codigo);  //indistintamente
 		List<Alumno> alumnos = (List<Alumno>)spq.getResultList();
 		curso.setAlumnos(alumnos); // lo coge del setter de la clase Curso(common)
+		*/
 		return curso;
 	}
 
@@ -53,12 +58,13 @@ public class CursoServiceBean implements CursoServiceRemote {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
 		try {
-			entityManager.persist(curso);
+			LOGGER.info(curso.toString()+" "+curso.getAlumnos());
+			curso = entityManager.merge(curso);
 			/* Se devuevle el curso.*/
 		//	tx.commit();
 		}catch (Exception e){
-		//	tx.rollback();
-		}	
+			LOGGER.error(e.getMessage());	
+			}	
 		return curso;
 	}
 	
@@ -67,12 +73,11 @@ public class CursoServiceBean implements CursoServiceRemote {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
 		try {
-			entityManager.persist(curso);
+			curso = entityManager.merge(curso);
 			/* Se devuevle el curso.*/
 			//tx.commit();
-			entityManager.flush();
 		}catch (Exception e){
-			//tx.rollback();
+			LOGGER.error(e.getMessage());	
 		}	
 		return curso;
 	}
@@ -86,7 +91,7 @@ public class CursoServiceBean implements CursoServiceRemote {
 			/* Se devuevle el curso.*/
 			//tx.commit();
 		}catch (Exception e){
-			//tx.rollback();
+			LOGGER.error(e.getMessage());	
 		}	
 	}
 
