@@ -34,6 +34,8 @@
          <bean id="clienteDaoImp" class="com.ipartek.formacion.dbms.dao.ClienteDAOImp">
     	<property name="dataSource" ref="mysqlDataSource"/>
     </bean>
+    
+    
     <bean id="messageSource"
       class="org.springframework.context.support.ResourceBundleMessageSource">
        <property name="basenames">

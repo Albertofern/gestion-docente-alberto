@@ -26,4 +26,11 @@ public class AlumnoServiceBean implements AlumnoServiceRemote {
 		return palumnos.getResultList();
 	}
 
+
+	@Override
+	public Alumno getById(long codigo) {
+		Alumno alumno = entityManager.find(Alumno.class, codigo);
+		return alumno;
+	}
+
 }

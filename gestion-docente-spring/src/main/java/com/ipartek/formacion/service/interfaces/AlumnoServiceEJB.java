@@ -16,5 +16,7 @@ public interface AlumnoServiceEJB {
 	
 	public List<Alumno> getAll();
 	
+	public Alumno getById(long codigo);
+	
 	public void setAlumnoServiceRemote(AlumnoServiceRemote alumnoService);
 }

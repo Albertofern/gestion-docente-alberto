@@ -35,4 +35,9 @@ public class AlumnoServiceEJBImp implements AlumnoServiceEJB {
 		
 	}
 
+	@Override
+	public Alumno getById(long codigo) {
+		return alumnoServiceRemote.getById(codigo);
+	}
+
 }

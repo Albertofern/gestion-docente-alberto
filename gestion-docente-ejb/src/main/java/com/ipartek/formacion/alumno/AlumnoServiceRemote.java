@@ -6,8 +6,11 @@ import javax.ejb.Remote;
 
 import com.ipartek.formacion.persistence.Alumno;
 
+
 @Remote
 public interface AlumnoServiceRemote {
 	
 	public List<Alumno> getAll();
+	
+	public Alumno getById(long codigo);
 }
