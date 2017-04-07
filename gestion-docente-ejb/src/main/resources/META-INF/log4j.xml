@@ -15,10 +15,10 @@
 	    <param name="MaxFileSize" value="100KB"/>
 	    <!-- Keep one backup file -->
 	    <param name="MaxBackupIndex" value="1"/>
-	     <param name="file" value="${jboss.server.log.dir}/euskalikea.log" />
+	    <param name="file" value="${jboss.server.log.dir}/euskalikea.log" />
 	    <layout class="org.apache.log4j.PatternLayout"> 
 	      <param name="ConversionPattern" 
-					value="%d{yyyy-MM-dd HH:mm:ss} - %r [%t] %-5p %c %x - %m%n %M" />
+	      			value="%d{yyyy-MM-dd HH:mm:ss} - %r [%t] %-5p %c %x - %m%n %M" />
 	    </layout> 
   	</appender>
 	
@@ -46,7 +46,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
 	

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ipartek.formacion.persistence.Alumno;
+
 import com.ipartek.formacion.persistence.Cliente;
 import com.ipartek.formacion.persistence.Curso;
 import com.ipartek.formacion.persistence.Profesor;

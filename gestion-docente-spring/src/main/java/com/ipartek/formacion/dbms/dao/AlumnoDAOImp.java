@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -36,17 +35,17 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	
 	private Logger logger = LoggerFactory.getLogger(AlumnoDAOImp.class);
 	
-	@Value("${alumno.crear}")
+//	@Value("${alumno.crear}")
 	private String sqlCreate;
-	@Value("${alumno.borrar}")
+	//@Value("${alumno.borrar}")
 	private String sqlDelete;
-	@Value("${alumno.editar}")
+//	@Value("${alumno.editar}")
 	private String sqlUpdate;
-	@Value("${alumno.obtener.todos}")
+	//@Value("${alumno.obtener.todos}")
 	private String sqlReadall;
-	@Value("${alumno.obtener.id}")
+//	@Value("${alumno.obtener.id}")
 	private String sqlReadbyid;
-	@Value("${alumno.obtener.dni}")
+	//@Value("${alumno.obtener.dni}")
 	private String sqlReadbydni;
 	
 	@Autowired

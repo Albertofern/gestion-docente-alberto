@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ipartek.formacion.controller.HomeController;
+
 import com.ipartek.formacion.curso.CursoServiceRemote;
 import com.ipartek.formacion.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
