@@ -1,12 +1,19 @@
 package com.ipartek.formacion.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +29,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.ipartek.formacion.controller.validator.CursoValidator;
+import com.ipartek.formacion.controller.validator.FileValidator;
 import com.ipartek.formacion.persistence.Cliente;
 import com.ipartek.formacion.persistence.Curso;
 import com.ipartek.formacion.persistence.Profesor;
@@ -38,6 +49,9 @@ import com.ipartek.formacion.service.interfaces.ProfesorServiceEJB;
 @RequestMapping("/cursos")    
 public class CursoController { // aqui porcesaremos las peticiones de las vistas
 
+	@Autowired
+	private ServletContext servletContext;
+	
 	private static final Logger logger=LoggerFactory.getLogger(CursoController.class);
 	private ModelAndView mav;
 	
@@ -51,14 +65,20 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	private AlumnoServiceEJB aSe;
 	
 	@Resource(name = "cursoValidator")
- 	Validator validator = null;
+	CursoValidator validator;
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
+	@InitBinder("curso")
+	public void initBinder(WebDataBinder binder, Locale locale) {
+		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+		// SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy")
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 		binder.addValidators(validator);//podemos añadirle más de una validación de spring
+	}
+	@InitBinder("fichero")
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(new FileValidator());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -120,17 +140,37 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public String save(@ModelAttribute(name="curso") @Valid Curso curso,
-						BindingResult bindingResult, ModelMap model){
+	public String save(@Valid @RequestParam("fichero") MultipartFile file,
+						@ModelAttribute(name="curso") @Valid Curso curso,
+						BindingResult bindingResult, ModelMap model, RedirectAttributes redirectMap) throws IOException{
 		String destino = "";
+		//Mensaje mensaje = null;
 		if (bindingResult.hasErrors()) {  
   			logger.trace("curso tiene errores");
 			model.addAttribute("listadoProfesores", pSe.getAll());
 			model.addAttribute("listadoClientes", cSe.getAll());
 			model.addAttribute("listadoAlumnos", aSe.getAll());
+			//mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
+			//String txt = "Los datos de formulario contienen errores";
+			//mensaje.setMsg(txt);
 			destino = "cursos/cursoform";
 		} else {
 			destino = "redirect:/cursos"; 
+			String txt ="";
+			//obtengo el chorro de datos
+			InputStream in = file.getInputStream();
+			// /resources/docs
+			String root = File.separator + "resources" + File.separator + "docs" + File.separator;
+			// ruta absoluta del contexto de la aplicacion
+			String ruta = servletContext.getRealPath(root);
+			// Crearme el archivo fisico que no tiene nada con un 
+			File destination = new File(ruta + file.getOriginalFilename());
+			// Se copia el chorro de bits al archivo fisico
+			FileUtils.copyInputStreamToFile(in, destination);
+			//Guardo dentro del Curso --> Temario la ruta del fichero
+			curso.setTemario(file.getOriginalFilename());
+			logger.info(ruta);
+			logger.info(file.getOriginalFilename());
 	 		if (curso.getCodigo() >  Curso.CODIGO_NULO) {
 	 			logger.info(curso.toString());
 	 			cS.update(curso);
@@ -144,7 +184,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	
 	
 	@RequestMapping(value = "/deleteCurso/{codigocurso}")
-	public String deleteCurso(@PathVariable("codigocurso") long id) {
+	public String deleteCurso(@PathVariable("codigocurso") long id,Model model) {
 
 	return "redirect:/cursos";
 	}

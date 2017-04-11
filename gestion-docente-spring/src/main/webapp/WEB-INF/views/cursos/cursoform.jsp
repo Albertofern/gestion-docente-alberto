@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <spring:message var="men" code="form.crear" text="nombre" />
 <c:if test="${curso.codigo > 0}" >
@@ -19,7 +20,7 @@
 		<c:url var="cancelUrl" value="/cursos"/>
 		<header class="col-xs-12 col-md-10 col-md-offset-2"><h2>${seccion}</h2></header>
 		<div class="container-fluid">
-			<form:form action="${sendUrl}" method="post" cssClass="form-horizontal" modelAttribute="curso">
+			<form:form action="${sendUrl}" enctype="multiporrt/form-data" method="post" cssClass="form-horizontal" modelAttribute="curso">
 				<c:if test="${!empty curso}">
 					<form:hidden path="codigo"/>
 				</c:if>
@@ -64,7 +65,22 @@
 							<form:input path="precio" cssClass="form-control" cssErrorClass="text-danger"/>
 						</div>
 						<form:errors path="precio" cssClass="text-danger col-xs-6"></form:errors>
-				</div>			
+				</div>
+				<div class="form-group">
+             		<form:label path="temario" cssClass="control-label  col-xs-2">Temario:</form:label>
+             		<div class="col-xs-4">
+             			<c:set var="string" value="${curso.temario}" />
+    						<c:set var="names" value="${fn:split(string, '/')}" />
+    						<c:set var="len" value="${fn:length(numList)}"/>
+    						<c:set var="value" value="${names[len-1]}" />
+    						${value}
+ 						<form:input value="${value}" path="temario" disabled="disabled" cssClass="form-control" cssErrorClass="text-danger"/>
+ 					</div>
+ 					<form:errors path="temario" cssClass="text-danger col-xs-6"></form:errors>
+ 					 <label class="btn btn-primary">
+                 		Examinar&hellip; <input type="file" id="fichero" name="fichero" style="display: none;"><!-- name del RequestParam del controller save -->
+            		</label>
+            	</div>				
 				<div class="form-group">
 					<form:label cssClass="control-label col-xs-2" path="profesor">Profesor:</form:label>
 					<div class="col-xs-4">
