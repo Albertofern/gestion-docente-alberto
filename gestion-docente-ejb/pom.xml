@@ -7,9 +7,8 @@
   </parent>
   <artifactId>gestion-docente-ejb</artifactId>
   <packaging>ejb</packaging>
-   <properties>
-   		<log4j.version>1.2.15</log4j.version>
-   
+  <properties>
+  		<log4j.version>1.2.15</log4j.version>
         <!-- plugin versions -->
         <version.compiler.plugin>2.5.1</version.compiler.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
@@ -20,62 +19,12 @@
         <ejb-api.version>3.0</ejb-api.version>
         <!-- JPA Project -->
         <project.version>1.0.0-SNAPSHOT</project.version>
-        <artifact.jar>gestion-docente-common</artifact.jar>
-        <!-- apache CFX -->
+  		<artifact.jar>gestion-docente-common</artifact.jar>
+  		 <!-- apache CFX -->
         <cxf.version>3.1.6</cxf.version>
     </properties>
       <dependencies>
-        <dependency>
-            <groupId>com.ipartek.formacion</groupId>
-            <artifactId>${artifact.jar}</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
-            <version>1.0.0.Final</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
-            <version>1.0.2.Final</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-          <groupId>javax.ejb</groupId>
-          <artifactId>ejb-api</artifactId>
-          <version>${ejb-api.version}</version>
-          <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        
-        <!-- APACHE CXF -->
-         <dependency>
-              <groupId>org.apache.cxf</groupId>
-              <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-              <version>${cxf.version}</version>
-              <scope>provided</scope>
-         </dependency>
-          <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-            <scope>provided</scope>
-        </dependency>
-     <dependency>
+       <dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
@@ -99,6 +48,57 @@
 			</exclusions>
 			<scope>provided</scope>
 		</dependency>
+      	<dependency>
+	  		<groupId>com.ipartek.formacion</groupId>
+	  		<artifactId>${artifact.jar}</artifactId>
+	  		<version>${project.version}</version>
+	  		<scope>provided</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <version>1.0.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <version>1.0.2.Final</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+		  <groupId>javax.ejb</groupId>
+		  <artifactId>ejb-api</artifactId>
+		  <version>${ejb-api.version}</version>
+		  <scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>persistence-api</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
+		
+		<!-- APACHE CXF -->
+         <dependency>
+              <groupId>org.apache.cxf</groupId>
+              <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+              <version>${cxf.version}</version>
+              <scope>provided</scope>
+         </dependency>
+          <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+            <scope>provided</scope>
+        </dependency>
+		
     </dependencies>
       <build>
         <!-- Set the name of the deployment -->

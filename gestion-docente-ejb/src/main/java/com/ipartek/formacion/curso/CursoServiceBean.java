@@ -10,14 +10,18 @@ import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 
-
 import com.ipartek.formacion.persistence.Curso;
+
+
+
+
 
 /**
  * Session Bean implementation class CursoServiceBean
  */
 @Stateless(name="cursoServiceBean")//lo que figura en el name de presistence.xml de jpa para el tag persistence-unit
 public class CursoServiceBean implements CursoServiceRemote {
+	
 	private static final Logger LOGGER = Logger.getLogger(CursoServiceBean.class);
 
 	@PersistenceContext(unitName = "gestiondocente")
@@ -57,12 +61,12 @@ public class CursoServiceBean implements CursoServiceRemote {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
 		try {
-			LOGGER.info(curso.toString()+" "+curso.getAlumnos());
+		//	LOGGER.info(curso.toString()+" "+curso.getAlumnos());
 			curso = entityManager.merge(curso);
 			/* Se devuevle el curso.*/
 		//	tx.commit();
 		}catch (Exception e){
-			LOGGER.error(e.getMessage());	
+			//LOGGER.error(e.getMessage());	
 			}	
 		return curso;
 	}
@@ -76,7 +80,7 @@ public class CursoServiceBean implements CursoServiceRemote {
 			/* Se devuevle el curso.*/
 			//tx.commit();
 		}catch (Exception e){
-			LOGGER.error(e.getMessage());	
+		//	LOGGER.error(e.getMessage());	
 		}	
 		return curso;
 	}
