@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -77,7 +76,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 		binder.addValidators(validator);//podemos añadirle más de una validación de spring
 	}
 	@InitBinder("fichero")
-	public void initBinder(WebDataBinder binder) {
+	public void initBinderfichero(WebDataBinder binder) {
 		binder.addValidators(new FileValidator());
 	}
 	
@@ -140,9 +139,8 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public String save(@Valid @RequestParam("fichero") MultipartFile file,
-						@ModelAttribute(name="curso") @Valid Curso curso,
-						BindingResult bindingResult, ModelMap model, RedirectAttributes redirectMap) throws IOException{
+	public String saveCurso(@Validated @RequestParam("fichero") MultipartFile  file,@ModelAttribute(name = "curso") @Valid Curso curso, 
+			BindingResult bindingResult, ModelMap model) throws IOException{
 		String destino = "";
 		//Mensaje mensaje = null;
 		if (bindingResult.hasErrors()) {  

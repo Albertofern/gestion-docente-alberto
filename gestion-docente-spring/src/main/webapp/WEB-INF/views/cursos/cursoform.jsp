@@ -20,7 +20,7 @@
 		<c:url var="cancelUrl" value="/cursos"/>
 		<header class="col-xs-12 col-md-10 col-md-offset-2"><h2>${seccion}</h2></header>
 		<div class="container-fluid">
-			<form:form action="${sendUrl}" enctype="multiporrt/form-data" method="post" cssClass="form-horizontal" modelAttribute="curso">
+			<form:form action="${sendUrl}" enctype="multiporrt/form-data" method="post" cssClass="form-horizontal" modelAttribute="curso" enctype="multipart/form-data">
 				<c:if test="${!empty curso}">
 					<form:hidden path="codigo"/>
 				</c:if>
