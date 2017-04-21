@@ -104,4 +104,13 @@
 				</li>
 			</ul>
 		</div>
+	<div class="container">
+        <c:if test="${not empty mensaje}">
+            <div class="${mensaje.type.styles}">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                
+                 <strong>${mensaje.msg}</strong> 
+            </div>
+        </c:if>
+    </div>
 	</header> 

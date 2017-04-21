@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -33,6 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ipartek.formacion.controller.pojo.Mensaje;
+import com.ipartek.formacion.controller.pojo.MensajeType;
 import com.ipartek.formacion.controller.validator.CursoValidator;
 import com.ipartek.formacion.controller.validator.FileValidator;
 import com.ipartek.formacion.persistence.Cliente;
@@ -140,22 +143,31 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public String saveCurso(@Validated @RequestParam("fichero") MultipartFile  file,@ModelAttribute(name = "curso") @Valid Curso curso, 
-			BindingResult bindingResult, ModelMap model) throws IOException{
+			BindingResult bindingResult, ModelMap model, RedirectAttributes redirectMap) throws IOException{
 		String destino = "";
-		//Mensaje mensaje = null;
+		String txt = "";
+		Mensaje mensaje = null;
+		logger.info(curso.toString());
 		if (bindingResult.hasErrors()) {  
   			logger.trace("curso tiene errores");
-			model.addAttribute("listadoProfesores", pSe.getAll());
+  			logger.info("curso tiene errores" + bindingResult.getErrorCount());
+  			List<ObjectError> errors = bindingResult.getAllErrors();
+  			for (ObjectError error : errors) {
+  				logger.info(error.toString() + error.getDefaultMessage());
+  				logger.info(error.getObjectName());
+			}
+  			model.addAttribute("listadoProfesores", pSe.getAll());
 			model.addAttribute("listadoClientes", cSe.getAll());
 			model.addAttribute("listadoAlumnos", aSe.getAll());
-			//mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
-			//String txt = "Los datos de formulario contienen errores";
+			
+			mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
+			txt = "Los datos de formulario contienen errores";
 			//mensaje.setMsg(txt);
 			destino = "cursos/cursoform";
 		} else {
 			destino = "redirect:/cursos"; 
-			String txt ="";
-			//obtengo el chorro de datos
+			
+			/*//obtengo el chorro de datos
 			InputStream in = file.getInputStream();
 			// /resources/docs
 			String root = File.separator + "resources" + File.separator + "docs" + File.separator;
@@ -175,9 +187,75 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	 		} else {
 	 			logger.info(curso.toString());
 	 			cS.create(curso);
-	 		} 	
+	 		} */
+			
+			String fileName = uploadFile(file);
+
+			curso.setTemario(fileName);
+			if (curso.getCodigo() > Curso.CODIGO_NULO) {
+				logger.info(curso.toString());
+				logger.info(curso.getProfesor().toString());
+				//logger.info(curso.getImparticiones().toString());
+
+				try {
+					cS.update(curso);
+					txt = "El curso se ha actualizado correctamente.";
+					mensaje = new Mensaje(MensajeType.MSG_TYPE_SUCCESS);
+				} catch (Exception e) {
+					logger.info("Se ha lanzadado una excepcion update. " + e.toString());
+					mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
+					txt = "Ha habido problemas en la actualización.";
+					// destino = "cursos/cursoform";
+				}
+
+			} else {
+				logger.info(curso.toString());
+				logger.info(curso.getProfesor().toString());
+				// LOGGER.info(curso.getImparticiones().toString());
+				try {
+					cS.create(curso);
+					txt = "El curso se ha creado correctamente.";
+					mensaje = new Mensaje(MensajeType.MSG_TYPE_SUCCESS);
+				} catch (Exception e) {
+					logger.info("Se ha lanzadado una excepcion create. " + e.toString());
+					mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
+					txt = "Ha habido problemas en la creación del curso.";
+					// destino = "cursos/cursoform";
+				}
+			}
+			
+			
+			
+	 		mensaje.setMsg(txt);
+	 		
+	 		redirectMap.addFlashAttribute("mensaje", mensaje);
 	 	}
 	 	return destino;
+	}
+	
+	private String uploadFile(MultipartFile file) throws IOException {
+		String fileName = null;
+		// obtengo el chorro de datos
+		InputStream in = file.getInputStream();
+		// /resources/docs/
+
+		String root = File.separator + "resources" + File.separator + "docs" + File.separator;
+		// ruta absoluta del contexto de la aplicación
+		String ruta = servletContext.getRealPath(root);
+
+		// crearme el archivo fisico que no tiene nada con un
+		File destination = new File(ruta + File.separator + file.getOriginalFilename());
+		if (!destination.isDirectory()) {
+			// se copia el chorro de bits al archivo fisico
+			FileUtils.copyInputStreamToFile(in, destination);
+			logger.info(destination.getAbsolutePath());
+
+			logger.info(ruta + File.separator + file.getOriginalFilename());
+			// guardo dentro de Curso --> Temario la ruta del fichero
+
+			fileName = file.getOriginalFilename();
+		}
+		return fileName;
 	}
 	
 	

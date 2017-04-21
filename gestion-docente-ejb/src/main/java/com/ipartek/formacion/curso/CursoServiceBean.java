@@ -60,14 +60,14 @@ public class CursoServiceBean implements CursoServiceRemote {
 	public Curso update(Curso curso) {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
-		try {
+		//try {
 		//	LOGGER.info(curso.toString()+" "+curso.getAlumnos());
 			curso = entityManager.merge(curso);
 			/* Se devuevle el curso.*/
 		//	tx.commit();
-		}catch (Exception e){
+		//}catch (Exception e){
 			//LOGGER.error(e.getMessage());	
-			}	
+		//	}	
 		return curso;
 	}
 	
@@ -75,13 +75,13 @@ public class CursoServiceBean implements CursoServiceRemote {
 	public Curso create(Curso curso) {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
-		try {
+		//try {
 			curso = entityManager.merge(curso);
 			/* Se devuevle el curso.*/
 			//tx.commit();
-		}catch (Exception e){
+		//}catch (Exception e){
 		//	LOGGER.error(e.getMessage());	
-		}	
+		//}	
 		return curso;
 	}
 	
@@ -89,13 +89,13 @@ public class CursoServiceBean implements CursoServiceRemote {
 	public void delete(long codigo) {
 		//EntityTransaction tx = entityManager.getTransaction(); 
 		//tx.begin();
-		try {
+		//try {
 			entityManager.remove(entityManager.find(Curso.class, codigo));
 			/* Se devuevle el curso.*/
 			//tx.commit();
-		}catch (Exception e){
-			LOGGER.error(e.getMessage());	
-		}	
+		//}catch (Exception e){
+		//	LOGGER.error(e.getMessage());	
+		//}	
 	}
 
 

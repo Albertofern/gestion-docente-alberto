@@ -103,7 +103,7 @@ public class AlumnoServiceTest {
 		}
 		
 		@Test
-		public void getBiIdTest(){
+		public void getByIdTest(){
 			for(int i=0; i<codigos.length; i++){
 				Alumno alum = aS.getById(codigos[i]);
 				assertNotNull("El alumno tiene que existir. El alumno con codigo " 
