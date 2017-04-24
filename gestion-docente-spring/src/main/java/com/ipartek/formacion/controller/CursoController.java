@@ -86,13 +86,13 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAll(Model model){
 		model.addAttribute("listadoCursos", cS.getAll());
-		return "cursos/cursos";
+		return "cursos";
 	}
 	
 	@RequestMapping(value="/{codigo}")
 	public String getById(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("curso", cS.getById(codigo));
-		return "cursos/curso";
+		return "cursodetalle";
 	}
 	
 	// funcionalidades
@@ -123,12 +123,12 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 		mav.addObject("listadoAlumnos", alumnos);
  		return mav;
 		*/
- 		return "cursos/cursoform";
+ 		return "cursoform";
 	}
 	
     @RequestMapping(value ="/editCurso/{codigocurso}", method= RequestMethod.GET)
     public ModelAndView editarCurso(@PathVariable("codigocurso") long codigocurso){
-    	mav = new ModelAndView("/cursos/cursoform");
+    	mav = new ModelAndView("cursoform");
  		Curso curso = cS.getById(codigocurso);
  		mav.addObject("curso", curso);
  		List<Profesor> profesores = pSe.getAll();
@@ -163,7 +163,7 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 			mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
 			txt = "Los datos de formulario contienen errores";
 			//mensaje.setMsg(txt);
-			destino = "cursos/cursoform";
+			destino = "cursoform";
 		} else {
 			destino = "redirect:/cursos"; 
 			
@@ -207,7 +207,6 @@ public class CursoController { // aqui porcesaremos las peticiones de las vistas
 					txt = "Ha habido problemas en la actualización.";
 					// destino = "cursos/cursoform";
 				}
-
 			} else {
 				logger.info(curso.toString());
 				logger.info(curso.getProfesor().toString());

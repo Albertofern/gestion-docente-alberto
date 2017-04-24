@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -10,7 +8,6 @@
 	</c:if> 
 <spring:message var="seccion" code="alumnos.titulo" text="alumno" />
 <c:set scope="request" var="seccion" value="${men} ${seccion}"/>
-<jsp:include page="../includes/header.jsp" />
 <main>
 	<!-- @ModelAttribute("alumno") de AlumnoController -->
 	<form:form action="save" method="post" cssClass="" modelAttribute="alumno">
@@ -50,12 +47,12 @@
 			<form:errors path="fNacimiento" />
 		</div>
 		<div>
-			<form:label path="direccion">DirecciÃ³n:</form:label>
+			<form:label path="direccion">Dirección:</form:label>
 			<form:input path="direccion"/>
 			<form:errors path="direccion" />
 		</div>
 		<div>
-			<form:label path="poblacion">PoblaciÃ³n:</form:label>
+			<form:label path="poblacion">Población:</form:label>
 			<form:input path="poblacion"/>
 			<form:errors path="poblacion" />
 		</div>
@@ -73,8 +70,3 @@
 	
 		<input type="submit" value="${men}">
 	</form:form>
-</main>
-<footer>
-</footer>
-</body>
-</html>

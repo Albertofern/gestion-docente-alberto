@@ -10,7 +10,6 @@
 </c:if>   
 <spring:message var="seccion" code="cliente.titulo" text="cliente" />
 <c:set scope="request" var="seccion" value="${men} ${seccion}"/>
-<jsp:include page="../includes/header.jsp" />
 <main>
 	<form:form action="save" method="post" modelAttribute="cliente">
 		<c:if test="${!empty cliente}">

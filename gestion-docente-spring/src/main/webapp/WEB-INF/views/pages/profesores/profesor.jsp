@@ -9,7 +9,6 @@
 </c:if>   
 <spring:message var="seccion" code="profesores.titulo" text="Profesor" />
 <c:set scope="request" var="seccion" value="${men} ${seccion}"/>
-<jsp:include page="../includes/header.jsp" />
 <main>
 	<form:form action="save" method="post" modelAttribute="profesor">
 			<form:errors path=""/>

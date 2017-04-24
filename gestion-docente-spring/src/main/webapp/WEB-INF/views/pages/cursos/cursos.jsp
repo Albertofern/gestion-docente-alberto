@@ -1,11 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<c:set scope="request" var="seccion" value="Listado de Cursos"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="../includes/header.jsp" />
-<main class="container-fluid">
 	<section class="row">
  		<header class="col-xs-12"><h2>Listado Cursos</h2></header>
  		<div class="col-xs-12">
@@ -48,6 +43,3 @@
 			</c:choose>
 		</div>
 	</section>
-</main>
-<footer>
-</footer>

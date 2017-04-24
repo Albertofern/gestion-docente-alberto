@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+ 
+<tiles-definitions>  
+  
+   <!-- Base Definition -->
+   <definition name="base-definition"
+       template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/tiles/templates/defaultHeader.jsp" />  
+       <!-- 
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/templates/defaultMenu.jsp" />  
+       -->
+       <!--  -->
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/defaultFooter.jsp" />  
+   </definition>  
+  
+   <!-- Home Page -->
+   <definition name="home" extends="base-definition">  
+       <put-attribute name="title" value="home.titulo" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
+   </definition>
+   
+   <!-- Login -->
+   <definition name="login" extends="base-definition">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
+   </definition>  
+ 
+    <!-- Page cursos -->
+   <definition name="cursos" extends="base-definition">  
+       <put-attribute name="title" value="listado de Cursos" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/cursos/cursos.jsp" />  
+   </definition>
+   
+   <!-- Page cursoform -->
+   <definition name="cursoform" extends="base-definition">  
+       <put-attribute name="title" value="formulario del curso" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/cursos/cursoform.jsp" />  
+   </definition>
+   
+      <!-- Page curso -->
+   <definition name="cursodetalle" extends="base-definition">  
+       <put-attribute name="title" value="detalle del curso" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/cursos/curso.jsp" />  
+   </definition>
+   
+   <!-- Page alumnos -->
+   <definition name="alumnos" extends="base-definition">  
+       <put-attribute name="title" value="listado de Alumnos" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/alumnos/alumno.jsp" />  
+   </definition>
+   
+   <!-- Page informe -->
+   <definition name="alumnoform" extends="base-definition">  
+       <put-attribute name="title" value="informe del alumno" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages//alumnos/informe.jsp" />  
+   </definition>
+   
+      <!-- Page alumno -->
+   <definition name="alumnodetalle" extends="base-definition">  
+       <put-attribute name="title" value="detalle del alumno" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/alumnos/alumnos.jsp" />  
+   </definition>
+   
+   
+ 
+ 
+   <!-- Product Page -->
+   <definition name="products" extends="base-definition">  
+       <put-attribute name="title" value="Products" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/products.jsp" />  
+   </definition>  
+       
+   <!-- Contact-us Page -->
+   <definition name="contactus" extends="base-definition">  
+       <put-attribute name="title" value="Contact Us" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/contactus.jsp" />  
+   </definition>  
+  
+</tiles-definitions>

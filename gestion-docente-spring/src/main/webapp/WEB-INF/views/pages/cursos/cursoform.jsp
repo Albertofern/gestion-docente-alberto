@@ -1,19 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-
-<spring:message var="men" code="form.crear" text="nombre" />
-<c:if test="${curso.codigo > 0}" >
-	<spring:message var="men"  code="form.editar" text="nombre" />
-</c:if> 
-<c:set scope="request" var="seccion" value="Curso"/>
-<c:set scope="request" var="seccion" value="${men} ${seccion}"/>
-<jsp:include page="../includes/header.jsp" />
-<main class="container-fluid">
 	<section class="row">
 		<c:url var="sendUrl" value="/cursos/save"/>
 
@@ -53,7 +42,7 @@
 						<form:errors path="ffin" cssClass="text-danger col-xs-6"></form:errors>
 				</div>
 				<div class="form-group">
-						<form:label path="nhoras" cssClass="control-label  col-xs-2"><spring:message code="form.nHoras" text="NÃºm. Horas"/></form:label>
+						<form:label path="nhoras" cssClass="control-label  col-xs-2"><spring:message code="form.nHoras" text="Núm. Horas"/></form:label>
 						<div class="col-xs-4">
 							<form:input path="nhoras" cssClass="form-control" cssErrorClass="text-danger"/>
 						</div>
@@ -120,4 +109,3 @@
 			</form:form>
 		</div>
 	</section>
-</main>

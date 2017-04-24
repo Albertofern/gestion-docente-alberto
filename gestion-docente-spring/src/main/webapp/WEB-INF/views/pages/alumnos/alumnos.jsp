@@ -3,11 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>  
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<spring:message var="seccion" code="alumnos.titulo" />
 
-<c:set scope="request" var="seccion" value="${seccion}"/>
-
-<jsp:include page="../includes/header.jsp" />
 <main class="container-fluid">
 	<section class="row">
 		<header class="col-xs-12"><h2 class="text-center text-capitalize">Lista de Alumnos</h2></header>
@@ -65,10 +61,5 @@
 		</div>	
 	</section>
 </main>
-
-<footer>
-	Ipartek S. Coop.
-</footer>
-
 </body>
 </html>
