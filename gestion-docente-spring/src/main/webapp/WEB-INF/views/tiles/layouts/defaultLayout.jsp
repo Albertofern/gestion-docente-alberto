@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>
 	<spring:message text="no encuentra la properti (hardcodeada)" scope="page" code="aplicacion.nombre" />
-		 - <tiles:getAsString name="title" />
+		 - <c:set var="titulo"><tiles:getAsString name="title" /></c:set> <!-- tenemos que hacerlo de esta manera para usar el message -->
 </title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
