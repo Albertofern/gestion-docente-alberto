@@ -56,7 +56,7 @@ public class ClienteController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
-		mav = new ModelAndView("clientes/clientes");
+		mav = new ModelAndView("clientes");
 		List<Cliente> clientes = cS.getAll();
 		mav.addObject("listadoClientes", clientes);
 		return mav;
@@ -65,12 +65,12 @@ public class ClienteController {
 	@RequestMapping(value = "/addCliente")
 	public String addCliente(Model model){
 		model.addAttribute("cliente", new Cliente());
-		return "clientes/cliente";
+		return "clienteform";
 	}
 	
 	@RequestMapping(value= "/{id}") // PARA estructurar la URL
 	public ModelAndView getById(@PathVariable("id") int id) { // me parsea el id
-		mav = new ModelAndView("clientes/cliente");
+		mav = new ModelAndView("clienteform");
 		mav.addObject("cliente", cS.getById(id)); 
 		return mav;
 	}
@@ -89,7 +89,7 @@ public class ClienteController {
 		
 		if (bindingResult.hasErrors()){
 			logger.info("cliente tiene errores");
-			destino = "/clientes/cliente";
+			destino = "clienteform";
 		} else {
 			destino = "redirect:/alumnos"; 
 			if(cliente.getCodigo() > Cliente.CODIGO_NULO){
@@ -112,7 +112,7 @@ public class ClienteController {
 		Cliente cliente = cS.getInforme(codigo);
 		logger.info(cliente.toString());
 		model.addAttribute("cliente", cliente);
-		return "/clientes/informe";
+		return "clientedetalle";
 
 	}
 	

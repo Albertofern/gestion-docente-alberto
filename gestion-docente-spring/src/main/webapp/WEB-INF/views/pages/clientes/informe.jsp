@@ -1,9 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>    
-<spring:message var="seccion" code="clientes.informe.titulo" />
-<c:set scope="request" var="seccion" value="${seccion}"/>
 <c:choose>
 	<c:when test="${not empty cliente}">
 		<div>
@@ -41,5 +37,3 @@
 		No se han encontrador datos del cliente
 		</c:otherwise>
 </c:choose>
-</body>
-</html>

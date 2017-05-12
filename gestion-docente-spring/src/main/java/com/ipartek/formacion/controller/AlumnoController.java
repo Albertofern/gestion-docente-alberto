@@ -55,7 +55,7 @@ public class AlumnoController {
 	
 	@RequestMapping(method =RequestMethod.GET)
 	public ModelAndView getAll() {
-		mav =new ModelAndView("alumnos/alumnos");
+		mav =new ModelAndView("alumnos");
 		//cargar la lista de alumnos
 		List<Alumno> alumnos = aS.getAll(); // He creado el CRUD en la CAPA Service
 		//engancharla al modelandview
@@ -71,7 +71,7 @@ public class AlumnoController {
 		
 		if (bindingResult.hasErrors()){
 			logger.info("alumno tiene errores");
-			destino = "alumnos/alumno";
+			destino = "alumnos";
 		} else {
 			destino = "redirect:/alumnos"; // Que hace esto? Hace una redireccion a "public ModelAndView getAll()"  LO RECICLA el codigo de getAll()
 			if(alumno.getCodigo() > Alumno.CODIGO_NULO){
@@ -89,7 +89,7 @@ public class AlumnoController {
 	
 	@RequestMapping(value= "/{id}") // PARA estructurar la URL
 	public ModelAndView getById(@PathVariable("id") int id) { // me parsea el id
-		mav = new ModelAndView("alumnos/alumno");
+		mav = new ModelAndView("alumnoform");
 		mav.addObject("alumno", aS.getById(id)); // falta el requestMaping para que sea procesado
 		return mav;
 	}
@@ -107,13 +107,13 @@ public class AlumnoController {
 	@RequestMapping(value = "/addAlumno")
 	public String addAlumno(Model model){
 		model.addAttribute("alumno", new Alumno());  //es identico al getbyid, este mandara un objeto en blanco no nulo y el getbyid uno objeto rellenado.
-		return "alumnos/alumno";
+		return "alumnoform";
 	}
 	@RequestMapping(value = "/getInforme/{codigo}")
 	public String getInforme(Model model, @PathVariable("codigo") int codigo) {
 		Alumno alumno = aS.getInforme(codigo);
 		model.addAttribute("alumno", alumno);
-		return "/alumnos/informe";
+		return "alumnodetalle";
 
 	}
 	

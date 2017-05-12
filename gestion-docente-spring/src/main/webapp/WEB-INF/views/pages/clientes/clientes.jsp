@@ -1,10 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<spring:message var="seccion" code="clientes.titulo"/>
-<c:set scope="request" var="seccion" value="${seccion}"/>
- <main>
 	<a href="<c:url value='/clientes/addCliente'/>">Crear Cliente</a>
 	<table>
 		<thead>
@@ -12,7 +7,7 @@
 				<th>Nombre</th>
 				<th>Email</th>
 				<th>Identificador</th>
-				<th>TÃ©lefono</th>
+				<th>Télefono</th>
 			</tr>	
 		</thead>
 	<tbody>	
@@ -42,6 +37,3 @@
 	</c:choose>
 	</tbody>
 	</table>
-</main>
-</body>
-</html>

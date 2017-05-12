@@ -1,10 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>  
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<main class="container-fluid">
 	<section class="row">
 		<header class="col-xs-12"><h2 class="text-center text-capitalize">Lista de Alumnos</h2></header>
 		<a class="btn btn-info" href="<c:url value='/alumnos/addAlumno'/>">Crear Alumno</a>
@@ -60,6 +56,3 @@
 			</c:choose>		
 		</div>	
 	</section>
-</main>
-</body>
-</html>

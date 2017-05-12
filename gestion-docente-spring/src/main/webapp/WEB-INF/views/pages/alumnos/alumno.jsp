@@ -1,14 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-		<!-- BOTON Crear//Editar formulario -->
-<c:set var="men" value="Crear" />
-	<c:if test="${alumno.codigo > 0}" >
-		<spring:message var="men"  code="form.editar" text="nombre" />
-	</c:if> 
-<spring:message var="seccion" code="alumnos.titulo" text="alumno" />
-<c:set scope="request" var="seccion" value="${men} ${seccion}"/>
-<main>
 	<!-- @ModelAttribute("alumno") de AlumnoController -->
 	<form:form action="save" method="post" cssClass="" modelAttribute="alumno">
 		<c:if test="${!empty alumno}">

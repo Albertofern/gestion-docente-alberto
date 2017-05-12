@@ -18,9 +18,9 @@
   
    <!-- Home Page -->
    <definition name="home" extends="base-definition">  
-       <put-attribute name="title" value="home.titulo" />  
+       <put-attribute name="title" value="Hola" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
-   </definition>
+   </definition>  
    
    <!-- Login -->
    <definition name="login" extends="base-definition">  
@@ -28,49 +28,96 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
    </definition>  
  
-    <!-- Page cursos -->
+    <!-- Page cursos.jsp -->
    <definition name="cursos" extends="base-definition">  
        <put-attribute name="title" value="listado de Cursos" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/cursos/cursos.jsp" />  
    </definition>
    
-   <!-- Page cursoform -->
+   <!-- Page cursoform.jsp -->
    <definition name="cursoform" extends="base-definition">  
        <put-attribute name="title" value="formulario del curso" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/cursos/cursoform.jsp" />  
    </definition>
    
-      <!-- Page curso -->
+      <!-- Page curso.jsp -->
    <definition name="cursodetalle" extends="base-definition">  
        <put-attribute name="title" value="detalle del curso" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/cursos/curso.jsp" />  
    </definition>
    
-   <!-- Page alumnos -->
-   <definition name="alumnos" extends="base-definition">  
-       <put-attribute name="title" value="listado de Alumnos" />  
+   <!-- Page alumnos.jsp -->
+   <definition name="alumnoform" extends="base-definition">  
+       <put-attribute name="title" value="formulario del Alumno" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/alumnos/alumno.jsp" />  
    </definition>
    
-   <!-- Page informe -->
-   <definition name="alumnoform" extends="base-definition">  
-       <put-attribute name="title" value="informe del alumno" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages//alumnos/informe.jsp" />  
+   <!-- Page informe.jsp -->
+   <definition name="alumnodetalle" extends="base-definition">  
+       <put-attribute name="title" value="informe del Alumno" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/alumnos/informe.jsp" />  
    </definition>
    
-      <!-- Page alumno -->
-   <definition name="alumnodetalle" extends="base-definition">  
-       <put-attribute name="title" value="detalle del alumno" />  
+      <!-- Page alumno.jsp -->
+   <definition name="alumnos" extends="base-definition">  
+       <put-attribute name="title" value="listado de Alumnos" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/alumnos/alumnos.jsp" />  
    </definition>
    
+   <!-- Page cliente.jsp -->
+   <definition name="clienteform" extends="base-definition">  
+       <put-attribute name="title" value="formulario de Clientes" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/clientes/cliente.jsp" />  
+   </definition>
    
+   <!-- Page clientes.jsp -->
+   <definition name="clientes" extends="base-definition">  
+       <put-attribute name="title" value="listado del clientes" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/clientes/clientes.jsp" />  
+   </definition>
+   
+      <!-- Page informe.jsp -->
+   <definition name="clientedetalle" extends="base-definition">  
+       <put-attribute name="title" value="informe del Clientes" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/alumnos/informe.jsp" />  
+   </definition>
+   
+   
+   <!-- Page profesor.jsp -->
+   <definition name="profesorform" extends="base-definition">  
+       <put-attribute name="title" value="formulario de profesor" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/profesores/profesor.jsp" />  
+   </definition>
+   
+   <!-- Page profesores.jsp -->
+   <definition name="profesores" extends="base-definition">  
+       <put-attribute name="title" value="listado de profesores" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/profesores/profesores.jsp" />  
+   </definition>
+   
+   
+   
+   <!-- Page errorcurso.jsp -->
+   
+   <definition name="error" extends="my-template">  
+       <put-attribute name="title" value="Error en Curso" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/cursoerror.jsp" />  
+   </definition>
+   
+ <!-- Page database.jsp -->
  
+   <definition name="generic_error" extends="my-template">  
+       <put-attribute name="title" value="Error de acceso a BBDD" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/database.jsp" />  
+   </definition>
+ 
+   <!-- Page generic.jsp -->
+   <!-- Esta definido en el Servlet-context -->
  
    <!-- Product Page -->
    <definition name="products" extends="base-definition">  
-       <put-attribute name="title" value="Products" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/products.jsp" />  
+       <put-attribute name="title" value="Error Producido en la Aplicacion" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/generic.jsp" />  
    </definition>  
        
    <!-- Contact-us Page -->

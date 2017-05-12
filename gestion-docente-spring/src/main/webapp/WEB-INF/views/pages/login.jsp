@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>     
 <main class="container-fluid">
-	<section aplicacion.nombre>
+	<section class="row">
 		<c:url value="/login.html" var="loginURL" />
 		<form:form action="${loginURL}" method="post">
 			<div class="input-group input-sm">

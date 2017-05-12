@@ -40,7 +40,7 @@ public class ProfesorController {
 	
 	@RequestMapping(method =RequestMethod.GET)
 	public ModelAndView getAll() {
-		mav =new ModelAndView("profesores/profesores"); // esto le engancha el .jsp AUTO (puede ser .xxx)
+		mav =new ModelAndView("profesores"); // esto le engancha el .jsp AUTO (puede ser .xxx)
 		//cargar la lista de profesores
 		List<Profesor> profesores = pS.getAll(); // He creado el CRUD en la CAPA Service
 		//engancharla al modelandview
@@ -57,7 +57,7 @@ public class ProfesorController {
 		
 		if (bindingResult.hasErrors()){
 			logger.info("profesor tiene errores");
-			destino = "profesores/profesor";
+			destino = "profesorform";
 		} else {
 			destino = "redirect:/profesores"; // Que hace esto? Hace una redireccion a "public ModelAndView getAll()"  LO RECICLA el codigo de getAll()
 			if(profesor.getCodigo() > Profesor.CODIGO_NULO){
@@ -76,10 +76,10 @@ public class ProfesorController {
 	public ModelAndView getById(@PathVariable("id") int id) { // me parsea el id
 		Profesor profesor=pS.getById(id);
 		if(profesor!=null){
-			mav = new ModelAndView("profesores/profesores");
+			mav = new ModelAndView("profesorform");
 			mav.addObject("profesor", profesor);
 		}else{
-			mav=new ModelAndView("profesores/profesores");
+			mav=new ModelAndView("profesorform");
 			mav.addObject("mensaje", "mensaje.profesorNoEncontrado");
 		}
 		return mav;
@@ -96,6 +96,6 @@ public class ProfesorController {
 	@RequestMapping(value = "/addProfesor")
 	public String addProfesor(Model model){
 		model.addAttribute("profesor", new Profesor());  //es identico al getbyid, este mandara un objeto en blanco no nulo y el getbyid uno objeto rellenado.
-		return "profesores/profesor";
+		return "profesorform";
 	}
 }
